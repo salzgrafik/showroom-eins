@@ -15,7 +15,8 @@
       "Bash(grep -l \"navHamburger\" \"/Users/phil/Documents/Projekte/showroom eins/07-Webseite\"/*.html \"/Users/phil/Documents/Projekte/showroom eins/07-Webseite/kuenstler\"/*.html)",
       "Bash(find . -name '*.html' -exec sed -i '' '/<button class=\"nav-overlay-close\"/d' '{}' ';')",
       "Bash(grep -l \"footer-link-groups\" \"/Users/phil/Documents/Projekte/showroom eins/07-Webseite\"/*.html \"/Users/phil/Documents/Projekte/showroom eins/07-Webseite/kuenstler\"/*.html)",
-      "Bash(grep -l \"footer-home\\\\|>Home<\" \"/Users/phil/Documents/Projekte/showroom eins/07-Webseite\"/*.html \"/Users/phil/Documents/Projekte/showroom eins/07-Webseite/kuenstler\"/*.html)"
+      "Bash(grep -l \"footer-home\\\\|>Home<\" \"/Users/phil/Documents/Projekte/showroom eins/07-Webseite\"/*.html \"/Users/phil/Documents/Projekte/showroom eins/07-Webseite/kuenstler\"/*.html)",
+      "Bash(grep:*)"
     ]
   }
 }

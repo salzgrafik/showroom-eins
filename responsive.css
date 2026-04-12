@@ -25,6 +25,8 @@ body.nav-open { overflow: hidden; }
   min-height: 44px;
   flex-shrink: 0;
   position: relative;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .nav-hamburger span {
@@ -164,6 +166,8 @@ body.nav-open { overflow: hidden; }
   cursor: pointer;
   user-select: none;
   opacity: 0.6;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .nav-overlay-lang .toggle-track {
@@ -426,5 +430,92 @@ body.nav-open { overflow: hidden; }
   }
   .lb-actions {
     margin-top: 24px !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   TOUCH-INTERAKTION (alle Geräte)
+═══════════════════════════════════════════════════════════════ */
+
+/* Alle interaktiven Elemente: kein Tap-Delay, kein Highlight */
+.filter-btn,
+.load-more-btn,
+.lb-btn,
+.lb-close,
+.toggle-track,
+.lang-switch,
+.nav-overlay-links a,
+.nav-overlay-artists a,
+.nav-overlay-extra,
+.gallery-item,
+.artist-name,
+button {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Filter-Buttons: Mindest-Touch-Target 44px */
+.filter-btn {
+  min-height: 44px;
+}
+
+/* Load-More Button: Mindest-Touch-Target 44px */
+.load-more-btn {
+  min-height: 44px;
+  display: inline-flex !important;
+  align-items: center;
+}
+
+/* Lightbox-Close Button: Mindest-Touch-Target 44px */
+.lb-close {
+  min-width: 44px;
+  min-height: 44px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ─── HOVER: NUR FÜR GERÄTE MIT ECHTER HOVER-FÄHIGKEIT ──────── */
+/* Auf Touch-Geräten steckt der :hover-State nach dem Antippen   */
+/* fest und macht aktive Zustände visuell kaputt.                */
+
+@media (hover: none) {
+  /* Filter-Buttons: aktiver Zustand bleibt schwarz, kein Hover  */
+  .filter-btn:hover {
+    border-color: rgba(10,10,10,0.25) !important;
+    color: rgba(10,10,10,0.25) !important;
+  }
+  .filter-btn.active:hover {
+    border-color: #0a0a0a !important;
+    color: #0a0a0a !important;
+  }
+
+  /* Galerie-Bild: kein Zoom beim Tippen */
+  .gallery-item:hover img {
+    transform: none !important;
+  }
+
+  /* Hamburger: kein Hover-Effekt auf mittlerer Linie */
+  .nav-hamburger:not(.open):hover span:nth-child(2) {
+    width: 13px !important;
+  }
+
+  /* Nav-Links: kein Hover-Underline */
+  .nav-links a:hover,
+  .nav-overlay-links a:hover,
+  .nav-overlay-artists a:hover,
+  .nav-overlay-extra:hover {
+    border-bottom-color: transparent !important;
+    opacity: 0.6 !important;
+  }
+
+  /* Lightbox-Buttons: kein Hover-Underline */
+  .lb-btn:hover,
+  .lb-close:hover,
+  .load-more-btn:hover {
+    border-bottom-color: transparent !important;
+    opacity: 1 !important;
   }
 }

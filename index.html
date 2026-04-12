@@ -1487,12 +1487,21 @@
     lbArtistBtn.textContent  = T[currentLang][d.gender === 'f' ? 'lb-artist-f' : 'lb-artist-m'];
     lbInquiryBtn.textContent = T[currentLang]['lb-inquiry'];
     artworkLightbox.classList.add('open');
+    const scrollY = window.scrollY;
     document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = '-' + scrollY + 'px';
+    document.body.style.width = '100%';
   }
 
   function closeLightbox() {
+    const scrollTop = parseInt(document.body.style.top || '0') * -1;
     artworkLightbox.classList.remove('open');
     document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, scrollTop);
     currentItem = null;
   }
 
@@ -1511,30 +1520,47 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
   /* ── Mobile Navigation ──────────────────────────────────── */
-  document.addEventListener('DOMContentLoaded', function() {
+  function _lockScroll() {
+    var scrollY = window.scrollY;
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = '-' + scrollY + 'px';
+    document.body.style.width = '100%';
+  }
+  function _unlockScroll() {
+    var scrollTop = parseInt(document.body.style.top || '0') * -1;
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, scrollTop);
+  }
+  function _initMobileNav() {
     var h = document.getElementById('navHamburger');
     var o = document.getElementById('navOverlay');
     if (!h || !o) return;
     h.addEventListener('click', function() {
       var open = o.classList.toggle('open');
       h.classList.toggle('open', open);
-      document.body.style.overflow = open ? 'hidden' : '';
+      if (open) { _lockScroll(); } else { _unlockScroll(); }
     });
     o.addEventListener('click', function(e) {
       if (e.target === o) {
         o.classList.remove('open');
         h.classList.remove('open');
-        document.body.style.overflow = '';
+        _unlockScroll();
       }
     });
     o.querySelectorAll('a').forEach(function(a) {
       a.addEventListener('click', function() {
         o.classList.remove('open');
         h.classList.remove('open');
-        document.body.style.overflow = '';
+        _unlockScroll();
       });
     });
-  });
+  }
+  if (document.readyState !== 'loading') { _initMobileNav(); }
+  else { document.addEventListener('DOMContentLoaded', _initMobileNav); }
 </script>
 
 <!-- ─── MOBILE NAV OVERLAY ───────────────────────────────────── -->
