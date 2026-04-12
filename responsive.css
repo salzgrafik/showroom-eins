@@ -134,26 +134,30 @@ body.nav-open { overflow: hidden; }
   text-decoration: none;
   color: #0a0a0a;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 400;
   font-size: 12px;
-  letter-spacing: 0.06em;
-  opacity: 0.5;
-  transition: opacity 0.2s;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s ease;
 }
 
-.nav-overlay-artists a:hover { opacity: 1; }
+.nav-overlay-artists a:hover { border-bottom-color: #0a0a0a; }
 
 /* ── Overlay Extras (Instagram) ───────────────────────────── */
 .nav-overlay-extra {
   text-decoration: none;
   color: #0a0a0a;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 400;
   font-size: 12px;
-  letter-spacing: 0.06em;
-  opacity: 0.6;
-  transition: opacity 0.2s;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s ease;
 }
 
-.nav-overlay-extra:hover { opacity: 1; }
+.nav-overlay-extra:hover { border-bottom-color: #0a0a0a; }
 
 /* ── Lang-Toggle im Overlay ───────────────────────────────── */
 .nav-overlay-lang {
@@ -230,6 +234,55 @@ body.nav-open { overflow: hidden; }
   display: block !important;
   flex-shrink: 0 !important;
   align-self: flex-start !important;
+}
+
+
+/* ─── GALLERY ITEM CAPTION (Mobile-Label auf Bildern) ────────── */
+/* Zeigt Titel + Künstler auf Touch-Geräten direkt auf dem Bild  */
+.gallery-item {
+  position: relative;
+}
+
+.gallery-item-caption {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 10px 10px;
+  background: linear-gradient(to bottom, transparent, rgba(10,10,10,0.45));
+  pointer-events: none;
+}
+
+.gallery-item-caption-title {
+  display: block;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f7f5f2;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gallery-item-caption-artist {
+  display: block;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: rgba(247,245,242,0.65);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (hover: none) {
+  .gallery-item-caption { display: block; }
 }
 
 
@@ -520,7 +573,7 @@ button {
   }
   .nav-overlay-artists a:hover,
   .nav-overlay-extra:hover {
-    opacity: 0.5 !important;
+    border-bottom-color: transparent !important;
   }
 
   /* Lightbox-Buttons: kein Hover-Underline */

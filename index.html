@@ -707,43 +707,12 @@
   .lb-image {
     overflow: hidden;
     background: #dedad4;
-    position: relative;
   }
   .lb-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-  }
-  .lb-img-caption {
-    display: none;
-    position: absolute;
-    bottom: 16px;
-    right: 16px;
-    text-align: right;
-    pointer-events: none;
-    background: rgba(247, 245, 242, 0.6);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(10,10,10,0.15);
-    padding: 8px 12px;
-  }
-  .lb-img-caption-title {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #0a0a0a;
-    line-height: 1.4;
-  }
-  .lb-img-caption-artist {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    color: rgba(10,10,10,0.5);
-    line-height: 1.4;
   }
   .lb-info {
     background: rgba(247, 245, 242, 0.82);
@@ -1138,10 +1107,6 @@
   <div class="artwork-lightbox" id="artworkLightbox">
     <div class="lb-image">
       <img id="lbImg" src="" alt="">
-      <div class="lb-img-caption">
-        <div class="lb-img-caption-title" id="lbImgCaptionTitle"></div>
-        <div class="lb-img-caption-artist" id="lbImgCaptionArtist"></div>
-      </div>
     </div>
     <div class="lb-info">
       <button class="lb-close" id="lbClose">&#215;</button>
@@ -1165,7 +1130,7 @@
     <div class="footer-nav-bar">
       <img class="footer-logo" src="svg/logo_weiss.svg" alt="Showroom Eins">
       <div class="footer-col">
-        <a href="showroom-eins-frontpage.html" class="footer-col-link">Home</a>
+        <a href="index.html" class="footer-col-link">Home</a>
         <a href="kuenstler/chaz-bargainer.html" class="footer-col-link">Chaz Bargainer</a>
         <a href="kuenstler/philipp-diefenbacher.html" class="footer-col-link">Philipp Diefenbacher</a>
         <a href="kuenstler/ralf-diefenbacher.html" class="footer-col-link">Ralf Diefenbacher</a>
@@ -1533,8 +1498,6 @@
     lbMeta.innerHTML = [d.year, d.material, d.size].filter(Boolean).join('<br>');
     lbArtistBtn.textContent  = T[currentLang][d.gender === 'f' ? 'lb-artist-f' : 'lb-artist-m'];
     lbInquiryBtn.textContent = T[currentLang]['lb-inquiry'];
-    document.getElementById('lbImgCaptionTitle').textContent  = d.title || '';
-    document.getElementById('lbImgCaptionArtist').textContent = d.artist || '';
     tooltip.style.display = 'none';
     artworkLightbox.classList.add('open');
     const scrollY = window.scrollY;
@@ -1556,6 +1519,12 @@
   }
 
   document.querySelectorAll('.gallery-item').forEach(item => {
+    // Mobile caption direkt auf dem Bild
+    const cap = document.createElement('div');
+    cap.className = 'gallery-item-caption';
+    cap.innerHTML = '<span class="gallery-item-caption-title">' + (item.dataset.title || '') + '</span>' +
+                    '<span class="gallery-item-caption-artist">' + (item.dataset.artist || '') + '</span>';
+    item.appendChild(cap);
     item.addEventListener('click', () => openLightbox(item));
   });
 

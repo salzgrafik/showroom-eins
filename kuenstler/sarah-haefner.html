@@ -548,13 +548,13 @@
 
 <!-- ─── NAV ──────────────────────────────────────────────────── -->
 <nav>
-  <a class="nav-logo" href="../showroom-eins-frontpage.html">showroom eins</a>
+  <a class="nav-logo" href="../index.html">showroom eins</a>
   <div class="nav-right">
     <ul class="nav-links">
-      <li><a href="../showroom-eins-frontpage.html#werke" data-translate="nav-works">Werke</a></li>
-      <li><a href="../showroom-eins-frontpage.html#kuenstlerinnen" data-translate="nav-artists">Künstler:innen</a></li>
-      <li><a href="../showroom-eins-frontpage.html#ueber-uns" data-translate="nav-about">Über uns</a></li>
-      <li><a href="../showroom-eins-frontpage.html#kontakt" data-translate="nav-contact">Kontakt</a></li>
+      <li><a href="../index.html#werke" data-translate="nav-works">Werke</a></li>
+      <li><a href="../index.html#kuenstlerinnen" data-translate="nav-artists">Künstler:innen</a></li>
+      <li><a href="../index.html#ueber-uns" data-translate="nav-about">Über uns</a></li>
+      <li><a href="../index.html#kontakt" data-translate="nav-contact">Kontakt</a></li>
     </ul>
     <div class="lang-switch">
       <span id="lang-de">DE</span>
@@ -640,7 +640,7 @@
     <div class="footer-nav-bar">
       <img class="footer-logo" src="../svg/logo_weiss.svg" alt="Showroom Eins">
       <div class="footer-col">
-        <a href="../showroom-eins-frontpage.html" class="footer-col-link">Home</a>
+        <a href="../index.html" class="footer-col-link">Home</a>
         <a href="chaz-bargainer.html" class="footer-col-link">Chaz Bargainer</a>
         <a href="philipp-diefenbacher.html" class="footer-col-link">Philipp Diefenbacher</a>
         <a href="ralf-diefenbacher.html" class="footer-col-link">Ralf Diefenbacher</a>
@@ -926,6 +926,7 @@
     lbArtistName.textContent = d.artist || '';
     lbMeta.innerHTML = [d.year, d.material, d.size].filter(Boolean).join('<br>');
     artworkLightbox.classList.add('open');
+    tooltip.style.display = 'none';
     var scrollY = window.scrollY;
     document.body.style.overflow = 'hidden';
     document.body.style.position = 'fixed';
@@ -944,7 +945,14 @@
     lbCurrent = null;
   }
 
-  allItems().forEach(item => { item.addEventListener('click', () => openLightbox(item)); });
+  allItems().forEach(item => {
+    const cap = document.createElement('div');
+    cap.className = 'gallery-item-caption';
+    cap.innerHTML = '<span class="gallery-item-caption-title">' + (item.dataset.title || '') + '</span>' +
+                    '<span class="gallery-item-caption-artist">' + (item.dataset.artist || '') + '</span>';
+    item.appendChild(cap);
+    item.addEventListener('click', () => openLightbox(item));
+  });
 
   document.getElementById('lbInquiryBtn').addEventListener('click', () => {
     closeLightbox();
@@ -1040,9 +1048,9 @@
   </div>
   <div class="nav-overlay-inner">
     <ul class="nav-overlay-links">
-      <li><a href="../showroom-eins-frontpage.html#werke">Werke</a></li>
-      <li><a href="../showroom-eins-frontpage.html#kuenstlerinnen">Künstler:innen</a></li>
-      <li><a href="../showroom-eins-frontpage.html#ueber-uns">Über uns</a></li>
+      <li><a href="../index.html#werke">Werke</a></li>
+      <li><a href="../index.html#kuenstlerinnen">Künstler:innen</a></li>
+      <li><a href="../index.html#ueber-uns">Über uns</a></li>
       <li><a href="../kontakt.html">Kontakt</a></li>
     </ul>
     <ul class="nav-overlay-artists">
