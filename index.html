@@ -283,7 +283,7 @@
 
   .gallery-item {
     overflow: hidden;
-    cursor: default;
+    cursor: pointer;
   }
 
   .gallery-item img {
@@ -906,16 +906,7 @@
     </div>
 
     <!-- Filter Bar -->
-    <div class="gallery-filters">
-      <button class="filter-btn" data-filter="alle"        data-translate="filter-all">Alle</button>
-      <button class="filter-btn" data-filter="Skulpturen"  data-translate="filter-skulpturen">Skulpturen</button>
-      <button class="filter-btn" data-filter="Fotografie"  data-translate="filter-fotografie">Fotografie</button>
-      <button class="filter-btn" data-filter="Malerei"     data-translate="filter-malerei">Malerei</button>
-      <button class="filter-btn" data-filter="Textilkunst" data-translate="filter-textilkunst">Textilkunst</button>
-      <button class="filter-btn" data-filter="Druckgrafik" data-translate="filter-druckgrafik">Druckgrafik</button>
-      <button class="filter-btn" data-filter="Zeichnungen" data-translate="filter-zeichnungen">Zeichnungen</button>
-      <button class="filter-btn" data-filter="Mixed Media" data-translate="filter-mixed">Mixed Media</button>
-    </div>
+    <div class="gallery-filters" id="galleryFilters"></div>
 
     <!-- Gallery Grid -->
     <div class="gallery-scatter" id="galleryGrid">
@@ -959,7 +950,7 @@
     </div>
 
     <!-- Load More -->
-    <div class="load-more-wrap" id="loadMoreWrap">
+    <div class="load-more-wrap" id="loadMoreWrap" style="display:none;">
       <button class="load-more-btn" id="loadMoreBtn" data-translate="btn-more">Weitere Werke</button>
     </div>
   </section>
@@ -1300,6 +1291,27 @@
   let activeFilters = new Set(CATEGORIES);
   let visibleCount = PAGE_SIZE;
 
+  /* ── Filter-Buttons dynamisch erzeugen (wie Künstlerseiten) ── */
+  const filtersEl = document.getElementById('galleryFilters');
+  const _catKeyMap = { 'Mixed Media': 'filter-mixed' };
+
+  const _allBtn = document.createElement('button');
+  _allBtn.className = 'filter-btn active';
+  _allBtn.dataset.filter = 'alle';
+  _allBtn.dataset.translate = 'filter-all';
+  _allBtn.textContent = T[currentLang]['filter-all'];
+  filtersEl.appendChild(_allBtn);
+
+  CATEGORIES.forEach(cat => {
+    const _btn = document.createElement('button');
+    _btn.className = 'filter-btn active';
+    _btn.dataset.filter = cat;
+    const _key = _catKeyMap[cat] || 'filter-' + cat.toLowerCase();
+    _btn.dataset.translate = _key;
+    _btn.textContent = T[currentLang][_key] || cat;
+    filtersEl.appendChild(_btn);
+  });
+
   function allItems() {
     return [...document.querySelectorAll('#galleryGrid .gallery-item')];
   }
@@ -1345,22 +1357,22 @@
     });
   }
 
-  // Filter clicks
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const f = btn.dataset.filter;
-      if (f === 'alle') {
-        CATEGORIES.forEach(c => activeFilters.add(c));
+  // Filter clicks – Event Delegation (wie Künstlerseiten)
+  filtersEl.addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    const f = btn.dataset.filter;
+    if (f === 'alle') {
+      CATEGORIES.forEach(c => activeFilters.add(c));
+    } else {
+      if (activeFilters.has(f)) {
+        activeFilters.delete(f);
       } else {
-        if (activeFilters.has(f)) {
-          activeFilters.delete(f);
-        } else {
-          activeFilters.add(f);
-        }
+        activeFilters.add(f);
       }
-      visibleCount = PAGE_SIZE;
-      updateGallery();
-    });
+    }
+    visibleCount = PAGE_SIZE;
+    updateGallery();
   });
 
   // Load more
@@ -1506,7 +1518,6 @@
   }
 
   document.querySelectorAll('.gallery-item').forEach(item => {
-    item.style.cursor = 'pointer';
     item.addEventListener('click', () => openLightbox(item));
   });
 
