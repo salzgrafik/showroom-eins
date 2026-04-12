@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Showroom Eins</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="color-scheme" content="only light">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="responsive.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f7f5f2;
+    --gray-light: #e0ddd8;
+    --gray-mid: #999;
+    --font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --nav-h: 60px;
+    --edge: 48px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #f7f5f2;
+  }
+
+  body {
+    background-color: #f7f5f2;
+    color: #0a0a0a;
+    font-family: var(--font);
+    font-size: 13px;
+  }
+
+  /* ─── NAVIGATION ────────────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--edge);
+    background: rgba(247, 245, 242, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--gray-light);
+    z-index: 500;
+  }
+
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: 0;
+    color: #0a0a0a;
+    text-decoration: none;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 120px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 72px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: #0a0a0a;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.25s ease;
+  }
+
+  .nav-links a:hover { border-bottom-color: #0a0a0a; }
+
+  /* ─── LANGUAGE TOGGLE SWITCH ────────────────────────────────── */
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0a0a0a ;
+    user-select: none;
+  }
+
+  .lang-switch span {
+    color: #0a0a0a ;
+  }
+
+  .lang-switch span {
+    cursor: default;
+  }
+
+  /* Toggle track */
+  .toggle-track {
+    position: relative;
+    width: 25px;
+    height: 13px;
+    border: 1px solid var(--black);
+    border-radius: 7px;
+    cursor: pointer;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .toggle-thumb {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid var(--black);
+    transition: left 0.2s ease;
+  }
+
+  .toggle-track.en-active .toggle-thumb {
+    left: 11px;
+  }
+
+  /* ─── SECTION BADGE ─────────────────────────────────────────── */
+  .section-tag {
+    display: inline-block;
+    align-self: flex-start;
+    width: fit-content;
+    border: 1px solid var(--black);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    margin-bottom: 16px;
+  }
+
+  /* ─── PAGE WRAPPER ──────────────────────────────────────────── */
+  .page { margin-top: var(--nav-h); }
+
+  /* ─── HERO ──────────────────────────────────────────────────── */
+  .hero {
+    display: grid;
+    grid-template-columns: 63fr 37fr;
+    height: calc(100vh - var(--nav-h));
+  }
+
+  .hero-image {
+    overflow: hidden;
+    background: #dedad4;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero-meta {
+    padding: 40px 32px;
+    border-left: 1px solid var(--gray-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .hero-title {
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 64px;
+    text-transform: uppercase;
+  }
+
+  .hero-artist,
+  .hero-desc {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: rgba(10, 10, 10, 0.5);
+    line-height: 1.5;
+  }
+
+  .hero-artist { }
+
+  /* ─── SECTIONS ABSTAND ──────────────────────────────────────── */
+  .section-gallery,
+  .footer-map-section {
+    padding: 104px var(--edge);
+    border-top: 1px solid var(--gray-light);
+    scroll-margin-top: var(--nav-h);
+  }
+
+  /* Künstler direkt nach Galerie – kein Trennstrich */
+  .section-artists {
+    padding: 104px var(--edge);
+    scroll-margin-top: var(--nav-h);
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 44px;
+    text-transform: uppercase;
+  }
+
+  /* ─── FILTER BAR ─────────────────────────────────────────────── */
+  .gallery-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: flex-start;
+    margin-bottom: 48px;
+  }
+
+  .filter-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(10, 10, 10, 0.25);
+    background: transparent;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: rgba(10, 10, 10, 0.25);
+    transition: border-color 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+
+  .filter-btn:hover {
+    border-color: rgba(10, 10, 10, 0.5);
+    color: rgba(10, 10, 10, 0.5);
+  }
+
+  .filter-btn.active {
+    border: 1px solid #0a0a0a;
+    color: #0a0a0a;
+  }
+
+  .filter-btn.active:hover {
+    border-color: rgba(10, 10, 10, 0.5);
+    color: rgba(10, 10, 10, 0.5);
+  }
+
+  /* Responsive: mehrzeilig → linksbündig */
+  @media (max-width: 900px) {
+    .gallery-filters { justify-content: flex-start; }
+  }
+
+  /* ─── GALLERY GRID 3 Spalten, links nach rechts ──────────────── */
+  .gallery-scatter {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .gallery-item {
+    overflow: hidden;
+    cursor: default;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.06);
+  }
+
+  /* ─── LOAD MORE ──────────────────────────────────────────────── */
+  .load-more-wrap {
+    margin-top: 48px;
+    text-align: center;
+  }
+
+  .load-more-btn {
+    display: inline-block;
+    padding: 4px 0;
+    border: none;
+    background: transparent;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #0a0a0a;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.25s ease;
+  }
+
+  .load-more-btn:hover {
+    border-bottom-color: #0a0a0a;
+  }
+
+  /* ─── CURSOR TOOLTIP ─────────────────────────────────────────── */
+  .cursor-tooltip {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid #0a0a0a;
+    padding: 8px 12px;
+    display: none;
+    min-width: 160px;
+  }
+
+  .cursor-tooltip-title {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0a0a0a;
+    line-height: 1.4;
+  }
+
+  .cursor-tooltip-artist {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: #0a0a0a;
+    line-height: 1.4;
+  }
+
+  /* ─── KÜNSTLER:INNEN ────────────────────────────────────────── */
+  .artists-list {
+    list-style: none;
+  }
+
+  .artist-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--gray-light);
+  }
+
+  .artist-row:first-child {
+    border-top: 1px solid var(--gray-light);
+  }
+
+  /* Linke Hälfte: Name + Linie */
+  .artist-left {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .artist-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 24px;
+    font-weight: 500;
+    white-space: nowrap;
+    flex: 0 0 auto;
+    letter-spacing: 0.01em;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  a.artist-name:hover {
+    border-bottom: 1px solid var(--black);
+  }
+
+  .artist-line {
+    flex: 1;
+    height: 1px;
+    background: var(--black);
+    min-width: 40px;
+  }
+
+  /* Rechte Hälfte: Tags linksbündig, 32px Abstand zur Linie */
+  .artist-tags {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-left: 32px;
+  }
+
+  .artist-tag {
+    border: 1px solid var(--black);
+    border-radius: 999px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    white-space: nowrap;
+    color: var(--black);
+  }
+
+  /* ─── FOOTER MAP BOX ────────────────────────────────────────── */
+  .footer-map-section {
+    padding: 64px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .map-box {
+    width: 360px;
+    height: 240px;
+    border: 1px solid var(--gray-light);
+    background: var(--white);
+  }
+
+  /* ─── ÜBER DAS PROJEKT ──────────────────────────────────────── */
+  .section-about {
+    padding: 104px var(--edge);
+    scroll-margin-top: var(--nav-h);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 80px;
+    margin-top: 48px;
+  }
+
+  .about-right {
+    padding-top: 160px;
+  }
+
+  .about-text {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.45;
+    color: var(--black);
+  }
+
+  .about-text p { margin-bottom: 32px; }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-text a { color: var(--black); text-decoration: underline; }
+
+  /* ─── KONTAKT + FOOTER ──────────────────────────────────────── */
+  .section-contact {
+    padding: 104px 0 0;
+    position: relative;
+    z-index: 2;
+    scroll-margin-top: var(--nav-h);
+  }
+
+  .contact-inner {
+    width: 58%;
+    margin: 0 auto;
+  }
+
+  .contact-form-box {
+    margin-top: 48px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid #0a0a0a;
+    padding: 48px;
+    position: relative;
+    z-index: 10;
+    margin-bottom: -80px;
+  }
+
+  .contact-form-box h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    color: var(--black);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(10,10,10,0.3);
+    padding: 10px 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: var(--black);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder {
+    color: rgba(10,10,10,0.4);
+  }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    border-bottom-color: var(--black);
+  }
+
+  .contact-form textarea {
+    resize: none;
+    height: 100px;
+  }
+
+  .contact-form button {
+    align-self: flex-start;
+    margin-top: 8px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: var(--black);
+    padding: 4px 0;
+    transition: border-color 0.25s;
+  }
+
+  .contact-form button:hover:not(:disabled) { border-bottom-color: var(--black); }
+
+  .contact-form button:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+  }
+
+  /* ─── DARK FOOTER (neu) ─────────────────────────────────────── */
+  .footer-dark {
+    background: #1a1917;
+    position: relative;
+    overflow: hidden;
+    padding-top: 80px;
+  }
+
+  .footer-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0.55;
+    filter: grayscale(20%);
+    z-index: 0;
+  }
+
+  .footer-nav-bar {
+    position: relative;
+    z-index: 1;
+    padding: 32px var(--edge);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .footer-logo {
+    height: 56px;
+    width: auto;
+    display: block;
+    flex-shrink: 0;
+    align-self: flex-end;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 72px;
+    list-style: none;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .footer-links a,
+  .footer-instagram a {
+    text-decoration: none;
+    color: #ffffff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.25s ease;
+  }
+
+  .footer-links a:hover,
+  .footer-instagram a:hover { border-bottom-color: #ffffff; }
+
+  .footer-instagram {
+    flex-shrink: 0;
+  }
+
+  /* ─── KONTAKT CHECKBOXEN ────────────────────────────────────── */
+  .contact-checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .contact-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: rgba(10, 10, 10, 0.7);
+    line-height: 1.5;
+  }
+
+  .contact-checkbox-label input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    min-width: 14px;
+    max-width: 14px;
+    min-height: 14px;
+    max-height: 14px;
+    aspect-ratio: 1 / 1;
+    padding: 0;
+    border-radius: 0 !important;
+    border: 1px solid rgba(10, 10, 10, 0.5);
+    background: transparent;
+    cursor: pointer;
+    margin-top: 1px;
+    flex-shrink: 0;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative;
+  }
+
+  .contact-checkbox-label input[type="checkbox"]:checked {
+    background: var(--black);
+    border-color: var(--black);
+  }
+
+  .contact-checkbox-label input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 0px;
+    width: 5px;
+    height: 9px;
+    border: 1.5px solid #f7f5f2;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+  }
+
+  /* ─── ARTWORK LIGHTBOX ──────────────────────────────────── */
+  .artwork-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 800;
+    display: grid;
+    grid-template-columns: 60fr 40fr;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+  .artwork-lightbox.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .lb-image {
+    overflow: hidden;
+    background: #dedad4;
+  }
+  .lb-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .lb-info {
+    background: rgba(247, 245, 242, 0.82);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 1px solid var(--gray-light);
+    padding: 48px 40px 48px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    overflow-y: auto;
+    position: relative;
+  }
+  .lb-close {
+    position: absolute;
+    top: 28px;
+    right: 32px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    color: var(--black);
+    line-height: 1;
+    padding: 0;
+    font-family: var(--font);
+    opacity: 0.5;
+    transition: opacity 0.2s;
+  }
+  .lb-close:hover { opacity: 1; }
+  .lb-price {
+    display: inline-block;
+    align-self: flex-start;
+    border: 1px solid var(--black);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    margin-bottom: 28px;
+  }
+  .lb-title {
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 36px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .lb-artist {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: rgba(10,10,10,0.5);
+    margin-bottom: 20px;
+  }
+  .lb-meta {
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: rgba(10,10,10,0.5);
+    line-height: 2;
+  }
+  .lb-actions {
+    margin-top: auto;
+    padding-top: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .lb-btn {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    font-family: var(--font);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: var(--black);
+    padding: 4px 0;
+    transition: border-color 0.25s;
+  }
+  .lb-btn:hover { border-bottom-color: var(--black); }
+
+  /* ─── FEHLER-HINWEIS (am E-Mail-Feld) ───────────────────── */
+  .email-error {
+    background: var(--black);
+    color: var(--white);
+    padding: 14px 20px;
+    font-family: var(--font);
+    font-size: 12px;
+    letter-spacing: 0.07em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    opacity: 0;
+    pointer-events: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.25s, max-height 0.25s, padding 0.25s;
+  }
+  .email-error.show {
+    opacity: 1;
+    pointer-events: all;
+    max-height: 80px;
+  }
+  .email-error-ok {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(247,245,242,0.4);
+    font-family: var(--font);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: var(--white);
+    padding: 2px 0;
+    white-space: nowrap;
+    transition: border-color 0.2s;
+    flex-shrink: 0;
+  }
+  .email-error-ok:hover { border-bottom-color: var(--white); }
+
+  /* ─── ERFOLGS-TOAST ─────────────────────────────────────── */
+  .contact-success {
+    position: fixed;
+    bottom: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--black);
+    color: var(--white);
+    padding: 16px 36px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 900;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+    white-space: nowrap;
+  }
+  .contact-success.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ──────────────────────────────────────────────────────── -->
+<nav>
+  <a class="nav-logo" href="#">showroom eins</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#werke" data-translate="nav-works">Werke</a></li>
+      <li><a href="#kuenstlerinnen" data-translate="nav-artists">Künstler:innen</a></li>
+      <li><a href="#ueber-uns" data-translate="nav-about">Über uns</a></li>
+      <li><a href="#kontakt" data-translate="nav-contact">Kontakt</a></li>
+    </ul>
+    <div class="lang-switch">
+      <span id="lang-de">DE</span>
+      <div class="toggle-track" id="langToggle" onclick="toggleLang()">
+        <div class="toggle-thumb" id="langThumb"></div>
+      </div>
+      <span id="lang-en">EN</span>
+    </div>
+  </div>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menü öffnen">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+</nav>
+
+<div class="page">
+
+  <!-- ─── HERO ─────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-image">
+      <img src="assets/platzhalter_werke.jpg" alt="Weiblicher Torso – Sybille Hutter">
+    </div>
+    <div class="hero-meta">
+      <div class="section-tag" data-translate="hero-tag">Fokus</div>
+      <h1 class="hero-title" data-translate="hero-title">Weiblicher<br>Torso</h1>
+      <p class="hero-artist">Sybille Hutter</p>
+      <p class="hero-desc" data-translate="hero-desc">2021 · Grünbrauner Speckstein aus Brasilien · 40 cm</p>
+    </div>
+  </section>
+
+  <!-- ─── WERKE IM SHOWROOM ────────────────────────────────────── -->
+  <section class="section-gallery" id="werke">
+    <div class="section-header">
+      <div class="section-tag" data-translate="gallery-tag">Programm</div>
+      <h2 class="section-title" data-translate="gallery-title">Werke im Showroom</h2>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="gallery-filters">
+      <button class="filter-btn" data-filter="alle"        data-translate="filter-all">Alle</button>
+      <button class="filter-btn" data-filter="Skulpturen"  data-translate="filter-skulpturen">Skulpturen</button>
+      <button class="filter-btn" data-filter="Fotografie"  data-translate="filter-fotografie">Fotografie</button>
+      <button class="filter-btn" data-filter="Malerei"     data-translate="filter-malerei">Malerei</button>
+      <button class="filter-btn" data-filter="Textilkunst" data-translate="filter-textilkunst">Textilkunst</button>
+      <button class="filter-btn" data-filter="Druckgrafik" data-translate="filter-druckgrafik">Druckgrafik</button>
+      <button class="filter-btn" data-filter="Zeichnungen" data-translate="filter-zeichnungen">Zeichnungen</button>
+      <button class="filter-btn" data-filter="Mixed Media" data-translate="filter-mixed">Mixed Media</button>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="gallery-scatter" id="galleryGrid">
+      <!-- Sybille Hutter – Skulpturen -->
+      <div class="gallery-item" data-category="Skulpturen" data-title="Abendkleid"          data-artist="Sybille Hutter"    data-gender="f" data-url="kuenstler/sybille-hutter.html"       data-year="2021" data-material="Grünbrauner Speckstein aus Brasilien" data-size="45 × 19 × 10 cm" data-price="175 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Skulpturen" data-title="Weiblicher Torso"    data-artist="Sybille Hutter"    data-gender="f" data-url="kuenstler/sybille-hutter.html"       data-year="2021" data-material="Grünbrauner Speckstein aus Brasilien" data-size="38 × 21 × 16 cm" data-price="190 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Skulpturen" data-title="Irokese"             data-artist="Sybille Hutter"    data-gender="f" data-url="kuenstler/sybille-hutter.html"       data-year="2023" data-material="Grünbrauner Speckstein aus Brasilien" data-size="46 × 16 × 20 cm" data-price="120 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Skulpturen" data-title="Entrückt"            data-artist="Sybille Hutter"    data-gender="f" data-url="kuenstler/sybille-hutter.html"       data-year="2023" data-material="Grüner Speckstein"                  data-size="23 × 9 × 7 cm"   data-price="110 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Skulpturen" data-title="Griechenland"        data-artist="Sybille Hutter"    data-gender="f" data-url="kuenstler/sybille-hutter.html"       data-year="2023" data-material="Weißer Speckstein auf Granitplatte"  data-size="16 × 23 × 8 cm"  data-price="150 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <!-- Siegmund Schlag – Fotografie -->
+      <div class="gallery-item" data-category="Fotografie" data-title="Sofortbild 2"        data-artist="Siegmund Schlag"   data-gender="m" data-url="kuenstler/siegmund-schlag.html"       data-year="2025" data-material="Mixed Materials"                     data-size="40 × 30 cm"      data-price="280 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Fotografie" data-title="Sofortbild 4"        data-artist="Siegmund Schlag"   data-gender="m" data-url="kuenstler/siegmund-schlag.html"       data-year="2025" data-material="Mixed Materials"                     data-size="40 × 30 cm"      data-price="280 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Fotografie" data-title="Sofortbild 5"        data-artist="Siegmund Schlag"   data-gender="m" data-url="kuenstler/siegmund-schlag.html"       data-year="2025" data-material="Mixed Materials"                     data-size="40 × 30 cm"      data-price="280 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Fotografie" data-title="Sofortbild 9"        data-artist="Siegmund Schlag"   data-gender="m" data-url="kuenstler/siegmund-schlag.html"       data-year="2025" data-material="Mixed Materials"                     data-size="40 × 30 cm"      data-price="280 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <!-- Cholud Kassem – Fotografie -->
+      <div class="gallery-item" data-category="Fotografie" data-title="weeping pillows (1)" data-artist="Cholud Kassem"    data-gender="f" data-url="kuenstler/cholud-kassem.html"         data-year="2023" data-material="Acryl &amp; Grafit auf Fotokarton, Aufl. 20" data-size="61 × 48 cm" data-price="530 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Fotografie" data-title="weeping pillows (2)" data-artist="Cholud Kassem"    data-gender="f" data-url="kuenstler/cholud-kassem.html"         data-year="2023" data-material="Acryl &amp; Grafit auf Fotokarton, Aufl. 20" data-size="61 × 48 cm" data-price="530 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <!-- Chaz Bargainer – Mixed Media -->
+      <div class="gallery-item" data-category="Mixed Media" data-title="Untitled (1)"       data-artist="Chaz Bargainer"   data-gender="m" data-url="kuenstler/chaz-bargainer.html"        data-year=""     data-material="Mixed Materials"                     data-size="33 × 38 cm (m.R.)" data-price="150 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Mixed Media" data-title="Untitled (2)"       data-artist="Chaz Bargainer"   data-gender="m" data-url="kuenstler/chaz-bargainer.html"        data-year=""     data-material="Mixed Materials"                     data-size="48 × 38 cm (m.R.)" data-price="150 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Mixed Media" data-title="Untitled (3)"       data-artist="Chaz Bargainer"   data-gender="m" data-url="kuenstler/chaz-bargainer.html"        data-year=""     data-material="Mixed Materials"                     data-size="100 × 70 cm"       data-price="850 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <!-- Cedric Pintarelli – Malerei -->
+      <div class="gallery-item" data-category="Malerei"    data-title="Kruste 1"            data-artist="Cedric Pintarelli" data-gender="m" data-url="kuenstler/cedric-pintarelli.html"    data-year="2025" data-material="Acryl, Verputz, Spray auf Leine"     data-size="24 × 18 cm"      data-price="180 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Malerei"    data-title="Kruste 2"            data-artist="Cedric Pintarelli" data-gender="m" data-url="kuenstler/cedric-pintarelli.html"    data-year="2025" data-material="Acryl, Verputz, Spray auf Leine"     data-size="24 × 18 cm"      data-price="180 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Malerei"    data-title="Untitled"            data-artist="Cedric Pintarelli" data-gender="m" data-url="kuenstler/cedric-pintarelli.html"    data-year="2019" data-material="Dispersion, Acryl, Spray auf Leine und Holz" data-size="121 × 100 cm" data-price="850 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <!-- Sarah Häfner – Fotografie, Textilkunst -->
+      <div class="gallery-item" data-category="Fotografie"  data-title="Connected In Softness" data-artist="Sarah Häfner"  data-gender="f" data-url="kuenstler/sarah-haefner.html"         data-year="2026" data-material="Fine Art Print auf Bambuspapier"    data-size="70 × 50 cm (m.R.)" data-price="275 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Fotografie"  data-title="Equilibrium"           data-artist="Sarah Häfner"  data-gender="f" data-url="kuenstler/sarah-haefner.html"         data-year="2026" data-material="Fine Art Print auf Bambuspapier"    data-size="70 × 50 cm (m.R.)" data-price="275 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Fotografie"  data-title="Female Nature"         data-artist="Sarah Häfner"  data-gender="f" data-url="kuenstler/sarah-haefner.html"         data-year="2025" data-material="Fine Art Print auf Bambuspapier"    data-size="70 × 50 cm (m.R.)" data-price="275 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Textilkunst" data-title="Stille der Berührung"  data-artist="Sarah Häfner"  data-gender="f" data-url="kuenstler/sarah-haefner.html"         data-year="2024" data-material="Handstickerei"                      data-size="24 × 23 cm"       data-price="unverkäuflich"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Textilkunst" data-title="Berührbarkeit"         data-artist="Sarah Häfner"  data-gender="f" data-url="kuenstler/sarah-haefner.html"         data-year="2024" data-material="Handstickerei"                      data-size="15 × 14 cm"       data-price="unverkäuflich"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <!-- Ralf Diefenbacher – Malerei, Zeichnungen -->
+      <div class="gallery-item" data-category="Zeichnungen" data-title="Waldlichtung"          data-artist="Ralf Diefenbacher" data-gender="m" data-url="kuenstler/ralf-diefenbacher.html" data-year="2019" data-material="Pastellkreide"                      data-size=""                 data-price="190 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Malerei"     data-title="Friedberger Klettersteig" data-artist="Ralf Diefenbacher" data-gender="m" data-url="kuenstler/ralf-diefenbacher.html" data-year="2020" data-material="Aquarell und Pastell"          data-size="48 × 62 cm (m.R.)" data-price="250 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Malerei"     data-title="Heidelberg / Himmelsleiter" data-artist="Ralf Diefenbacher" data-gender="m" data-url="kuenstler/ralf-diefenbacher.html" data-year="2026" data-material="Aquarell"                 data-size="43 × 33 cm (m.R.)" data-price="250 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Malerei"     data-title='Mühlrad "außer Betrieb"'  data-artist="Ralf Diefenbacher" data-gender="m" data-url="kuenstler/ralf-diefenbacher.html" data-year="2026" data-material="Öl auf Leinwand"              data-size="31 × 31 cm (m.R.)" data-price="190 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <!-- Philipp Diefenbacher – Druckgrafik, Textilkunst, Malerei -->
+      <div class="gallery-item" data-category="Druckgrafik" data-title="Daidalos I"            data-artist="Philipp Diefenbacher" data-gender="m" data-url="kuenstler/philipp-diefenbacher.html" data-year="2023" data-material="Holzschnittdruck"               data-size="41 × 32 cm" data-price="200 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Textilkunst" data-title="Daidalos II"           data-artist="Philipp Diefenbacher" data-gender="m" data-url="kuenstler/philipp-diefenbacher.html" data-year="2023" data-material="Handstickerei"                   data-size="17 × 16 cm" data-price="250 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+      <div class="gallery-item" data-category="Malerei"     data-title="Daidalos III"          data-artist="Philipp Diefenbacher" data-gender="m" data-url="kuenstler/philipp-diefenbacher.html" data-year="2025" data-material="Acryl auf handgeschöpftem Papier" data-size="44 × 40 cm" data-price="300 €"><img src="assets/platzhalter_werke.jpg" alt=""></div>
+    </div>
+
+    <!-- Load More -->
+    <div class="load-more-wrap" id="loadMoreWrap">
+      <button class="load-more-btn" id="loadMoreBtn" data-translate="btn-more">Weitere Werke</button>
+    </div>
+  </section>
+
+  <!-- ─── VERTRETENE KÜNSTLER:INNEN ────────────────────────────── -->
+  <section class="section-artists" id="kuenstlerinnen">
+    <div class="section-header">
+      <div class="section-tag" data-translate="artists-tag">Ensemble</div>
+      <h2 class="section-title" data-translate="artists-title">Vertretene Künstler:innen</h2>
+    </div>
+
+    <ul class="artists-list">
+      <li class="artist-row">
+        <div class="artist-left">
+          <a class="artist-name" href="kuenstler/chaz-bargainer.html">Chaz Bargainer</a>
+          <span class="artist-line"></span>
+        </div>
+        <div class="artist-tags">
+          <span class="artist-tag" data-translate="tag-mixed">Mixed Media</span>
+        </div>
+      </li>
+      <li class="artist-row">
+        <div class="artist-left">
+          <a class="artist-name" href="kuenstler/philipp-diefenbacher.html">Philipp Diefenbacher</a>
+          <span class="artist-line"></span>
+        </div>
+        <div class="artist-tags">
+          <span class="artist-tag" data-translate="tag-malerei">Malerei</span>
+          <span class="artist-tag" data-translate="tag-druckgrafik">Druckgrafik</span>
+          <span class="artist-tag" data-translate="tag-textilkunst">Textilkunst</span>
+        </div>
+      </li>
+      <li class="artist-row">
+        <div class="artist-left">
+          <a class="artist-name" href="kuenstler/ralf-diefenbacher.html">Ralf Diefenbacher</a>
+          <span class="artist-line"></span>
+        </div>
+        <div class="artist-tags">
+          <span class="artist-tag" data-translate="tag-malerei">Malerei</span>
+          <span class="artist-tag" data-translate="tag-zeichnungen">Zeichnungen</span>
+        </div>
+      </li>
+      <li class="artist-row">
+        <div class="artist-left">
+          <a class="artist-name" href="kuenstler/sarah-haefner.html">Sarah Häfner</a>
+          <span class="artist-line"></span>
+        </div>
+        <div class="artist-tags">
+          <span class="artist-tag" data-translate="tag-fotografie">Fotografie</span>
+          <span class="artist-tag" data-translate="tag-textilkunst">Textilkunst</span>
+        </div>
+      </li>
+      <li class="artist-row">
+        <div class="artist-left">
+          <a class="artist-name" href="kuenstler/sybille-hutter.html">Sybille Hutter</a>
+          <span class="artist-line"></span>
+        </div>
+        <div class="artist-tags">
+          <span class="artist-tag" data-translate="tag-skulpturen">Skulpturen</span>
+        </div>
+      </li>
+      <li class="artist-row">
+        <div class="artist-left">
+          <a class="artist-name" href="kuenstler/cholud-kassem.html">Cholud Kassem</a>
+          <span class="artist-line"></span>
+        </div>
+        <div class="artist-tags">
+          <span class="artist-tag" data-translate="tag-fotografie">Fotografie</span>
+        </div>
+      </li>
+      <li class="artist-row">
+        <div class="artist-left">
+          <a class="artist-name" href="kuenstler/johanna-mangold.html">Johanna Mangold</a>
+          <span class="artist-line"></span>
+        </div>
+        <div class="artist-tags">
+          <span class="artist-tag" data-translate="tag-textilkunst">Textilkunst</span>
+        </div>
+      </li>
+      <li class="artist-row">
+        <div class="artist-left">
+          <a class="artist-name" href="kuenstler/cedric-pintarelli.html">Cedric Pintarelli</a>
+          <span class="artist-line"></span>
+        </div>
+        <div class="artist-tags">
+          <span class="artist-tag" data-translate="tag-malerei">Malerei</span>
+        </div>
+      </li>
+      <li class="artist-row">
+        <div class="artist-left">
+          <a class="artist-name" href="kuenstler/siegmund-schlag.html">Siegmund Schlag</a>
+          <span class="artist-line"></span>
+        </div>
+        <div class="artist-tags">
+          <span class="artist-tag" data-translate="tag-fotografie">Fotografie</span>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ─── ÜBER DAS PROJEKT ─────────────────────────────────────── -->
+  <section class="section-about" id="ueber-uns">
+    <div class="section-header">
+      <div class="section-tag" data-translate="about-tag">Hintergrund</div>
+      <h2 class="section-title" data-translate="about-title">Über das Projekt</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-left about-text">
+        <p data-translate="about-p1" data-html>Showroom Eins ist eine <em>unabhängige, nicht kommerzielle Plattform für Gegenwartskunst</em> mit Sitz in Heidelberg, Kirchheim.</p>
+        <p data-translate="about-p2" data-html>Das Projekt versteht sich als offener Ort für künstlerische Positionen unterschiedlicher Herkunft, Medien und Perspektiven. Im Mittelpunkt steht die Frage, <em>was Kunst braucht, um gesehen und ernst genommen zu werden</em> – jenseits von Marktlogik, Trends oder Szenezugehörigkeit.</p>
+        <p data-translate="about-p3" data-html>Ein besonderer Fokus liegt auf Künstler:innen aus unserem Stadtteil. Wir möchten die künstlerischen Positionen sichtbar machen, die in unserer direkten Umgebung entstehen, und <em>ihnen einen Kontext geben</em>, in dem sie wahrgenommen, diskutiert und wertgeschätzt werden.</p>
+      </div>
+      <div class="about-right about-text">
+        <p data-translate="about-p4" data-html>In unregelmäßigen Abständen finden sogenannte <em>Salons</em> statt – persönliche Zusammenkünfte mit wechselnden Inhalten wie <em>Gesprächen, Ausstellungen, Lesungen, Konzerte oder andere kleinen Veranstaltungen rund um Kunst</em> in jeglicher Form. Diese Formate funktionieren über persönliche Einladungen und schaffen einen konzentrierten Rahmen für Begegnung, Austausch und Resonanz.</p>
+        <p data-translate="about-p5" data-html>Solltest du Interesse haben unsere Salons zu besuchen, <em>melde dich gerne bei uns über unser <a href="#kontakt">Kontaktformular</a> oder folge uns auf <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener">Instagram</a></em>. Auch dort informieren wir regelmäßig über einen Teil unserer Salons.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── KONTAKT ───────────────────────────────────────────────── -->
+  <div class="section-contact" id="kontakt">
+    <div class="contact-inner">
+      <div class="section-header">
+        <div class="section-tag" data-translate="contact-tag">Austausch</div>
+        <h2 class="section-title" data-translate="contact-title">Kontakt</h2>
+      </div>
+      <div class="contact-form-box">
+        <form class="contact-form">
+          <input type="hidden" name="_subject" value="Neue Anfrage – Showroom Eins">
+          <input type="text" name="name" placeholder="Name *" required data-translate-placeholder="placeholder-name">
+          <input type="email" name="email" placeholder="E-Mail *" required data-translate-placeholder="placeholder-email">
+          <div class="email-error" id="emailError">
+            <span data-translate="email-error-msg">Bitte eine gültige E-Mail-Adresse eingeben.</span>
+            <button type="button" class="email-error-ok" id="emailErrorOk" data-translate="email-error-ok">OK</button>
+          </div>
+          <textarea name="message" placeholder="Nachricht *" required data-translate-placeholder="placeholder-message"></textarea>
+          <div class="contact-checkboxes">
+            <label class="contact-checkbox-label">
+              <input type="checkbox" required>
+              <span data-translate="checkbox-privacy">Ich habe die Datenschutzerklärung gelesen und akzeptiere sie.</span>
+            </label>
+            <label class="contact-checkbox-label">
+              <input type="checkbox" required>
+              <span data-translate="checkbox-consent">Ich bin damit einverstanden, dass meine Daten verarbeitet werden.</span>
+            </label>
+          </div>
+          <button type="submit" data-translate="contact-send">Absenden</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── ARTWORK LIGHTBOX ────────────────────────────────────── -->
+  <div class="artwork-lightbox" id="artworkLightbox">
+    <div class="lb-image">
+      <img id="lbImg" src="" alt="">
+    </div>
+    <div class="lb-info">
+      <button class="lb-close" id="lbClose">&#215;</button>
+      <div class="lb-price" id="lbPrice"></div>
+      <div class="lb-title" id="lbTitle"></div>
+      <div class="lb-artist" id="lbArtist"></div>
+      <div class="lb-meta" id="lbMeta"></div>
+      <div class="lb-actions">
+        <button class="lb-btn" id="lbArtistBtn"></button>
+        <button class="lb-btn" id="lbInquiryBtn"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── ERFOLGS-TOAST ─────────────────────────────────────── -->
+  <div class="contact-success" id="contactSuccess" data-translate="success-msg">Nachricht gesendet</div>
+
+  <!-- ─── DARK FOOTER ──────────────────────────────────────── -->
+  <footer class="footer-dark">
+    <img class="footer-bg" src="assets/platzhalter_werke.jpg" alt="Showroom Eins">
+    <div class="footer-nav-bar">
+      <img class="footer-logo" src="svg/logo_weiss.svg" alt="Showroom Eins">
+      <div class="footer-col">
+        <a href="showroom-eins-frontpage.html" class="footer-col-link">Home</a>
+        <a href="kuenstler/chaz-bargainer.html" class="footer-col-link">Chaz Bargainer</a>
+        <a href="kuenstler/philipp-diefenbacher.html" class="footer-col-link">Philipp Diefenbacher</a>
+        <a href="kuenstler/ralf-diefenbacher.html" class="footer-col-link">Ralf Diefenbacher</a>
+        <a href="kuenstler/sarah-haefner.html" class="footer-col-link">Sarah Häfner</a>
+        <a href="kuenstler/sybille-hutter.html" class="footer-col-link">Sybille Hutter</a>
+        <a href="kuenstler/cholud-kassem.html" class="footer-col-link">Cholud Kassem</a>
+        <a href="kuenstler/johanna-mangold.html" class="footer-col-link">Johanna Mangold</a>
+        <a href="kuenstler/cedric-pintarelli.html" class="footer-col-link">Cedric Pintarelli</a>
+        <a href="kuenstler/siegmund-schlag.html" class="footer-col-link">Siegmund Schlag</a>
+      </div>
+      <div class="footer-col">
+        <a href="impressum.html" class="footer-col-link">Impressum</a>
+        <a href="datenschutz.html" class="footer-col-link">Datenschutz</a>
+        <a href="agb.html" class="footer-col-link">AGB</a>
+        <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener" class="footer-col-link">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Cursor Tooltip -->
+<div class="cursor-tooltip" id="cursorTooltip">
+  <div class="cursor-tooltip-title" id="tooltipTitle"></div>
+  <div class="cursor-tooltip-artist" id="tooltipArtist"></div>
+</div>
+
+<script>
+  /* ── Übersetzungen ───────────────────────────────────── */
+  const T = {
+    de: {
+      'nav-works': 'Werke', 'nav-artists': 'Künstler:innen',
+      'nav-about': 'Über uns', 'nav-contact': 'Kontakt',
+      'hero-tag': 'Fokus', 'hero-title': 'Weiblicher\nTorso',
+      'hero-desc': '2021 · Grünbrauner Speckstein aus Brasilien · 40 cm',
+      'gallery-tag': 'Programm', 'gallery-title': 'Werke im Showroom',
+      'filter-all': 'Alle', 'filter-skulpturen': 'Skulpturen',
+      'filter-fotografie': 'Fotografie', 'filter-textilkunst': 'Textilkunst',
+      'filter-malerei': 'Malerei', 'filter-druckgrafik': 'Druckgrafik',
+      'filter-zeichnungen': 'Zeichnungen', 'filter-keramik': 'Keramik',
+      'filter-mixed': 'Mixed Media',
+      'btn-more': 'Weitere Werke', 'btn-less': 'Weniger anzeigen',
+      'artists-tag': 'Ensemble', 'artists-title': 'Vertretene Künstler:innen',
+      'tag-skulpturen': 'Skulpturen', 'tag-fotografie': 'Fotografie',
+      'tag-textilkunst': 'Textilkunst', 'tag-malerei': 'Malerei',
+      'tag-druckgrafik': 'Druckgrafik', 'tag-zeichnungen': 'Zeichnungen', 'tag-mixed': 'Mixed Media',
+      'about-tag': 'Hintergrund', 'about-title': 'Über das Projekt',
+      'about-p1': 'Showroom Eins ist eine <em>unabhängige, nicht kommerzielle Plattform für Gegenwartskunst</em> mit Sitz in Heidelberg, Kirchheim.',
+      'about-p2': 'Das Projekt versteht sich als offener Ort für künstlerische Positionen unterschiedlicher Herkunft, Medien und Perspektiven. Im Mittelpunkt steht die Frage, <em>was Kunst braucht, um gesehen und ernst genommen zu werden</em> – jenseits von Marktlogik, Trends oder Szenezugehörigkeit.',
+      'about-p3': 'Ein besonderer Fokus liegt auf Künstler:innen aus unserem Stadtteil. Wir möchten die künstlerischen Positionen sichtbar machen, die in unserer direkten Umgebung entstehen, und <em>ihnen einen Kontext geben</em>, in dem sie wahrgenommen, diskutiert und wertgeschätzt werden.',
+      'about-p4': 'In unregelmäßigen Abständen finden sogenannte <em>Salons</em> statt – persönliche Zusammenkünfte mit wechselnden Inhalten wie <em>Gesprächen, Ausstellungen, Lesungen, Konzerte oder andere kleinen Veranstaltungen rund um Kunst</em> in jeglicher Form. Diese Formate funktionieren über persönliche Einladungen und schaffen einen konzentrierten Rahmen für Begegnung, Austausch und Resonanz.',
+      'about-p5': 'Solltest du Interesse haben unsere Salons zu besuchen, <em>melde dich gerne bei uns über unser <a href="#kontakt">Kontaktformular</a> oder folge uns auf <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener">Instagram</a></em>. Auch dort informieren wir regelmäßig über einen Teil unserer Salons.',
+      'contact-tag': 'Austausch', 'contact-title': 'Kontakt',
+      'contact-send': 'Absenden',
+      'placeholder-name': 'Name *', 'placeholder-email': 'E-Mail *', 'placeholder-message': 'Nachricht *',
+      'email-error-msg': 'Bitte eine gültige E-Mail-Adresse eingeben.',
+      'email-error-ok': 'OK',
+      'checkbox-privacy': 'Ich habe die Datenschutzerklärung gelesen und akzeptiere sie.',
+      'checkbox-consent': 'Ich bin damit einverstanden, dass meine Daten verarbeitet werden.',
+      'success-msg': 'Nachricht gesendet',
+      'footer-home': 'Home', 'footer-imprint': 'Impressum', 'footer-privacy': 'Datenschutz', 'footer-terms': 'AGBs',
+      'lb-artist-f': 'Zur Künstlerin', 'lb-artist-m': 'Zum Künstler',
+      'lb-inquiry': 'Kaufanfrage',
+    },
+    en: {
+      'nav-works': 'Works', 'nav-artists': 'Artists',
+      'nav-about': 'About', 'nav-contact': 'Contact',
+      'hero-tag': 'Focus', 'hero-title': 'Female\nTorso',
+      'hero-desc': '2021 · Green-brown soapstone from Brazil · 40 cm',
+      'gallery-tag': 'Program', 'gallery-title': 'Works in the Showroom',
+      'filter-all': 'All', 'filter-skulpturen': 'Sculptures',
+      'filter-fotografie': 'Photography', 'filter-textilkunst': 'Textile Art',
+      'filter-malerei': 'Painting', 'filter-druckgrafik': 'Printmaking',
+      'filter-zeichnungen': 'Drawings', 'filter-keramik': 'Ceramics',
+      'filter-mixed': 'Mixed Media',
+      'btn-more': 'More Works', 'btn-less': 'Show Less',
+      'artists-tag': 'Ensemble', 'artists-title': 'Represented Artists',
+      'tag-skulpturen': 'Sculptures', 'tag-fotografie': 'Photography',
+      'tag-textilkunst': 'Textile Art', 'tag-malerei': 'Painting',
+      'tag-druckgrafik': 'Printmaking', 'tag-zeichnungen': 'Drawings', 'tag-mixed': 'Mixed Media',
+      'about-tag': 'Background', 'about-title': 'About the Project',
+      'about-p1': 'Showroom Eins is an <em>independent, non-commercial platform for contemporary art</em> based in Heidelberg, Kirchheim.',
+      'about-p2': 'The project sees itself as an open space for artistic positions of different origins, media and perspectives. At its center is the question of <em>what art needs to be seen and taken seriously</em> – beyond market logic, trends or scene affiliation.',
+      'about-p3': 'A particular focus is on artists from our neighbourhood. We want to make visible the artistic positions that emerge in our immediate surroundings, and <em>give them a context</em> in which they are perceived, discussed and appreciated.',
+      'about-p4': 'At irregular intervals, so-called <em>Salons</em> take place – personal gatherings with varying content such as <em>conversations, exhibitions, readings, concerts or other small events around art</em> in any form. These formats work through personal invitations and create a focused framework for encounter, exchange and resonance.',
+      'about-p5': 'If you are interested in attending our Salons, <em>feel free to contact us through our <a href="#kontakt">contact form</a> or follow us on <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener">Instagram</a></em>. We also regularly share updates about some of our Salons there.',
+      'contact-tag': 'Exchange', 'contact-title': 'Contact',
+      'contact-send': 'Send',
+      'placeholder-name': 'Name *', 'placeholder-email': 'E-Mail *', 'placeholder-message': 'Message *',
+      'email-error-msg': 'Please enter a valid email address.',
+      'email-error-ok': 'OK',
+      'checkbox-privacy': 'I have read and accept the privacy policy.',
+      'checkbox-consent': 'I agree that my data may be processed.',
+      'success-msg': 'Message sent',
+      'footer-home': 'Home', 'footer-imprint': 'Imprint', 'footer-privacy': 'Privacy Policy', 'footer-terms': 'Terms',
+      'lb-artist-f': 'To the Artist', 'lb-artist-m': 'To the Artist',
+      'lb-inquiry': 'Purchase Inquiry',
+    }
+  };
+
+  let currentLang = 'de';
+
+  function applyLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('[data-translate]').forEach(el => {
+      const key = el.dataset.translate;
+      if (T[lang][key] === undefined) return;
+      if (el.hasAttribute('data-html')) {
+        el.innerHTML = T[lang][key];
+      } else if (el.tagName === 'H1' && T[lang][key].includes('\n')) {
+        el.innerHTML = T[lang][key].replace('\n', '<br>');
+      } else {
+        el.textContent = T[lang][key];
+      }
+    });
+    document.querySelectorAll('[data-translate-placeholder]').forEach(el => {
+      const key = el.dataset.translatePlaceholder;
+      if (T[lang][key] !== undefined) el.placeholder = T[lang][key];
+    });
+    // Load-More Button Text aktualisieren
+    updateGallery();
+  }
+
+  function toggleLang() {
+    const track = document.getElementById('langToggle');
+    track.classList.toggle('en-active');
+    const lang = track.classList.contains('en-active') ? 'en' : 'de';
+    document.querySelectorAll('.toggle-track').forEach(t => t.classList.toggle('en-active', lang === 'en'));
+    localStorage.setItem('sre-lang', lang);
+    applyLang(lang);
+  }
+
+  // Gespeicherte Sprache beim Laden wiederherstellen
+  { const _s = localStorage.getItem('sre-lang'); if (_s === 'en') { document.querySelectorAll('.toggle-track').forEach(t => t.classList.add('en-active')); applyLang('en'); } }
+
+  /* ── Gallery ─────────────────────────────────────────── */
+  const CATEGORIES = ['Skulpturen','Fotografie','Malerei','Textilkunst','Druckgrafik','Zeichnungen','Mixed Media'];
+  const PAGE_SIZE = 6;
+
+  // Grid-Positionen exakt nach Vorlage (20-Spalten-Grid)
+  // Muster aus Bild: links-breit | rechts-versetzt → mitte-links | rechts → links | rechts-tief → …
+  const GRID_POS = [
+    { col: '1 / 9',   pt: 0   },  // links breit
+    { col: '13 / 19', pt: 100 },  // rechts, deutlich versetzt
+    { col: '4 / 12',  pt: 0   },  // mitte-links
+    { col: '13 / 19', pt: 0   },  // rechts
+    { col: '1 / 8',   pt: 100 },  // links, versetzt
+    { col: '13 / 19', pt: 0   },  // rechts
+    { col: '4 / 12',  pt: 0   },  // mitte-links
+    { col: '13 / 19', pt: 80  },  // rechts versetzt
+    { col: '1 / 9',   pt: 0   },  // links breit
+    { col: '12 / 18', pt: 0   },  // rechts
+    { col: '3 / 11',  pt: 80  },  // mitte versetzt
+    { col: '13 / 19', pt: 0   },  // rechts
+    { col: '1 / 9',   pt: 0   },  // links breit
+  ];
+
+  let activeFilters = new Set(CATEGORIES);
+  let visibleCount = PAGE_SIZE;
+
+  function allItems() {
+    return [...document.querySelectorAll('#galleryGrid .gallery-item')];
+  }
+
+  function filteredItems() {
+    return allItems().filter(i => activeFilters.has(i.dataset.category));
+  }
+
+  function updateGallery() {
+    const all = allItems();
+    const filtered = filteredItems();
+
+    all.forEach(i => { i.style.display = 'none'; });
+    filtered.forEach((item, idx) => {
+      item.style.display = idx < visibleCount ? 'block' : 'none';
+    });
+
+    const wrap = document.getElementById('loadMoreWrap');
+    const btn  = document.getElementById('loadMoreBtn');
+
+    if (filtered.length <= PAGE_SIZE) {
+      wrap.style.display = 'none';
+    } else if (visibleCount >= filtered.length) {
+      wrap.style.display = 'block';
+      btn.textContent = T[currentLang]['btn-less'];
+    } else {
+      wrap.style.display = 'block';
+      btn.textContent = T[currentLang]['btn-more'];
+    }
+
+    updateFilterUI();
+  }
+
+  function updateFilterUI() {
+    const allActive = CATEGORIES.every(c => activeFilters.has(c));
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      const f = btn.dataset.filter;
+      if (f === 'alle') {
+        btn.classList.toggle('active', allActive);
+      } else {
+        btn.classList.toggle('active', activeFilters.has(f));
+      }
+    });
+  }
+
+  // Filter clicks
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const f = btn.dataset.filter;
+      if (f === 'alle') {
+        CATEGORIES.forEach(c => activeFilters.add(c));
+      } else {
+        if (activeFilters.has(f)) {
+          activeFilters.delete(f);
+        } else {
+          activeFilters.add(f);
+        }
+      }
+      visibleCount = PAGE_SIZE;
+      updateGallery();
+    });
+  });
+
+  // Load more
+  document.getElementById('loadMoreBtn').addEventListener('click', () => {
+    const filtered = filteredItems();
+    if (visibleCount >= filtered.length) {
+      visibleCount = PAGE_SIZE;
+      updateGallery();
+      document.querySelector('.section-gallery').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      visibleCount += PAGE_SIZE;
+      updateGallery();
+    }
+  });
+
+  /* ── Cursor Tooltip ──────────────────────────────────── */
+  const tooltip   = document.getElementById('cursorTooltip');
+  const ttTitle   = document.getElementById('tooltipTitle');
+  const ttArtist  = document.getElementById('tooltipArtist');
+
+  document.addEventListener('mousemove', e => {
+    tooltip.style.left = (e.clientX + 18) + 'px';
+    tooltip.style.top  = (e.clientY - 10) + 'px';
+  });
+
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      ttTitle.textContent  = item.dataset.title;
+      ttArtist.textContent = '– ' + item.dataset.artist;
+      tooltip.style.display = 'block';
+    });
+    item.addEventListener('mouseleave', () => {
+      tooltip.style.display = 'none';
+    });
+  });
+
+  // Shuffle gallery items on load
+  const grid = document.getElementById('galleryGrid');
+  const items = [...grid.children];
+  for (let i = items.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    grid.appendChild(items[j]);
+    [items[i], items[j]] = [items[j], items[i]];
+  }
+
+  // Init
+  updateGallery();
+
+  /* ── Kontaktformular ────────────────────────────────────────── */
+  const contactForm       = document.querySelector('.contact-form');
+  const contactCheckboxes = document.querySelectorAll('.contact-checkbox-label input[type="checkbox"]');
+  const contactSubmit     = document.querySelector('.contact-form button[type="submit"]');
+  const contactName       = document.querySelector('.contact-form input[type="text"]');
+  const contactEmail      = document.querySelector('.contact-form input[type="email"]');
+  const contactMessage    = document.querySelector('.contact-form textarea');
+  const emailError        = document.getElementById('emailError');
+  const emailErrorOk      = document.getElementById('emailErrorOk');
+  const contactSuccess    = document.getElementById('contactSuccess');
+
+  function updateSubmitState() {
+    const allChecked = [...contactCheckboxes].every(cb => cb.checked);
+    const allFilled  = contactName.value.trim() !== ''
+                    && contactEmail.value.trim() !== ''
+                    && contactMessage.value.trim() !== '';
+    contactSubmit.disabled = !(allChecked && allFilled);
+  }
+
+  contactCheckboxes.forEach(cb => cb.addEventListener('change', updateSubmitState));
+  [contactName, contactEmail, contactMessage].forEach(el => el.addEventListener('input', updateSubmitState));
+  updateSubmitState();
+
+  /* Fehlermeldung schließen */
+  emailErrorOk.addEventListener('click', () => emailError.classList.remove('show'));
+
+  /* Form Submit → Formspree via fetch */
+  contactForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (!contactEmail.validity.valid) {
+      emailError.classList.add('show');
+      return;
+    }
+    emailError.classList.remove('show');
+
+    try {
+      const res = await fetch('https://formspree.io/f/xkopakgv', {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        contactForm.reset();
+        updateSubmitState();
+        contactSuccess.classList.add('show');
+        setTimeout(() => contactSuccess.classList.remove('show'), 2000);
+      } else {
+        const data = await res.json();
+        console.error('Formspree error:', data);
+      }
+    } catch (err) {
+      console.error('Submit error:', err);
+    }
+  });
+
+  /* ── Artwork Lightbox ───────────────────────────────────── */
+  const artworkLightbox = document.getElementById('artworkLightbox');
+  const lbImg           = document.getElementById('lbImg');
+  const lbPrice         = document.getElementById('lbPrice');
+  const lbTitle         = document.getElementById('lbTitle');
+  const lbArtist        = document.getElementById('lbArtist');
+  const lbMeta          = document.getElementById('lbMeta');
+  const lbArtistBtn     = document.getElementById('lbArtistBtn');
+  const lbInquiryBtn    = document.getElementById('lbInquiryBtn');
+  let   currentItem     = null;
+
+  function openLightbox(item) {
+    currentItem = item;
+    const d = item.dataset;
+    lbImg.src        = item.querySelector('img').src;
+    lbImg.alt        = d.title || '';
+    lbPrice.textContent  = d.price || '';
+    lbTitle.textContent  = d.title || '';
+    lbArtist.textContent = d.artist || '';
+    lbMeta.innerHTML = [d.year, d.material, d.size].filter(Boolean).join('<br>');
+    lbArtistBtn.textContent  = T[currentLang][d.gender === 'f' ? 'lb-artist-f' : 'lb-artist-m'];
+    lbInquiryBtn.textContent = T[currentLang]['lb-inquiry'];
+    artworkLightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    artworkLightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    currentItem = null;
+  }
+
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.style.cursor = 'pointer';
+    item.addEventListener('click', () => openLightbox(item));
+  });
+
+  lbArtistBtn.addEventListener('click', () => {
+    if (currentItem && currentItem.dataset.url) {
+      window.location.href = currentItem.dataset.url;
+    }
+  });
+
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  /* ── Mobile Navigation ──────────────────────────────────── */
+  document.addEventListener('DOMContentLoaded', function() {
+    var h = document.getElementById('navHamburger');
+    var o = document.getElementById('navOverlay');
+    if (!h || !o) return;
+    h.addEventListener('click', function() {
+      var open = o.classList.toggle('open');
+      h.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    o.addEventListener('click', function(e) {
+      if (e.target === o) {
+        o.classList.remove('open');
+        h.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+    o.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        o.classList.remove('open');
+        h.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  });
+</script>
+
+<!-- ─── MOBILE NAV OVERLAY ───────────────────────────────────── -->
+<div class="nav-overlay" id="navOverlay">
+  <div class="nav-overlay-lang-wrap">
+    <div class="nav-overlay-lang" onclick="if(typeof toggleLang!=='undefined') toggleLang()">
+      <span>DE</span>
+      <div class="toggle-track">
+        <div class="toggle-thumb"></div>
+      </div>
+      <span>EN</span>
+    </div>
+  </div>
+  <div class="nav-overlay-inner">
+    <ul class="nav-overlay-links">
+      <li><a href="#werke">Werke</a></li>
+      <li><a href="#kuenstlerinnen">Künstler:innen</a></li>
+      <li><a href="#ueber-uns">Über uns</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+    <ul class="nav-overlay-artists">
+      <li><a href="kuenstler/chaz-bargainer.html">Chaz Bargainer</a></li>
+      <li><a href="kuenstler/philipp-diefenbacher.html">Philipp Diefenbacher</a></li>
+      <li><a href="kuenstler/ralf-diefenbacher.html">Ralf Diefenbacher</a></li>
+      <li><a href="kuenstler/sarah-haefner.html">Sarah Häfner</a></li>
+      <li><a href="kuenstler/sybille-hutter.html">Sybille Hutter</a></li>
+      <li><a href="kuenstler/cholud-kassem.html">Cholud Kassem</a></li>
+      <li><a href="kuenstler/johanna-mangold.html">Johanna Mangold</a></li>
+      <li><a href="kuenstler/cedric-pintarelli.html">Cedric Pintarelli</a></li>
+      <li><a href="kuenstler/siegmund-schlag.html">Siegmund Schlag</a></li>
+    </ul>
+    <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener" class="nav-overlay-extra">Instagram</a>
+  </div>
+</div>
+</body>
+</html>
