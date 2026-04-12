@@ -80,9 +80,9 @@ body.nav-open { overflow: hidden; }
 /* DE/EN Toggle: oben rechts, unterhalb der Nav-Bar */
 .nav-overlay-lang-wrap {
   position: absolute;
-  top: 0;
+  top: 60px;           /* unterhalb der Nav-Leiste */
   right: 0;
-  height: 60px;
+  height: 48px;
   display: flex;
   align-items: center;
   padding: 0 24px;
@@ -98,7 +98,7 @@ body.nav-open { overflow: hidden; }
   max-width: 360px;
 }
 
-/* ── Hauptlinks: wie Desktop-Nav ───────────────────────────── */
+/* ── Hauptlinks: exakt wie Desktop-Nav ─────────────────────── */
 .nav-overlay-links {
   list-style: none;
   display: flex;
@@ -111,13 +111,15 @@ body.nav-open { overflow: hidden; }
   text-decoration: none;
   color: #0a0a0a;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 400;
   font-size: 12px;
-  letter-spacing: 0.06em;
-  opacity: 0.6;
-  transition: opacity 0.2s;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s ease;
 }
 
-.nav-overlay-links a:hover { opacity: 1; }
+.nav-overlay-links a:hover { border-bottom-color: #0a0a0a; }
 
 /* ── Künstler:innen flache Liste (alphabetisch) ───────────── */
 .nav-overlay-artists {
@@ -165,7 +167,6 @@ body.nav-open { overflow: hidden; }
   color: #0a0a0a;
   cursor: pointer;
   user-select: none;
-  opacity: 0.6;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
@@ -431,6 +432,11 @@ body.nav-open { overflow: hidden; }
   .lb-actions {
     margin-top: 24px !important;
   }
+
+  /* ── Lightbox: Info-Caption unten rechts im Bild ─────────── */
+  .lb-img-caption {
+    display: block !important;
+  }
 }
 
 
@@ -482,6 +488,9 @@ button {
 /* fest und macht aktive Zustände visuell kaputt.                */
 
 @media (hover: none) {
+  /* Cursor-Tooltip: nur auf Hover-Geräten sinnvoll             */
+  .cursor-tooltip { display: none !important; }
+
   /* Filter-Buttons: aktiver Zustand bleibt schwarz, kein Hover  */
   .filter-btn:hover {
     border-color: rgba(10,10,10,0.25) !important;
@@ -502,13 +511,16 @@ button {
     width: 13px !important;
   }
 
-  /* Nav-Links: kein Hover-Underline */
-  .nav-links a:hover,
-  .nav-overlay-links a:hover,
+  /* Nav-Links: kein Hover-Underline auf Touch */
+  .nav-links a:hover {
+    border-bottom-color: transparent !important;
+  }
+  .nav-overlay-links a:hover {
+    border-bottom-color: transparent !important;
+  }
   .nav-overlay-artists a:hover,
   .nav-overlay-extra:hover {
-    border-bottom-color: transparent !important;
-    opacity: 0.6 !important;
+    opacity: 0.5 !important;
   }
 
   /* Lightbox-Buttons: kein Hover-Underline */
