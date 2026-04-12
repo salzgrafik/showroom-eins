@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Name] – Showroom Eins</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="color-scheme" content="only light">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../responsive.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f7f5f2;
+    --gray-light: #e0ddd8;
+    --font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --nav-h: 60px;
+    --edge: 48px;
+  }
+
+  html { scroll-behavior: smooth; background-color: #f7f5f2; }
+  body { background-color: #f7f5f2; color: #0a0a0a; font-family: var(--font); font-size: 13px; }
+
+  /* ─── NAV ────────────────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--edge);
+    background: rgba(247, 245, 242, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--gray-light);
+    z-index: 500;
+  }
+
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    font-size: 20px;
+    text-decoration: none;
+    color: var(--black);
+  }
+
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--black);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+
+  .nav-links a:hover { opacity: 1; }
+
+  /* ─── PAGE ───────────────────────────────────────────────── */
+  .page { margin-top: var(--nav-h); }
+
+  /* ─── KÜNSTLER:IN HEADER ─────────────────────────────────── */
+  .section-artist-header {
+    padding: 104px var(--edge) 80px;
+    border-bottom: 1px solid var(--gray-light);
+    max-width: 960px;
+  }
+
+  .artist-h1 {
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 48px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  /* identisch .section-tag auf der Frontpage */
+  .section-tag {
+    display: inline-block;
+    width: fit-content;
+    border: 1px solid var(--black);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    margin-bottom: 16px;
+  }
+
+  .artist-bio {
+    font-family: var(--font);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--black);
+    max-width: 640px;
+    margin-top: 24px;
+  }
+
+  /* ─── WERKGALERIE ────────────────────────────────────────── */
+  .section-gallery-artist {
+    padding: 80px var(--edge);
+  }
+
+  .section-gallery-artist h2 {
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 32px;
+  }
+
+  /* ─── FILTER BAR (identisch Frontpage) ──────────────────── */
+  .gallery-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: flex-start;
+    margin-bottom: 48px;
+  }
+
+  .filter-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(10, 10, 10, 0.25);
+    background: transparent;
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: rgba(10, 10, 10, 0.25);
+    transition: border-color 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+
+  .filter-btn:hover {
+    border-color: rgba(10, 10, 10, 0.5);
+    color: rgba(10, 10, 10, 0.5);
+  }
+
+  .filter-btn.active {
+    border: 1px solid #0a0a0a;
+    color: #0a0a0a;
+  }
+
+  .filter-btn.active:hover {
+    border-color: rgba(10, 10, 10, 0.5);
+    color: rgba(10, 10, 10, 0.5);
+  }
+
+  /* ─── GALLERY GRID (identisch Frontpage) ────────────────── */
+  .gallery-scatter {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .gallery-item {
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .gallery-item:hover img { transform: scale(1.06); }
+
+  /* ─── LOAD MORE (identisch Frontpage) ───────────────────── */
+  .load-more-wrap { margin-top: 48px; text-align: center; }
+
+  .load-more-btn {
+    display: inline-block;
+    padding: 4px 0;
+    border: none;
+    background: transparent;
+    font-family: var(--font);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #0a0a0a;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.25s ease;
+  }
+
+  .load-more-btn:hover { border-bottom-color: #0a0a0a; }
+
+  /* ─── CURSOR TOOLTIP (identisch Frontpage) ──────────────── */
+  .cursor-tooltip {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid #0a0a0a;
+    padding: 8px 12px;
+    display: none;
+    min-width: 160px;
+  }
+
+  .cursor-tooltip-title {
+    font-family: var(--font);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0a0a0a;
+    line-height: 1.4;
+  }
+
+  .cursor-tooltip-artist {
+    font-family: var(--font);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: rgba(10, 10, 10, 0.5);
+    line-height: 1.4;
+  }
+
+  /* ─── VERMITTLUNGS-BLOCK ─────────────────────────────────── */
+  .section-vermittlung {
+    background: var(--white);
+    color: var(--black);
+    padding: 104px var(--edge);
+    border-top: 1px solid var(--gray-light);
+  }
+
+  .vermittlung-inner {
+    max-width: 640px;
+  }
+
+  .vermittlung-label {
+    display: inline-block;
+    width: fit-content;
+    border: 1px solid var(--black);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    margin-bottom: 16px;
+  }
+
+  .vermittlung-title {
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 32px;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-bottom: 24px;
+  }
+
+  .vermittlung-text {
+    font-family: var(--font);
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(10, 10, 10, 0.6);
+    margin-bottom: 48px;
+  }
+
+  .vermittlung-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  /* ─── ANFRAGE-FORMULAR (dunkel) ──────────────────────────── */
+  .anfrage-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .anfrage-form input,
+  .anfrage-form textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(10, 10, 10, 0.3);
+    padding: 8px 0;
+    font-family: var(--font);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--black);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .anfrage-form input::placeholder,
+  .anfrage-form textarea::placeholder { color: rgba(10, 10, 10, 0.4); }
+
+  .anfrage-form input:focus,
+  .anfrage-form textarea:focus { border-bottom-color: var(--black); }
+
+  .anfrage-form textarea {
+    min-height: 80px;
+    resize: vertical;
+  }
+
+  /* Checkboxen */
+  .anfrage-checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .anfrage-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+  }
+
+  .anfrage-checkbox-label input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    min-width: 14px;
+    min-height: 14px;
+    max-width: 14px;
+    max-height: 14px;
+    aspect-ratio: 1 / 1;
+    padding: 0;
+    border-radius: 0;
+    border: 1px solid rgba(10, 10, 10, 0.5);
+    background: transparent;
+    cursor: pointer;
+    margin-top: 1px;
+    flex-shrink: 0;
+    position: relative;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .anfrage-checkbox-label input[type="checkbox"]:checked {
+    background: var(--black);
+    border-color: var(--black);
+  }
+
+  .anfrage-checkbox-label input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 0px;
+    width: 5px;
+    height: 8px;
+    border: 2px solid #f7f5f2;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+  }
+
+  .anfrage-checkbox-label span {
+    font-size: 11px;
+    line-height: 1.5;
+    color: rgba(10, 10, 10, 0.5);
+  }
+
+  /* E-Mail-Fehler */
+  .anfrage-email-error {
+    background: var(--black);
+    color: var(--white);
+    padding: 10px 16px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    opacity: 0;
+    pointer-events: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.25s, max-height 0.25s, padding 0.25s;
+  }
+
+  .anfrage-email-error.show {
+    opacity: 1;
+    pointer-events: all;
+    max-height: 60px;
+  }
+
+  .anfrage-email-error-ok {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(247, 245, 242, 0.4);
+    font-family: var(--font);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: var(--white);
+    padding: 2px 0;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Submit-Button */
+  .anfrage-submit {
+    align-self: flex-start;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    font-family: var(--font);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: var(--black);
+    padding: 4px 0;
+    transition: border-color 0.25s;
+    margin-top: 4px;
+  }
+
+  .anfrage-submit:hover:not(:disabled) { border-bottom-color: var(--black); }
+  .anfrage-submit:disabled { opacity: 0.25; cursor: not-allowed; }
+
+  /* Erfolgs-Toast */
+  .anfrage-success {
+    position: fixed;
+    bottom: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--black);
+    color: var(--white);
+    padding: 16px 36px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 900;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+    white-space: nowrap;
+  }
+  .anfrage-success.show { opacity: 1; }
+
+  /* Mailto-Link */
+  .vermittlung-mailto {
+    display: inline-block;
+    color: var(--black);
+    font-family: var(--font);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.25s;
+  }
+
+  .vermittlung-mailto:hover { border-bottom-color: var(--black); }
+
+  /* ─── DARK FOOTER ────────────────────────────────────────── */
+  .footer-dark {
+    background: #1a1917;
+    position: relative;
+    overflow: hidden;
+    padding-top: 80px;
+  }
+
+  .footer-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    opacity: 0.25;
+    z-index: 0;
+  }
+
+  .footer-nav-bar {
+    position: relative;
+    z-index: 1;
+    padding: 32px var(--edge);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .footer-logo { height: 56px; width: auto; display: block; flex-shrink: 0; align-self: flex-end; }
+  .footer-links { display: flex; gap: 72px; list-style: none; justify-content: center; }
+
+  .footer-links a, .footer-instagram a {
+    text-decoration: none;
+    color: #ffffff;
+    font-family: var(--font);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: border-color 0.25s ease;
+  }
+
+  .footer-links a:hover, .footer-instagram a:hover { border-bottom-color: #ffffff; }
+  .footer-instagram { flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ──────────────────────────────────────────────────── -->
+<nav>
+  <a class="nav-logo" href="../showroom-eins-frontpage.html">showroom eins</a>
+  <ul class="nav-links">
+    <li><a href="../showroom-eins-frontpage.html#werke">Werke</a></li>
+    <li><a href="../showroom-eins-frontpage.html#kuenstlerinnen">Künstler:innen</a></li>
+    <li><a href="../showroom-eins-frontpage.html#ueber-uns">Über uns</a></li>
+    <li><a href="../kontakt.html">Kontakt</a></li>
+  </ul>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menü öffnen">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+</nav>
+
+<div class="page">
+
+  <!-- ─── KÜNSTLER:IN HEADER ───────────────────────────────── -->
+  <!--
+    ANPASSEN:
+    - <title> oben im <head>
+    - artist-h1: Name
+    - artist-media-tags: Medien dieser Künstler:in
+    - artist-bio: Kurzbiografie
+  -->
+  <section class="section-artist-header">
+    <!-- "Künstlerin" oder "Künstler" je nach Geschlecht -->
+    <div class="section-tag">Künstlerin</div>
+    <h1 class="artist-h1">Sybille Hutter</h1>
+    <p class="artist-bio">
+      Sybille Hutter arbeitet mit Stein als primärem Medium. Ihre Skulpturen bewegen sich zwischen figürlicher Andeutung und abstrakter Reduktion – stets auf der Suche nach dem Wesentlichen in der Form. Sie lebt und arbeitet in Heidelberg.
+    </p>
+  </section>
+
+  <!-- ─── WERKGALERIE ──────────────────────────────────────── -->
+  <!--
+    ANPASSEN:
+    - Filter-Buttons: nur Kategorien dieser Künstler:in
+    - Gallery-Items: Werke dieser Künstler:in (data-category, data-title, data-year, data-material, data-size, data-price)
+    - data-artist: Name der Künstler:in
+    - data-gender: "f" oder "m"
+  -->
+  <section class="section-gallery-artist">
+    <h2>Werke</h2>
+
+    <div class="gallery-filters" id="galleryFilters">
+      <!-- Werden dynamisch aus den gallery-items generiert -->
+    </div>
+
+    <div class="gallery-scatter" id="galleryGrid">
+      <div class="gallery-item"
+           data-category="Skulpturen"
+           data-title="Weiblicher Torso"
+           data-artist="Sybille Hutter"
+           data-gender="f"
+           data-year="2021"
+           data-material="Grünbrauner Speckstein"
+           data-size="40 cm"
+           data-price="1.800 €">
+        <img src="../assets/platzhalter_werke.jpg" alt="Weiblicher Torso">
+      </div>
+      <div class="gallery-item"
+           data-category="Skulpturen"
+           data-title="Torso II"
+           data-artist="Sybille Hutter"
+           data-gender="f"
+           data-year="2022"
+           data-material="Roter Sandstein"
+           data-size="35 cm"
+           data-price="2.200 €">
+        <img src="../assets/platzhalter_werke.jpg" alt="Torso II">
+      </div>
+      <!-- weitere Werke hier einfügen -->
+    </div>
+
+    <div class="load-more-wrap" id="loadMoreWrap" style="display:none;">
+      <button class="load-more-btn" id="loadMoreBtn">Weitere Werke</button>
+    </div>
+  </section>
+
+  <!-- ─── VERMITTLUNG ──────────────────────────────────────── -->
+  <section class="section-vermittlung">
+    <div class="vermittlung-inner">
+      <p class="vermittlung-label">Werk anfragen</p>
+      <h3 class="vermittlung-title">Interesse an einem Werk?</h3>
+      <p class="vermittlung-text">
+        Showroom Eins vermittelt auf Anfrage den direkten Kontakt zur Künstlerin oder zum Künstler. Wir sind kein Kunsthandel – alle Verkäufe laufen direkt zwischen Ihnen und der Künstlerin oder dem Künstler ab.
+      </p>
+      <form class="anfrage-form" id="anfrageForm">
+        <input type="hidden" name="_subject" value="Werkeanfrage – Showroom Eins">
+        <input type="text"  name="name"    placeholder="Name *"     required>
+        <input type="email" name="email"   placeholder="E-Mail *"   required>
+        <div class="anfrage-email-error" id="anfrageEmailError">
+          <span>Bitte eine gültige E-Mail-Adresse eingeben.</span>
+          <button type="button" class="anfrage-email-error-ok" id="anfrageEmailErrorOk">OK</button>
+        </div>
+        <textarea name="message" placeholder="Nachricht *" required></textarea>
+        <div class="anfrage-checkboxes">
+          <label class="anfrage-checkbox-label">
+            <input type="checkbox" required>
+            <span>Ich habe die Datenschutzerklärung gelesen und akzeptiere sie.</span>
+          </label>
+          <label class="anfrage-checkbox-label">
+            <input type="checkbox" required>
+            <span>Ich bin damit einverstanden, dass meine Daten verarbeitet werden.</span>
+          </label>
+        </div>
+        <button type="submit" class="anfrage-submit" id="anfrageSubmit" disabled>Absenden</button>
+      </form>
+
+    </div>
+  </section>
+
+  <!-- ─── DARK FOOTER ──────────────────────────────────────── -->
+  <footer class="footer-dark">
+    <img class="footer-bg" src="../assets/platzhalter_werke.jpg" alt="Showroom Eins">
+    <div class="footer-nav-bar">
+      <img class="footer-logo" src="../svg/logo_weiss.svg" alt="Showroom Eins">
+      <div class="footer-col">
+        <a href="../showroom-eins-frontpage.html" class="footer-col-link">Home</a>
+        <a href="chaz-bargainer.html" class="footer-col-link">Chaz Bargainer</a>
+        <a href="philipp-diefenbacher.html" class="footer-col-link">Philipp Diefenbacher</a>
+        <a href="ralf-diefenbacher.html" class="footer-col-link">Ralf Diefenbacher</a>
+        <a href="sarah-haefner.html" class="footer-col-link">Sarah Häfner</a>
+        <a href="sybille-hutter.html" class="footer-col-link">Sybille Hutter</a>
+        <a href="cholud-kassem.html" class="footer-col-link">Cholud Kassem</a>
+        <a href="johanna-mangold.html" class="footer-col-link">Johanna Mangold</a>
+        <a href="cedric-pintarelli.html" class="footer-col-link">Cedric Pintarelli</a>
+        <a href="siegmund-schlag.html" class="footer-col-link">Siegmund Schlag</a>
+      </div>
+      <div class="footer-col">
+        <a href="../impressum.html" class="footer-col-link">Impressum</a>
+        <a href="../datenschutz.html" class="footer-col-link">Datenschutz</a>
+        <a href="../agb.html" class="footer-col-link">AGB</a>
+        <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener" class="footer-col-link">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ─── ANFRAGE SUCCESS TOAST ───────────────────────────────── -->
+<div class="anfrage-success" id="anfrageSuccess">Nachricht gesendet</div>
+
+<!-- ─── CURSOR TOOLTIP ───────────────────────────────────────── -->
+<div class="cursor-tooltip" id="cursorTooltip">
+  <div class="cursor-tooltip-title" id="tooltipTitle"></div>
+  <div class="cursor-tooltip-artist" id="tooltipArtist"></div>
+</div>
+
+<script>
+  const PAGE_SIZE = 6;
+  let visibleCount = PAGE_SIZE;
+  let activeFilters = new Set();
+
+  /* ── Kategorien dynamisch aus Items ableiten ────────────── */
+  function allItems() {
+    return [...document.querySelectorAll('#galleryGrid .gallery-item')];
+  }
+
+  const CATEGORIES = [...new Set(allItems().map(i => i.dataset.category))];
+  activeFilters = new Set(CATEGORIES);
+
+  /* ── Filter-Buttons generieren ──────────────────────────── */
+  const filtersEl = document.getElementById('galleryFilters');
+
+  if (CATEGORIES.length > 1) {
+    const allBtn = document.createElement('button');
+    allBtn.className = 'filter-btn active';
+    allBtn.dataset.filter = 'alle';
+    allBtn.textContent = 'Alle';
+    filtersEl.appendChild(allBtn);
+  }
+
+  CATEGORIES.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn active';
+    btn.dataset.filter = cat;
+    btn.textContent = cat;
+    filtersEl.appendChild(btn);
+  });
+
+  /* ── Gallery Update ──────────────────────────────────────── */
+  function filteredItems() {
+    return allItems().filter(i => activeFilters.has(i.dataset.category));
+  }
+
+  function updateGallery() {
+    const all      = allItems();
+    const filtered = filteredItems();
+
+    all.forEach(i => { i.style.display = 'none'; });
+    filtered.forEach((item, idx) => {
+      item.style.display = idx < visibleCount ? 'block' : 'none';
+    });
+
+    const wrap = document.getElementById('loadMoreWrap');
+    const btn  = document.getElementById('loadMoreBtn');
+
+    if (filtered.length <= PAGE_SIZE) {
+      wrap.style.display = 'none';
+    } else if (visibleCount >= filtered.length) {
+      wrap.style.display = 'block';
+      btn.textContent = 'Weniger anzeigen';
+    } else {
+      wrap.style.display = 'block';
+      btn.textContent = 'Weitere Werke';
+    }
+
+    updateFilterUI();
+  }
+
+  function updateFilterUI() {
+    const allActive = CATEGORIES.every(c => activeFilters.has(c));
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      const f = btn.dataset.filter;
+      if (f === 'alle') {
+        btn.classList.toggle('active', allActive);
+      } else {
+        btn.classList.toggle('active', activeFilters.has(f));
+      }
+    });
+  }
+
+  /* ── Filter-Klicks ───────────────────────────────────────── */
+  filtersEl.addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    const f = btn.dataset.filter;
+    if (f === 'alle') {
+      CATEGORIES.forEach(c => activeFilters.add(c));
+    } else {
+      if (activeFilters.has(f)) {
+        activeFilters.delete(f);
+      } else {
+        activeFilters.add(f);
+      }
+    }
+    visibleCount = PAGE_SIZE;
+    updateGallery();
+  });
+
+  /* ── Load More ───────────────────────────────────────────── */
+  document.getElementById('loadMoreBtn').addEventListener('click', () => {
+    const filtered = filteredItems();
+    if (visibleCount >= filtered.length) {
+      visibleCount = PAGE_SIZE;
+      updateGallery();
+      document.querySelector('.section-gallery-artist').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      visibleCount += PAGE_SIZE;
+      updateGallery();
+    }
+  });
+
+  updateGallery();
+
+  /* ── Anfrage-Formular ───────────────────────────────────── */
+  const anfrageForm       = document.getElementById('anfrageForm');
+  const anfrageCheckboxes = document.querySelectorAll('.anfrage-checkbox-label input[type="checkbox"]');
+  const anfrageSubmit     = document.getElementById('anfrageSubmit');
+  const anfrageEmail      = document.querySelector('.anfrage-form input[type="email"]');
+  const anfrageName       = document.querySelector('.anfrage-form input[type="text"]');
+  const anfrageMessage    = document.querySelector('.anfrage-form textarea');
+  const anfrageEmailError = document.getElementById('anfrageEmailError');
+  const anfrageEmailErrorOk = document.getElementById('anfrageEmailErrorOk');
+  const anfrageSuccess    = document.getElementById('anfrageSuccess');
+
+  function updateAnfrageState() {
+    const allChecked = [...anfrageCheckboxes].every(cb => cb.checked);
+    const allFilled  = anfrageName.value.trim() !== ''
+                    && anfrageEmail.value.trim() !== ''
+                    && anfrageMessage.value.trim() !== '';
+    anfrageSubmit.disabled = !(allChecked && allFilled);
+  }
+
+  anfrageCheckboxes.forEach(cb => cb.addEventListener('change', updateAnfrageState));
+  [anfrageName, anfrageEmail, anfrageMessage].forEach(el => el.addEventListener('input', updateAnfrageState));
+
+  anfrageEmailErrorOk.addEventListener('click', () => anfrageEmailError.classList.remove('show'));
+
+  anfrageForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (!anfrageEmail.validity.valid) {
+      anfrageEmailError.classList.add('show');
+      return;
+    }
+    anfrageEmailError.classList.remove('show');
+    try {
+      const res = await fetch('https://formspree.io/f/xkopakgv', {
+        method: 'POST',
+        body: new FormData(anfrageForm),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        anfrageForm.reset();
+        updateAnfrageState();
+        anfrageSuccess.classList.add('show');
+        setTimeout(() => anfrageSuccess.classList.remove('show'), 2000);
+      }
+    } catch (err) {
+      console.error('Submit error:', err);
+    }
+  });
+
+  /* ── Cursor Tooltip ──────────────────────────────────────── */
+  const tooltip  = document.getElementById('cursorTooltip');
+  const ttTitle  = document.getElementById('tooltipTitle');
+  const ttArtist = document.getElementById('tooltipArtist');
+
+  document.addEventListener('mousemove', e => {
+    tooltip.style.left = (e.clientX + 18) + 'px';
+    tooltip.style.top  = (e.clientY - 10) + 'px';
+  });
+
+  allItems().forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      ttTitle.textContent  = item.dataset.title;
+      ttArtist.textContent = item.dataset.year + ' · ' + item.dataset.material;
+      tooltip.style.display = 'block';
+    });
+    item.addEventListener('mouseleave', () => {
+      tooltip.style.display = 'none';
+    });
+  });
+
+  /* Mobile Navigation */
+  document.addEventListener('DOMContentLoaded', function() {
+    var h = document.getElementById('navHamburger');
+    var o = document.getElementById('navOverlay');
+    if (!h || !o) return;
+    h.addEventListener('click', function() {
+      var open = o.classList.toggle('open');
+      h.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    o.addEventListener('click', function(e) {
+      if (e.target === o) {
+        o.classList.remove('open');
+        h.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+    o.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        o.classList.remove('open');
+        h.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  });
+</script>
+
+<!-- ─── MOBILE NAV OVERLAY ───────────────────────────────────── -->
+<div class="nav-overlay" id="navOverlay">
+  <div class="nav-overlay-lang-wrap">
+    <div class="nav-overlay-lang" onclick="if(typeof toggleLang!=='undefined') toggleLang()">
+      <span>DE</span>
+      <div class="toggle-track">
+        <div class="toggle-thumb"></div>
+      </div>
+      <span>EN</span>
+    </div>
+  </div>
+  <div class="nav-overlay-inner">
+    <ul class="nav-overlay-links">
+      <li><a href="../showroom-eins-frontpage.html#werke">Werke</a></li>
+      <li><a href="../showroom-eins-frontpage.html#kuenstlerinnen">Künstler:innen</a></li>
+      <li><a href="../showroom-eins-frontpage.html#ueber-uns">Über uns</a></li>
+      <li><a href="../kontakt.html">Kontakt</a></li>
+    </ul>
+    <ul class="nav-overlay-artists">
+      <li><a href="chaz-bargainer.html">Chaz Bargainer</a></li>
+      <li><a href="philipp-diefenbacher.html">Philipp Diefenbacher</a></li>
+      <li><a href="ralf-diefenbacher.html">Ralf Diefenbacher</a></li>
+      <li><a href="sarah-haefner.html">Sarah Häfner</a></li>
+      <li><a href="sybille-hutter.html">Sybille Hutter</a></li>
+      <li><a href="cholud-kassem.html">Cholud Kassem</a></li>
+      <li><a href="johanna-mangold.html">Johanna Mangold</a></li>
+      <li><a href="cedric-pintarelli.html">Cedric Pintarelli</a></li>
+      <li><a href="siegmund-schlag.html">Siegmund Schlag</a></li>
+    </ul>
+    <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener" class="nav-overlay-extra">Instagram</a>
+  </div>
+</div>
+</body>
+</html>

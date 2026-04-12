@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontakt – Showroom Eins</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="color-scheme" content="only light">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="responsive.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f7f5f2;
+    --gray-light: #e0ddd8;
+    --font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --nav-h: 60px;
+    --edge: 48px;
+  }
+
+  html { scroll-behavior: smooth; background-color: #f7f5f2; }
+  body { background-color: #f7f5f2; color: #0a0a0a; font-family: var(--font); font-size: 13px; }
+
+  /* ─── NAV ────────────────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--edge);
+    background: rgba(247, 245, 242, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--gray-light);
+    z-index: 500;
+  }
+
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    font-size: 20px;
+    text-decoration: none;
+    color: var(--black);
+  }
+
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--black);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+
+  .nav-links a:hover { opacity: 1; }
+
+  /* ─── PAGE ───────────────────────────────────────────────── */
+  .page { margin-top: var(--nav-h); }
+
+  /* ─── SECTION BADGE ──────────────────────────────────────── */
+  .section-tag {
+    display: inline-block;
+    width: fit-content;
+    border: 1px solid var(--black);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 32px;
+    text-transform: uppercase;
+  }
+
+  /* ─── KONTAKT SECTION ────────────────────────────────────── */
+  .section-kontakt {
+    padding: 104px var(--edge);
+  }
+
+  .section-header { margin-bottom: 56px; }
+
+  /* ─── FORMULAR ───────────────────────────────────────────── */
+  .contact-form {
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-field label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--black);
+  }
+
+  .form-field input,
+  .form-field textarea {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 16px;
+    color: var(--black);
+    background: transparent;
+    border: 1px solid #ddddd5;
+    border-radius: 0;
+    padding: 16px;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+
+  .form-field input:focus,
+  .form-field textarea:focus {
+    border-color: #0c0c0b;
+  }
+
+  .form-field textarea {
+    min-height: 160px;
+    resize: vertical;
+  }
+
+  .form-submit {
+    margin-top: 8px;
+  }
+
+  .form-submit button {
+    background: #0c0c0b;
+    color: #f6f4f0;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .form-submit button:hover { opacity: 0.8; }
+
+  /* ─── DARK FOOTER ────────────────────────────────────────── */
+  .footer-dark {
+    background: #1a1917;
+    position: relative;
+    overflow: hidden;
+    padding-top: 80px;
+  }
+
+  .footer-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    opacity: 0.25;
+    z-index: 0;
+  }
+
+  .footer-nav-bar {
+    position: relative;
+    z-index: 1;
+    padding: 32px var(--edge);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .footer-logo { height: 56px; width: auto; display: block; flex-shrink: 0; align-self: flex-end; }
+  .footer-links { display: flex; gap: 72px; list-style: none; justify-content: center; }
+
+  .footer-links a, .footer-instagram a {
+    text-decoration: none;
+    color: #ffffff;
+    font-family: var(--font);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: border-color 0.25s ease;
+  }
+
+  .footer-links a:hover, .footer-instagram a:hover { border-bottom-color: #ffffff; }
+  .footer-instagram { flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ──────────────────────────────────────────────────── -->
+<nav>
+  <a class="nav-logo" href="showroom-eins-frontpage.html">showroom eins</a>
+  <ul class="nav-links">
+    <li><a href="showroom-eins-frontpage.html#werke">Werke</a></li>
+    <li><a href="showroom-eins-frontpage.html#kuenstlerinnen">Künstler:innen</a></li>
+    <li><a href="showroom-eins-frontpage.html#ueber-uns">Über uns</a></li>
+    <li><a href="kontakt.html">Kontakt</a></li>
+  </ul>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menü öffnen">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+</nav>
+
+<div class="page">
+
+  <!-- ─── KONTAKT ───────────────────────────────────────────── -->
+  <section class="section-kontakt">
+    <div class="section-header">
+      <div class="section-tag">Austausch</div>
+      <h1 class="section-title">Kontakt</h1>
+    </div>
+
+    <form class="contact-form"
+          action="https://formspree.io/f/xkopakgv"
+          method="POST">
+
+      <input type="hidden" name="_subject" value="Neue Anfrage – Showroom Eins">
+      <input type="hidden" name="_next" value="danke.html">
+
+      <div class="form-field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required autocomplete="name">
+      </div>
+
+      <div class="form-field">
+        <label for="email">E-Mail</label>
+        <input type="email" id="email" name="email" required autocomplete="email">
+      </div>
+
+      <div class="form-field">
+        <label for="message">Nachricht</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+
+      <div class="form-submit">
+        <button type="submit">Absenden</button>
+      </div>
+
+    </form>
+  </section>
+
+  <!-- ─── DARK FOOTER ──────────────────────────────────────── -->
+  <footer class="footer-dark">
+    <img class="footer-bg" src="assets/platzhalter_werke.jpg" alt="Showroom Eins">
+    <div class="footer-nav-bar">
+      <img class="footer-logo" src="svg/logo_weiss.svg" alt="Showroom Eins">
+      <div class="footer-col">
+        <a href="showroom-eins-frontpage.html" class="footer-col-link">Home</a>
+        <a href="kuenstler/chaz-bargainer.html" class="footer-col-link">Chaz Bargainer</a>
+        <a href="kuenstler/philipp-diefenbacher.html" class="footer-col-link">Philipp Diefenbacher</a>
+        <a href="kuenstler/ralf-diefenbacher.html" class="footer-col-link">Ralf Diefenbacher</a>
+        <a href="kuenstler/sarah-haefner.html" class="footer-col-link">Sarah Häfner</a>
+        <a href="kuenstler/sybille-hutter.html" class="footer-col-link">Sybille Hutter</a>
+        <a href="kuenstler/cholud-kassem.html" class="footer-col-link">Cholud Kassem</a>
+        <a href="kuenstler/johanna-mangold.html" class="footer-col-link">Johanna Mangold</a>
+        <a href="kuenstler/cedric-pintarelli.html" class="footer-col-link">Cedric Pintarelli</a>
+        <a href="kuenstler/siegmund-schlag.html" class="footer-col-link">Siegmund Schlag</a>
+      </div>
+      <div class="footer-col">
+        <a href="impressum.html" class="footer-col-link">Impressum</a>
+        <a href="datenschutz.html" class="footer-col-link">Datenschutz</a>
+        <a href="agb.html" class="footer-col-link">AGB</a>
+        <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener" class="footer-col-link">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ─── MOBILE NAV OVERLAY ───────────────────────────────────── -->
+<div class="nav-overlay" id="navOverlay">
+  <div class="nav-overlay-lang-wrap">
+    <div class="nav-overlay-lang" onclick="if(typeof toggleLang!=='undefined') toggleLang()">
+      <span>DE</span>
+      <div class="toggle-track">
+        <div class="toggle-thumb"></div>
+      </div>
+      <span>EN</span>
+    </div>
+  </div>
+  <div class="nav-overlay-inner">
+    <ul class="nav-overlay-links">
+      <li><a href="showroom-eins-frontpage.html#werke">Werke</a></li>
+      <li><a href="showroom-eins-frontpage.html#kuenstlerinnen">Künstler:innen</a></li>
+      <li><a href="showroom-eins-frontpage.html#ueber-uns">Über uns</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+    <ul class="nav-overlay-artists">
+      <li><a href="kuenstler/chaz-bargainer.html">Chaz Bargainer</a></li>
+      <li><a href="kuenstler/philipp-diefenbacher.html">Philipp Diefenbacher</a></li>
+      <li><a href="kuenstler/ralf-diefenbacher.html">Ralf Diefenbacher</a></li>
+      <li><a href="kuenstler/sarah-haefner.html">Sarah Häfner</a></li>
+      <li><a href="kuenstler/sybille-hutter.html">Sybille Hutter</a></li>
+      <li><a href="kuenstler/cholud-kassem.html">Cholud Kassem</a></li>
+      <li><a href="kuenstler/johanna-mangold.html">Johanna Mangold</a></li>
+      <li><a href="kuenstler/cedric-pintarelli.html">Cedric Pintarelli</a></li>
+      <li><a href="kuenstler/siegmund-schlag.html">Siegmund Schlag</a></li>
+    </ul>
+    <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener" class="nav-overlay-extra">Instagram</a>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var h = document.getElementById('navHamburger');
+    var o = document.getElementById('navOverlay');
+    if (!h || !o) return;
+    h.addEventListener('click', function() {
+      var open = o.classList.toggle('open');
+      h.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    o.addEventListener('click', function(e) {
+      if (e.target === o) {
+        o.classList.remove('open');
+        h.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+    o.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        o.classList.remove('open');
+        h.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  });
+</script>
+</body>
+</html>

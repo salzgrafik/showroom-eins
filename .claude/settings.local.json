@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(open:*)",
+      "Bash(python3 _setup_content.py)",
+      "Bash(mv kuenstler/sarah-hafner kuenstler/sarah-haefner)",
+      "Bash(sed -i '' 's/sarah-hafner/sarah-haefner/g' alle-kuenstler.json alle-werke.json kuenstler/sarah-haefner/kuenstler.json)",
+      "Bash(grep -l \"sarah-hafner\" werke/*.json)",
+      "Bash(xargs sed:*)",
+      "Bash(python3 -c \"import ast; ast.parse\\(open\\('add_content.py'\\).read\\(\\)\\); print\\('✓ Syntax ok'\\)\")",
+      "WebSearch",
+      "Bash(python3:*)",
+      "Bash(grep -l \"responsive.css\" \"/Users/phil/Documents/Projekte/showroom eins/07-Webseite\"/*.html \"/Users/phil/Documents/Projekte/showroom eins/07-Webseite/kuenstler\"/*.html)",
+      "Bash(grep -l \"navOverlay\" \"/Users/phil/Documents/Projekte/showroom eins/07-Webseite\"/*.html \"/Users/phil/Documents/Projekte/showroom eins/07-Webseite/kuenstler\"/*.html)",
+      "Bash(grep -l \"navHamburger\" \"/Users/phil/Documents/Projekte/showroom eins/07-Webseite\"/*.html \"/Users/phil/Documents/Projekte/showroom eins/07-Webseite/kuenstler\"/*.html)",
+      "Bash(find . -name '*.html' -exec sed -i '' '/<button class=\"nav-overlay-close\"/d' '{}' ';')",
+      "Bash(grep -l \"footer-link-groups\" \"/Users/phil/Documents/Projekte/showroom eins/07-Webseite\"/*.html \"/Users/phil/Documents/Projekte/showroom eins/07-Webseite/kuenstler\"/*.html)",
+      "Bash(grep -l \"footer-home\\\\|>Home<\" \"/Users/phil/Documents/Projekte/showroom eins/07-Webseite\"/*.html \"/Users/phil/Documents/Projekte/showroom eins/07-Webseite/kuenstler\"/*.html)"
+    ]
+  }
+}

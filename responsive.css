@@ -1,0 +1,430 @@
+/* ═══════════════════════════════════════════════════════════════
+   SHOWROOM EINS — RESPONSIVE DESIGN
+   mobile < 768px | tablet 768–1024px | desktop > 1024px
+═══════════════════════════════════════════════════════════════ */
+
+/* Kein horizontales Scrollen auf keinem Breakpoint */
+html, body { max-width: 100%; overflow-x: hidden; }
+
+/* Scroll lock wenn Overlay oder Lightbox offen */
+body.nav-open { overflow: hidden; }
+
+
+/* ─── HAMBURGER BUTTON ──────────────────────────────────────── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px 8px;
+  min-width: 44px;
+  min-height: 44px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.nav-hamburger span {
+  display: block;
+  height: 1.5px;
+  background: #0a0a0a;
+  border-radius: 1px;
+  transition: transform 0.3s ease, opacity 0.2s ease, width 0.25s ease;
+  transform-origin: center;
+}
+
+.nav-hamburger span:nth-child(1) { width: 20px; }
+.nav-hamburger span:nth-child(2) { width: 13px; }
+.nav-hamburger span:nth-child(3) { width: 20px; }
+
+/* Hover: mittlere Linie verlängert sich */
+.nav-hamburger:not(.open):hover span:nth-child(2) { width: 20px; }
+
+/* Open → X */
+.nav-hamburger.open span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+  width: 20px;
+}
+.nav-hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.nav-hamburger.open span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+  width: 20px;
+}
+
+
+/* ─── MOBILE NAV OVERLAY ────────────────────────────────────── */
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 700;
+  background: rgba(247, 245, 242, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.nav-overlay.open { display: flex; }
+
+/* DE/EN Toggle: oben rechts, unterhalb der Nav-Bar */
+.nav-overlay-lang-wrap {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+}
+
+.nav-overlay-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 80px 48px;
+  width: 100%;
+  max-width: 360px;
+}
+
+/* ── Hauptlinks: wie Desktop-Nav ───────────────────────────── */
+.nav-overlay-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-overlay-links a {
+  text-decoration: none;
+  color: #0a0a0a;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.nav-overlay-links a:hover { opacity: 1; }
+
+/* ── Künstler:innen flache Liste (alphabetisch) ───────────── */
+.nav-overlay-artists {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-overlay-artists a {
+  text-decoration: none;
+  color: #0a0a0a;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.nav-overlay-artists a:hover { opacity: 1; }
+
+/* ── Overlay Extras (Instagram) ───────────────────────────── */
+.nav-overlay-extra {
+  text-decoration: none;
+  color: #0a0a0a;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.nav-overlay-extra:hover { opacity: 1; }
+
+/* ── Lang-Toggle im Overlay ───────────────────────────────── */
+.nav-overlay-lang {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0a0a0a;
+  cursor: pointer;
+  user-select: none;
+  opacity: 0.6;
+}
+
+.nav-overlay-lang .toggle-track {
+  position: relative;
+  width: 25px;
+  height: 13px;
+  border: 1px solid #0a0a0a;
+  border-radius: 7px;
+  cursor: pointer;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.nav-overlay-lang .toggle-thumb {
+  position: absolute;
+  top: -1px; left: -1px;
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid #0a0a0a;
+  transition: left 0.2s ease;
+}
+
+.nav-overlay-lang .toggle-track.en-active .toggle-thumb { left: 11px; }
+
+
+/* ─── FOOTER 3-SPALTEN LAYOUT ──────────────────────────────── */
+.footer-nav-bar {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  gap: 48px !important;
+  padding: 48px 48px !important;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-col-link {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.25s;
+  line-height: 1;
+}
+
+.footer-col-link:hover { color: #ffffff; }
+
+.footer-logo {
+  height: 56px !important;
+  width: auto !important;
+  display: block !important;
+  flex-shrink: 0 !important;
+  align-self: flex-start !important;
+}
+
+
+/* ─── ARTIST LINE + TAG SIZING (global) ─────────────────────── */
+.artist-line { display: none !important; }
+
+.artist-tag {
+  font-size: 12px !important;
+  padding: 8px 16px !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   TABLET + MOBILE  (≤ 1024px)
+═══════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+
+  /* ── Navigation ─────────────────────────────────────────── */
+  nav { z-index: 800 !important; }
+  .nav-links  { display: none !important; }
+  .nav-right  { display: none !important; }
+  .nav-hamburger { display: flex; }
+  nav { padding: 0 24px !important; }
+
+  /* ── Hero: Stack ────────────────────────────────────────── */
+  .hero {
+    display: block !important;
+    height: auto !important;
+  }
+  .hero-image {
+    width: 100%;
+    height: 56vw;
+    max-height: 540px;
+    min-height: 200px;
+  }
+  .hero-meta {
+    padding: 24px !important;
+    border-left: none !important;
+    border-top: 1px solid #e0ddd8;
+  }
+  .hero-title {
+    font-size: clamp(28px, 5.5vw, 52px) !important;
+    line-height: 1.1 !important;
+  }
+
+  /* ── Galerie: 2 Spalten ─────────────────────────────────── */
+  .gallery-scatter {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* ── Sections: Seitenabstand ────────────────────────────── */
+  .section-gallery,
+  .section-artists,
+  .section-about,
+  .section-contact,
+  .section-gallery-artist,
+  .section-vermittlung,
+  .footer-map-section {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  /* ── Über uns: einspaltig ───────────────────────────────── */
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    column-gap: 0 !important;
+  }
+  .about-right {
+    padding-top: 0 !important;
+    margin-top: 40px;
+  }
+
+  /* ── Kontaktformular Frontpage: kein Overlap auf Tablet ─── */
+  .contact-form-box {
+    margin-bottom: 0 !important;
+  }
+  .contact-inner { width: calc(100% - 48px) !important; }
+  .contact-form-box { padding: 32px 24px !important; }
+
+  /* ── Künstler-Header ────────────────────────────────────── */
+  .section-artist-header { padding: 80px 24px 56px !important; }
+  .artist-h1 { font-size: clamp(28px, 5vw, 40px) !important; }
+  .artist-bio { font-size: 20px !important; }
+
+  /* ── Unterseiten ────────────────────────────────────────── */
+  .section-kontakt   { padding: 80px 24px !important; }
+  .section-impressum { padding: 80px 24px !important; }
+  .section-datenschutz { padding: 80px 24px !important; }
+
+  /* ── Footer ─────────────────────────────────────────────── */
+  .footer-dark { padding-top: 80px !important; }
+  .footer-nav-bar {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    gap: 36px !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE ONLY  (< 768px)
+═══════════════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+
+  /* ── Hero: volle Bildschirmhöhe ─────────────────────────── */
+  .hero {
+    display: flex !important;
+    flex-direction: column !important;
+    height: calc(100vh - 60px) !important;
+    height: calc(100dvh - 60px) !important;
+  }
+  .hero-image {
+    flex: 1 1 auto !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+  }
+  .hero-meta { flex-shrink: 0 !important; }
+  .hero-title { font-size: 28px !important; line-height: 34px !important; }
+
+  /* ── Galerie: 1 Spalte ──────────────────────────────────── */
+  .gallery-scatter { grid-template-columns: 1fr !important; }
+
+  /* ── Titel-Größen ───────────────────────────────────────── */
+  .section-title { font-size: 26px !important; line-height: 30px !important; }
+
+  /* ── Sections: vertikaler Abstand ──────────────────────── */
+  .section-gallery,
+  .section-artists,
+  .section-about,
+  .section-contact,
+  .section-gallery-artist,
+  .section-vermittlung {
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+  }
+
+  /* ── Künstler:innen-Liste ───────────────────────────────── */
+  .artist-row {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    padding: 20px 0 !important;
+  }
+  .artist-name { font-size: 20px !important; }
+  .artist-tags {
+    padding-left: 0 !important;
+    gap: 8px !important;
+  }
+
+  /* ── Über uns ───────────────────────────────────────────── */
+  .about-text { font-size: 18px !important; }
+  .about-text p { margin-bottom: 24px !important; }
+
+  /* ── Kontaktformular Frontpage: mobiler Overlap ─────────── */
+  .contact-form-box {
+    margin-bottom: -40px !important;
+  }
+
+  /* ── Kontaktformular (Kontakt-Seite) ────────────────────── */
+  .contact-form { max-width: none !important; }
+
+  /* ── Footer: vertikal stapeln ───────────────────────────── */
+  .footer-dark { padding-top: 60px !important; }
+  .footer-nav-bar {
+    flex-direction: column !important;
+    padding-top: 40px !important;
+    padding-bottom: 48px !important;
+    gap: 32px !important;
+  }
+
+  /* ── Unterseiten ────────────────────────────────────────── */
+  .section-impressum { padding: 64px 24px !important; }
+  .section-kontakt   { padding: 64px 24px !important; }
+  .section-datenschutz { padding: 64px 24px !important; }
+
+  /* ── Künstler-Header ────────────────────────────────────── */
+  .artist-h1 { font-size: 28px !important; line-height: 36px !important; }
+  .artist-bio { font-size: 17px !important; }
+  .section-artist-header { padding: 64px 24px 48px !important; }
+
+  /* ── Lightbox: wie Hero (Bild füllt, Info unten) ────────── */
+  .artwork-lightbox {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    overflow: hidden !important;
+  }
+  .lb-image {
+    flex: 1 1 auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+  .lb-info {
+    flex-shrink: 0 !important;
+    max-height: 55vh !important;
+    overflow-y: auto !important;
+    padding: 32px 24px !important;
+  }
+  .lb-actions {
+    margin-top: 24px !important;
+  }
+}

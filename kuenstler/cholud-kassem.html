@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cholud Kassem – Showroom Eins</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="color-scheme" content="only light">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../responsive.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f7f5f2;
+    --gray-light: #e0ddd8;
+    --font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --nav-h: 60px;
+    --edge: 48px;
+  }
+
+  html { scroll-behavior: smooth; background-color: #f7f5f2; }
+  body { background-color: #f7f5f2; color: #0a0a0a; font-family: var(--font); font-size: 13px; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 var(--edge);
+    background: rgba(247, 245, 242, 0.5);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--gray-light); z-index: 500;
+  }
+  .nav-logo { font-family: 'DM Mono', monospace; font-weight: 500; font-size: 20px; text-decoration: none; color: var(--black); }
+  .nav-links { display: flex; gap: 72px; list-style: none; }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--black);
+    font-family: var(--font);
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.25s ease;
+  }
+
+  .nav-links a:hover { border-bottom-color: var(--black); }
+
+  .page { margin-top: var(--nav-h); }
+
+  .section-artist-header { padding: 104px var(--edge) 80px; border-bottom: 1px solid var(--gray-light); max-width: 960px; }
+  .section-tag { display: inline-block; width: fit-content; border: 1px solid var(--black); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 8px; margin-bottom: 16px; }
+  .artist-h1 { font-family: 'DM Mono', monospace; font-weight: 500; font-size: 40px; line-height: 48px; text-transform: uppercase; margin-bottom: 24px; }
+  .artist-bio { font-family: var(--font); font-size: 24px; font-weight: 400; line-height: 1.45; color: var(--black); max-width: 640px; margin-top: 24px; }
+
+  .section-gallery-artist { padding: 80px var(--edge); }
+  .section-gallery-artist h2 { font-family: 'DM Mono', monospace; font-weight: 500; font-size: 40px; line-height: 44px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 32px; }
+
+  .gallery-filters { display: flex; flex-wrap: wrap; gap: 16px; justify-content: flex-start; margin-bottom: 48px; }
+  .filter-btn { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(10,10,10,0.25); background: transparent; font-family: var(--font); font-size: 12px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; color: rgba(10,10,10,0.25); transition: border-color 0.2s, color 0.2s; white-space: nowrap; }
+  .filter-btn:hover { border-color: rgba(10,10,10,0.5); color: rgba(10,10,10,0.5); }
+  .filter-btn.active { border: 1px solid #0a0a0a; color: #0a0a0a; }
+  .filter-btn.active:hover { border-color: rgba(10,10,10,0.5); color: rgba(10,10,10,0.5); }
+
+  .gallery-scatter { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .gallery-item { overflow: hidden; cursor: pointer; }
+  .gallery-item img { width: 100%; display: block; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .gallery-item:hover img { transform: scale(1.06); }
+
+  .load-more-wrap { margin-top: 48px; text-align: center; }
+  .load-more-btn { display: inline-block; padding: 4px 0; border: none; background: transparent; font-family: var(--font); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; color: #0a0a0a; border-bottom: 1px solid transparent; transition: border-color 0.25s ease; }
+  .load-more-btn:hover { border-bottom-color: #0a0a0a; }
+
+  .cursor-tooltip { position: fixed; pointer-events: none; z-index: 9999; background: rgba(255,255,255,0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid #0a0a0a; padding: 8px 12px; display: none; min-width: 160px; }
+  .cursor-tooltip-title { font-family: var(--font); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #0a0a0a; line-height: 1.4; }
+  .cursor-tooltip-artist { font-family: var(--font); font-size: 12px; letter-spacing: 0.08em; color: rgba(10,10,10,0.5); line-height: 1.4; }
+
+  .section-vermittlung { background: var(--white); color: var(--black); padding: 104px var(--edge); border-top: 1px solid var(--gray-light); }
+  .vermittlung-inner { max-width: 640px; }
+  .vermittlung-label { display: inline-block; width: fit-content; border: 1px solid var(--black); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 8px; margin-bottom: 16px; }
+  .vermittlung-title { font-family: 'DM Mono', monospace; font-weight: 500; font-size: 30px; line-height: 32px; text-transform: uppercase; color: var(--black); margin-bottom: 24px; }
+  .vermittlung-text { font-family: var(--font); font-size: 13px; line-height: 1.7; color: rgba(10,10,10,0.6); margin-bottom: 48px; }
+
+  .anfrage-form { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
+  .anfrage-form input, .anfrage-form textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(10,10,10,0.3); padding: 8px 0; font-family: var(--font); font-size: 13px; letter-spacing: 0.04em; color: var(--black); outline: none; transition: border-color 0.2s; }
+  .anfrage-form input::placeholder, .anfrage-form textarea::placeholder { color: rgba(10,10,10,0.4); }
+  .anfrage-form input:focus, .anfrage-form textarea:focus { border-bottom-color: var(--black); }
+  .anfrage-form textarea { min-height: 80px; resize: vertical; }
+
+  .anfrage-checkboxes { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+  .anfrage-checkbox-label { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; }
+  .anfrage-checkbox-label input[type="checkbox"] { appearance: none; -webkit-appearance: none; display: inline-block; width: 14px; height: 14px; min-width: 14px; min-height: 14px; max-width: 14px; max-height: 14px; aspect-ratio: 1/1; padding: 0; border-radius: 0; border: 1px solid rgba(10,10,10,0.5); background: transparent; cursor: pointer; margin-top: 1px; flex-shrink: 0; position: relative; transition: border-color 0.2s, background 0.2s; }
+  .anfrage-checkbox-label input[type="checkbox"]:checked { background: var(--black); border-color: var(--black); }
+  .anfrage-checkbox-label input[type="checkbox"]:checked::after { content: ''; position: absolute; left: 3px; top: 0px; width: 5px; height: 8px; border: 2px solid #f7f5f2; border-top: none; border-left: none; transform: rotate(45deg); }
+  .anfrage-checkbox-label span { font-size: 11px; line-height: 1.5; color: rgba(10,10,10,0.5); }
+
+  .anfrage-email-error { background: var(--black); color: var(--white); padding: 10px 16px; font-size: 11px; letter-spacing: 0.06em; display: flex; align-items: center; justify-content: space-between; gap: 16px; opacity: 0; pointer-events: none; max-height: 0; overflow: hidden; transition: opacity 0.25s, max-height 0.25s, padding 0.25s; }
+  .anfrage-email-error.show { opacity: 1; pointer-events: all; max-height: 60px; }
+  .anfrage-email-error-ok { background: transparent; border: none; border-bottom: 1px solid rgba(247,245,242,0.4); font-family: var(--font); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; color: var(--white); padding: 2px 0; white-space: nowrap; flex-shrink: 0; }
+
+  .anfrage-submit { align-self: flex-start; background: transparent; border: none; border-bottom: 1px solid transparent; font-family: var(--font); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; color: var(--black); padding: 4px 0; transition: border-color 0.25s; margin-top: 4px; }
+  .anfrage-submit:hover:not(:disabled) { border-bottom-color: var(--black); }
+  .anfrage-submit:disabled { opacity: 0.25; cursor: not-allowed; }
+
+  .anfrage-success { position: fixed; bottom: 48px; left: 50%; transform: translateX(-50%); background: var(--black); color: var(--white); padding: 16px 36px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; z-index: 900; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; white-space: nowrap; }
+  .anfrage-success.show { opacity: 1; }
+
+  .footer-dark { background: #1a1917; position: relative; overflow: hidden; padding-top: 80px; }
+  .footer-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; opacity: 0.25; z-index: 0; }
+  .footer-nav-bar { position: relative; z-index: 1; padding: 32px var(--edge); display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+  .footer-logo { height: 56px; width: auto; display: block; flex-shrink: 0; align-self: flex-end; }
+  .footer-links { display: flex; gap: 72px; list-style: none; justify-content: center; }
+  .footer-links a, .footer-instagram a { text-decoration: none; color: #ffffff; font-family: var(--font); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: border-color 0.25s ease; }
+  .footer-links a:hover, .footer-instagram a:hover { border-bottom-color: #ffffff; }
+  .footer-instagram { flex-shrink: 0; }
+
+  /* ─── LIGHTBOX ────────────────────────────────────────────── */
+  .artwork-lightbox { position: fixed; inset: 0; z-index: 800; display: grid; grid-template-columns: 60fr 40fr; opacity: 0; pointer-events: none; transition: opacity 0.35s ease; }
+  .artwork-lightbox.open { opacity: 1; pointer-events: all; }
+  .lb-image { overflow: hidden; background: #dedad4; }
+  .lb-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .lb-info { background: rgba(247,245,242,0.82); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-left: 1px solid var(--gray-light); padding: 48px 40px; display: flex; flex-direction: column; overflow-y: auto; position: relative; }
+  .lb-close { position: absolute; top: 28px; right: 32px; background: transparent; border: none; cursor: pointer; font-size: 22px; color: var(--black); line-height: 1; padding: 0; font-family: var(--font); opacity: 0.5; transition: opacity 0.2s; }
+  .lb-close:hover { opacity: 1; }
+  .lb-price { display: inline-block; align-self: flex-start; border: 1px solid var(--black); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 8px; margin-bottom: 28px; }
+  .lb-title { font-family: 'DM Mono', monospace; font-weight: 500; font-size: 30px; line-height: 36px; text-transform: uppercase; margin-bottom: 12px; }
+  .lb-artist-name { font-size: 12px; letter-spacing: 0.1em; color: rgba(10,10,10,0.5); margin-bottom: 20px; }
+  .lb-meta { font-size: 12px; letter-spacing: 0.06em; color: rgba(10,10,10,0.5); line-height: 2; }
+  .lb-actions { margin-top: auto; padding-top: 48px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+  .lb-btn { background: transparent; border: none; border-bottom: 1px solid transparent; font-family: var(--font); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; color: var(--black); padding: 4px 0; transition: border-color 0.25s; }
+  .lb-btn:hover { border-bottom-color: var(--black); }
+
+  /* ─── NAV RIGHT + LANG TOGGLE ─────────────────────────────── */
+  .nav-right { display: flex; align-items: center; gap: 120px; }
+  .lang-switch { display: flex; align-items: center; gap: 6px; font-family: var(--font); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--black); user-select: none; }
+  .lang-switch span { cursor: default; }
+  .toggle-track { position: relative; width: 25px; height: 13px; border: 1px solid var(--black); border-radius: 7px; cursor: pointer; flex-shrink: 0; overflow: hidden; }
+  .toggle-thumb { position: absolute; top: -1px; left: -1px; width: 13px; height: 13px; border-radius: 50%; background: transparent; border: 1px solid var(--black); transition: left 0.2s ease; }
+  .toggle-track.en-active .toggle-thumb { left: 11px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../showroom-eins-frontpage.html">showroom eins</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="../showroom-eins-frontpage.html#werke" data-translate="nav-works">Werke</a></li>
+      <li><a href="../showroom-eins-frontpage.html#kuenstlerinnen" data-translate="nav-artists">Künstler:innen</a></li>
+      <li><a href="../showroom-eins-frontpage.html#ueber-uns" data-translate="nav-about">Über uns</a></li>
+      <li><a href="../showroom-eins-frontpage.html#kontakt" data-translate="nav-contact">Kontakt</a></li>
+    </ul>
+    <div class="lang-switch">
+      <span id="lang-de">DE</span>
+      <div class="toggle-track" id="langToggle" onclick="toggleLang()">
+        <div class="toggle-thumb" id="langThumb"></div>
+      </div>
+      <span id="lang-en">EN</span>
+    </div>
+  </div>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menü öffnen">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+</nav>
+
+<div class="page">
+
+  <section class="section-artist-header">
+    <div class="section-tag" data-translate="artist-tag-f">Künstlerin</div>
+    <h1 class="artist-h1">Cholud Kassem</h1>
+    <p class="artist-bio" data-translate="artist-bio">
+      Cholud Kassem verbindet Fotografie mit malerischen und zeichnerischen Eingriffen. Auf Fotokarton entstehen Arbeiten, die das fotografische Bild als Träger und Widerstand zugleich begreifen. Sie lebt und arbeitet in Heidelberg.
+    </p>
+  </section>
+
+  <section class="section-gallery-artist">
+    <h2 data-translate="gallery-h2">Werke</h2>
+
+    <div class="gallery-filters" id="galleryFilters"></div>
+
+    <div class="gallery-scatter" id="galleryGrid">
+      <div class="gallery-item" data-category="Fotografie" data-title="weeping pillows (1)" data-artist="Cholud Kassem" data-gender="f" data-year="2023" data-material="Acryl &amp; Grafit auf Fotokarton, Aufl. 20" data-size="61 × 48 cm" data-price="530 €"><img src="../assets/platzhalter_werke.jpg" alt="weeping pillows"></div>
+      <div class="gallery-item" data-category="Fotografie" data-title="weeping pillows (2)" data-artist="Cholud Kassem" data-gender="f" data-year="2023" data-material="Acryl &amp; Grafit auf Fotokarton, Aufl. 20" data-size="61 × 48 cm" data-price="530 €"><img src="../assets/platzhalter_werke.jpg" alt="weeping pillows"></div>
+    </div>
+
+    <div class="load-more-wrap" id="loadMoreWrap" style="display:none;">
+      <button class="load-more-btn" id="loadMoreBtn" data-translate="load-more">Weitere Werke</button>
+    </div>
+  </section>
+
+  <section class="section-vermittlung">
+    <div class="vermittlung-inner">
+      <p class="vermittlung-label" data-translate="vermittlung-tag">Werk anfragen</p>
+      <h3 class="vermittlung-title" data-translate="vermittlung-title">Interesse an einem Werk?</h3>
+      <p class="vermittlung-text" data-translate="vermittlung-text">
+        Showroom Eins vermittelt auf Anfrage den direkten Kontakt zur Künstlerin. Wir sind kein Kunsthandel – alle Verkäufe laufen direkt zwischen Ihnen und der Künstlerin ab.
+      </p>
+      <form class="anfrage-form" id="anfrageForm">
+        <input type="hidden" name="_subject" value="Werkeanfrage – Showroom Eins">
+        <input type="text"  name="name"    placeholder="Name *" data-translate-placeholder="form-name-ph" required>
+        <input type="email" name="email"   placeholder="E-Mail *" data-translate-placeholder="form-email-ph" required>
+        <div class="anfrage-email-error" id="anfrageEmailError">
+          <span data-translate="form-email-error">Bitte eine gültige E-Mail-Adresse eingeben.</span>
+          <button type="button" class="anfrage-email-error-ok" id="anfrageEmailErrorOk" data-translate="form-email-ok">OK</button>
+        </div>
+        <textarea name="message" placeholder="Nachricht *" data-translate-placeholder="form-message-ph" required></textarea>
+        <div class="anfrage-checkboxes">
+          <label class="anfrage-checkbox-label">
+            <input type="checkbox" required>
+            <span data-translate="form-check1">Ich habe die Datenschutzerklärung gelesen und akzeptiere sie.</span>
+          </label>
+          <label class="anfrage-checkbox-label">
+            <input type="checkbox" required>
+            <span data-translate="form-check2">Ich bin damit einverstanden, dass meine Daten verarbeitet werden.</span>
+          </label>
+        </div>
+        <button type="submit" class="anfrage-submit" id="anfrageSubmit" data-translate="form-submit" disabled>Absenden</button>
+      </form>
+    </div>
+  </section>
+
+    <!-- ─── DARK FOOTER ──────────────────────────────────────── -->
+  <footer class="footer-dark">
+    <img class="footer-bg" src="../assets/platzhalter_werke.jpg" alt="Showroom Eins">
+    <div class="footer-nav-bar">
+      <img class="footer-logo" src="../svg/logo_weiss.svg" alt="Showroom Eins">
+      <div class="footer-col">
+        <a href="../showroom-eins-frontpage.html" class="footer-col-link">Home</a>
+        <a href="chaz-bargainer.html" class="footer-col-link">Chaz Bargainer</a>
+        <a href="philipp-diefenbacher.html" class="footer-col-link">Philipp Diefenbacher</a>
+        <a href="ralf-diefenbacher.html" class="footer-col-link">Ralf Diefenbacher</a>
+        <a href="sarah-haefner.html" class="footer-col-link">Sarah Häfner</a>
+        <a href="sybille-hutter.html" class="footer-col-link">Sybille Hutter</a>
+        <a href="cholud-kassem.html" class="footer-col-link">Cholud Kassem</a>
+        <a href="johanna-mangold.html" class="footer-col-link">Johanna Mangold</a>
+        <a href="cedric-pintarelli.html" class="footer-col-link">Cedric Pintarelli</a>
+        <a href="siegmund-schlag.html" class="footer-col-link">Siegmund Schlag</a>
+      </div>
+      <div class="footer-col">
+        <a href="../impressum.html" class="footer-col-link">Impressum</a>
+        <a href="../datenschutz.html" class="footer-col-link">Datenschutz</a>
+        <a href="../agb.html" class="footer-col-link">AGB</a>
+        <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener" class="footer-col-link">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<div class="anfrage-success" id="anfrageSuccess" data-translate="form-success">Nachricht gesendet</div>
+
+
+<!-- ─── LIGHTBOX ─────────────────────────────────────────────── -->
+<div class="artwork-lightbox" id="artworkLightbox">
+  <div class="lb-image"><img id="lbImg" src="" alt=""></div>
+  <div class="lb-info">
+    <button class="lb-close" id="lbClose">&#215;</button>
+    <div class="lb-price" id="lbPrice"></div>
+    <div class="lb-title" id="lbTitle"></div>
+    <div class="lb-artist-name" id="lbArtistName"></div>
+    <div class="lb-meta" id="lbMeta"></div>
+    <div class="lb-actions">
+      <button class="lb-btn" id="lbInquiryBtn" data-translate="lb-inquiry">Werk anfragen</button>
+    </div>
+  </div>
+</div>
+<div class="cursor-tooltip" id="cursorTooltip">
+  <div class="cursor-tooltip-title" id="tooltipTitle"></div>
+  <div class="cursor-tooltip-artist" id="tooltipArtist"></div>
+</div>
+
+<script>
+  const PAGE_SIZE = 6;
+  let visibleCount = PAGE_SIZE;
+  let activeFilters = new Set();
+
+  function allItems() { return [...document.querySelectorAll('#galleryGrid .gallery-item')]; }
+
+  const CATEGORIES = [...new Set(allItems().map(i => i.dataset.category))];
+  activeFilters = new Set(CATEGORIES);
+
+  const filtersEl = document.getElementById('galleryFilters');
+
+  if (CATEGORIES.length > 1) {
+    const allBtn = document.createElement('button');
+    allBtn.className = 'filter-btn active';
+    allBtn.dataset.filter = 'alle';
+    allBtn.textContent = T[currentLang.v]['filter-all'];
+    filtersEl.appendChild(allBtn);
+  }
+
+  CATEGORIES.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn active';
+    btn.dataset.filter = cat;
+    btn.textContent = cat;
+    filtersEl.appendChild(btn);
+  });
+
+  function filteredItems() { return allItems().filter(i => activeFilters.has(i.dataset.category)); }
+
+  function updateGallery() {
+    const all = allItems(), filtered = filteredItems();
+    all.forEach(i => { i.style.display = 'none'; });
+    filtered.forEach((item, idx) => { item.style.display = idx < visibleCount ? 'block' : 'none'; });
+    const wrap = document.getElementById('loadMoreWrap'), btn = document.getElementById('loadMoreBtn');
+    if (filtered.length <= PAGE_SIZE) { wrap.style.display = 'none'; }
+    else if (visibleCount >= filtered.length) { wrap.style.display = 'block'; btn.textContent = T[currentLang.v]['load-less']; }
+    else { wrap.style.display = 'block'; btn.textContent = T[currentLang.v]['load-more']; }
+    const allActive = CATEGORIES.every(c => activeFilters.has(c));
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      const f = btn.dataset.filter;
+      btn.classList.toggle('active', f === 'alle' ? allActive : activeFilters.has(f));
+    });
+  }
+
+  filtersEl.addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    const f = btn.dataset.filter;
+    if (f === 'alle') { CATEGORIES.forEach(c => activeFilters.add(c)); }
+    else { if (activeFilters.has(f)) activeFilters.delete(f); else activeFilters.add(f); }
+    visibleCount = PAGE_SIZE;
+    updateGallery();
+  });
+
+  document.getElementById('loadMoreBtn').addEventListener('click', () => {
+    const filtered = filteredItems();
+    if (visibleCount >= filtered.length) { visibleCount = PAGE_SIZE; updateGallery(); document.querySelector('.section-gallery-artist').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    else { visibleCount += PAGE_SIZE; updateGallery(); }
+  });
+
+  updateGallery();
+
+  const anfrageForm = document.getElementById('anfrageForm');
+  const anfrageCheckboxes = document.querySelectorAll('.anfrage-checkbox-label input[type="checkbox"]');
+  const anfrageSubmit = document.getElementById('anfrageSubmit');
+  const anfrageEmail = document.querySelector('.anfrage-form input[type="email"]');
+  const anfrageName = document.querySelector('.anfrage-form input[type="text"]');
+  const anfrageMessage = document.querySelector('.anfrage-form textarea');
+  const anfrageEmailError = document.getElementById('anfrageEmailError');
+  const anfrageEmailErrorOk = document.getElementById('anfrageEmailErrorOk');
+  const anfrageSuccess = document.getElementById('anfrageSuccess');
+
+  function updateAnfrageState() {
+    const allChecked = [...anfrageCheckboxes].every(cb => cb.checked);
+    const allFilled = anfrageName.value.trim() !== '' && anfrageEmail.value.trim() !== '' && anfrageMessage.value.trim() !== '';
+    anfrageSubmit.disabled = !(allChecked && allFilled);
+  }
+
+  anfrageCheckboxes.forEach(cb => cb.addEventListener('change', updateAnfrageState));
+  [anfrageName, anfrageEmail, anfrageMessage].forEach(el => el.addEventListener('input', updateAnfrageState));
+  anfrageEmailErrorOk.addEventListener('click', () => anfrageEmailError.classList.remove('show'));
+
+  anfrageForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (!anfrageEmail.validity.valid) { anfrageEmailError.classList.add('show'); return; }
+    anfrageEmailError.classList.remove('show');
+    try {
+      const res = await fetch('https://formspree.io/f/xkopakgv', { method: 'POST', body: new FormData(anfrageForm), headers: { 'Accept': 'application/json' } });
+      if (res.ok) { anfrageForm.reset(); updateAnfrageState(); anfrageSuccess.classList.add('show'); setTimeout(() => anfrageSuccess.classList.remove('show'), 2000); }
+    } catch (err) { console.error('Submit error:', err); }
+  });
+
+  const tooltip = document.getElementById('cursorTooltip');
+  const ttTitle = document.getElementById('tooltipTitle');
+  const ttArtist = document.getElementById('tooltipArtist');
+
+  document.addEventListener('mousemove', e => { tooltip.style.left = (e.clientX + 18) + 'px'; tooltip.style.top = (e.clientY - 10) + 'px'; });
+
+  allItems().forEach(item => {
+    item.addEventListener('mouseenter', () => { ttTitle.textContent = item.dataset.title; ttArtist.textContent = item.dataset.year + ' · ' + item.dataset.material; tooltip.style.display = 'block'; });
+    item.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+  });
+
+  /* ── Lightbox ────────────────────────────────────────────── */
+  const artworkLightbox = document.getElementById('artworkLightbox');
+  const lbImg        = document.getElementById('lbImg');
+  const lbPrice      = document.getElementById('lbPrice');
+  const lbTitle      = document.getElementById('lbTitle');
+  const lbArtistName = document.getElementById('lbArtistName');
+  const lbMeta       = document.getElementById('lbMeta');
+  let   lbCurrent    = null;
+
+  function openLightbox(item) {
+    lbCurrent = item;
+    const d = item.dataset;
+    lbImg.src = item.querySelector('img').src;
+    lbImg.alt = d.title || '';
+    lbPrice.textContent = d.price || '';
+    lbTitle.textContent = d.title || '';
+    lbArtistName.textContent = d.artist || '';
+    lbMeta.innerHTML = [d.year, d.material, d.size].filter(Boolean).join('<br>');
+    artworkLightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    artworkLightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    lbCurrent = null;
+  }
+
+  allItems().forEach(item => { item.addEventListener('click', () => openLightbox(item)); });
+
+  document.getElementById('lbInquiryBtn').addEventListener('click', () => {
+    closeLightbox();
+    document.querySelector('.section-vermittlung').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  /* ── Translations ───────────────────────────────────────────── */
+  const currentLang = { v: 'de' };
+  const T = {
+    de: {
+      'nav-works': 'Werke', 'nav-artists': 'Künstler:innen', 'nav-about': 'Über uns', 'nav-contact': 'Kontakt',
+      'artist-tag-f': 'Künstlerin', 'artist-tag-m': 'Künstler',
+      'artist-bio': "Cholud Kassem verbindet Fotografie mit malerischen und zeichnerischen Eingriffen. Auf Fotokarton entstehen Arbeiten, die das fotografische Bild als Tr\u00e4ger und Widerstand zugleich begreifen. Sie lebt und arbeitet in Heidelberg.",
+      'gallery-h2': 'Werke',
+      'filter-all': 'Alle', 'filter-skulpturen': 'Skulpturen', 'filter-fotografie': 'Fotografie',
+      'filter-malerei': 'Malerei', 'filter-textilkunst': 'Textilkunst', 'filter-druckgrafik': 'Druckgrafik',
+      'filter-zeichnungen': 'Zeichnungen', 'filter-mixed': 'Mixed Media',
+      'vermittlung-tag': 'Werk anfragen', 'vermittlung-title': 'Interesse an einem Werk?',
+      'vermittlung-text': "Showroom Eins vermittelt auf Anfrage den direkten Kontakt zur K\u00fcnstlerin. Wir sind kein Kunsthandel \u2013 alle Verk\u00e4ufe laufen direkt zwischen Ihnen und der K\u00fcnstlerin ab.",
+      'form-name-ph': 'Name *', 'form-email-ph': 'E-Mail *', 'form-message-ph': 'Nachricht *',
+      'form-check1': 'Ich habe die Datenschutzerklärung gelesen und akzeptiere sie.',
+      'form-check2': 'Ich bin damit einverstanden, dass meine Daten verarbeitet werden.',
+      'form-submit': 'Absenden', 'form-success': 'Nachricht gesendet',
+      'form-email-error': 'Bitte eine gültige E-Mail-Adresse eingeben.', 'form-email-ok': 'OK',
+      'load-more': 'Weitere Werke', 'load-less': 'Weniger anzeigen',
+      'lb-inquiry': 'Werk anfragen',
+      'footer-home': 'Home', 'footer-impressum': 'Impressum', 'footer-datenschutz': 'Datenschutz',
+      'footer-agb': 'AGBs', 'footer-instagram': 'Instagram',
+    },
+    en: {
+      'nav-works': 'Works', 'nav-artists': 'Artists', 'nav-about': 'About', 'nav-contact': 'Contact',
+      'artist-tag-f': 'Artist', 'artist-tag-m': 'Artist',
+      'artist-bio': "Cholud Kassem combines photography with painterly and graphic interventions. Working on photographic paper, she creates pieces that understand the photographic image as both support and resistance. She lives and works in Heidelberg.",
+      'gallery-h2': 'Works',
+      'filter-all': 'All', 'filter-skulpturen': 'Sculptures', 'filter-fotografie': 'Photography',
+      'filter-malerei': 'Painting', 'filter-textilkunst': 'Textile Art', 'filter-druckgrafik': 'Printmaking',
+      'filter-zeichnungen': 'Drawings', 'filter-mixed': 'Mixed Media',
+      'vermittlung-tag': 'Request a Work', 'vermittlung-title': 'Interested in a Work?',
+      'vermittlung-text': 'Showroom Eins facilitates direct contact with the artist upon request. We are not an art dealer – all sales take place directly between you and the artist.',
+      'form-name-ph': 'Name *', 'form-email-ph': 'E-Mail *', 'form-message-ph': 'Message *',
+      'form-check1': 'I have read and accept the privacy policy.',
+      'form-check2': 'I agree to my data being processed.',
+      'form-submit': 'Send', 'form-success': 'Message sent',
+      'form-email-error': 'Please enter a valid email address.', 'form-email-ok': 'OK',
+      'load-more': 'More Works', 'load-less': 'Show Less',
+      'lb-inquiry': 'Request Work',
+      'footer-home': 'Home', 'footer-impressum': 'Imprint', 'footer-datenschutz': 'Privacy',
+      'footer-agb': 'Terms', 'footer-instagram': 'Instagram',
+    }
+  };
+
+  function applyLang(lang) {
+    currentLang.v = lang;
+    const t = T[lang];
+    document.querySelectorAll('[data-translate]').forEach(el => {
+      const key = el.dataset.translate;
+      if (t[key] !== undefined) el.textContent = t[key];
+    });
+    document.querySelectorAll('[data-translate-placeholder]').forEach(el => {
+      const key = el.dataset.translatePlaceholder;
+      if (t[key] !== undefined) el.placeholder = t[key];
+    });
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      const f = btn.dataset.filter;
+      const key = f === 'alle' ? 'filter-all' : 'filter-' + f.toLowerCase().replace(/ /g, '-');
+      if (t[key] !== undefined) btn.textContent = t[key];
+    });
+    document.querySelectorAll('.toggle-track').forEach(t => t.classList.toggle('en-active', lang === 'en'));
+  }
+
+  function toggleLang() {
+    const newLang = currentLang.v === 'de' ? 'en' : 'de';
+    localStorage.setItem('sre-lang', newLang);
+    applyLang(newLang);
+  }
+
+  // Gespeicherte Sprache beim Laden wiederherstellen
+  { const _s = localStorage.getItem('sre-lang'); if (_s === 'en') applyLang('en'); }
+
+  /* Mobile Navigation */
+  document.addEventListener('DOMContentLoaded', function() {
+    var h = document.getElementById('navHamburger');
+    var o = document.getElementById('navOverlay');
+    if (!h || !o) return;
+    h.addEventListener('click', function() {
+      var open = o.classList.toggle('open');
+      h.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    o.addEventListener('click', function(e) {
+      if (e.target === o) {
+        o.classList.remove('open');
+        h.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+    o.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        o.classList.remove('open');
+        h.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  });
+</script>
+
+<!-- ─── MOBILE NAV OVERLAY ───────────────────────────────────── -->
+<div class="nav-overlay" id="navOverlay">
+  <div class="nav-overlay-lang-wrap">
+    <div class="nav-overlay-lang" onclick="if(typeof toggleLang!=='undefined') toggleLang()">
+      <span>DE</span>
+      <div class="toggle-track">
+        <div class="toggle-thumb"></div>
+      </div>
+      <span>EN</span>
+    </div>
+  </div>
+  <div class="nav-overlay-inner">
+    <ul class="nav-overlay-links">
+      <li><a href="../showroom-eins-frontpage.html#werke">Werke</a></li>
+      <li><a href="../showroom-eins-frontpage.html#kuenstlerinnen">Künstler:innen</a></li>
+      <li><a href="../showroom-eins-frontpage.html#ueber-uns">Über uns</a></li>
+      <li><a href="../kontakt.html">Kontakt</a></li>
+    </ul>
+    <ul class="nav-overlay-artists">
+      <li><a href="chaz-bargainer.html">Chaz Bargainer</a></li>
+      <li><a href="philipp-diefenbacher.html">Philipp Diefenbacher</a></li>
+      <li><a href="ralf-diefenbacher.html">Ralf Diefenbacher</a></li>
+      <li><a href="sarah-haefner.html">Sarah Häfner</a></li>
+      <li><a href="sybille-hutter.html">Sybille Hutter</a></li>
+      <li><a href="cholud-kassem.html">Cholud Kassem</a></li>
+      <li><a href="johanna-mangold.html">Johanna Mangold</a></li>
+      <li><a href="cedric-pintarelli.html">Cedric Pintarelli</a></li>
+      <li><a href="siegmund-schlag.html">Siegmund Schlag</a></li>
+    </ul>
+    <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener" class="nav-overlay-extra">Instagram</a>
+  </div>
+</div>
+</body>
+</html>
