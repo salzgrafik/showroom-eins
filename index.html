@@ -584,19 +584,18 @@
   .footer-nav-bar {
     position: relative;
     z-index: 1;
-    padding: 32px var(--edge);
+    padding: 56px var(--edge) 48px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    gap: 32px;
+    align-items: flex-start;
+    gap: 48px;
   }
 
   .footer-logo {
-    height: 56px;
+    height: 52px;
     width: auto;
     display: block;
     flex-shrink: 0;
-    align-self: flex-end;
   }
 
   .footer-links {
@@ -965,11 +964,38 @@
     <ul class="artists-list">
       <li class="artist-row">
         <div class="artist-left">
+          <a class="artist-name" href="kuenstler/cedric-pintarelli.html">Cedric Pintarelli</a>
+          <span class="artist-line"></span>
+        </div>
+        <div class="artist-tags">
+          <span class="artist-tag" data-translate="tag-malerei">Malerei</span>
+        </div>
+      </li>
+      <li class="artist-row">
+        <div class="artist-left">
           <a class="artist-name" href="kuenstler/chaz-bargainer.html">Chaz Bargainer</a>
           <span class="artist-line"></span>
         </div>
         <div class="artist-tags">
           <span class="artist-tag" data-translate="tag-mixed">Mixed Media</span>
+        </div>
+      </li>
+      <li class="artist-row">
+        <div class="artist-left">
+          <a class="artist-name" href="kuenstler/cholud-kassem.html">Cholud Kassem</a>
+          <span class="artist-line"></span>
+        </div>
+        <div class="artist-tags">
+          <span class="artist-tag" data-translate="tag-fotografie">Fotografie</span>
+        </div>
+      </li>
+      <li class="artist-row">
+        <div class="artist-left">
+          <a class="artist-name" href="kuenstler/johanna-mangold.html">Johanna Mangold</a>
+          <span class="artist-line"></span>
+        </div>
+        <div class="artist-tags">
+          <span class="artist-tag" data-translate="tag-textilkunst">Textilkunst</span>
         </div>
       </li>
       <li class="artist-row">
@@ -1005,47 +1031,20 @@
       </li>
       <li class="artist-row">
         <div class="artist-left">
-          <a class="artist-name" href="kuenstler/sybille-hutter.html">Sybille Hutter</a>
-          <span class="artist-line"></span>
-        </div>
-        <div class="artist-tags">
-          <span class="artist-tag" data-translate="tag-skulpturen">Skulpturen</span>
-        </div>
-      </li>
-      <li class="artist-row">
-        <div class="artist-left">
-          <a class="artist-name" href="kuenstler/cholud-kassem.html">Cholud Kassem</a>
-          <span class="artist-line"></span>
-        </div>
-        <div class="artist-tags">
-          <span class="artist-tag" data-translate="tag-fotografie">Fotografie</span>
-        </div>
-      </li>
-      <li class="artist-row">
-        <div class="artist-left">
-          <a class="artist-name" href="kuenstler/johanna-mangold.html">Johanna Mangold</a>
-          <span class="artist-line"></span>
-        </div>
-        <div class="artist-tags">
-          <span class="artist-tag" data-translate="tag-textilkunst">Textilkunst</span>
-        </div>
-      </li>
-      <li class="artist-row">
-        <div class="artist-left">
-          <a class="artist-name" href="kuenstler/cedric-pintarelli.html">Cedric Pintarelli</a>
-          <span class="artist-line"></span>
-        </div>
-        <div class="artist-tags">
-          <span class="artist-tag" data-translate="tag-malerei">Malerei</span>
-        </div>
-      </li>
-      <li class="artist-row">
-        <div class="artist-left">
           <a class="artist-name" href="kuenstler/siegmund-schlag.html">Siegmund Schlag</a>
           <span class="artist-line"></span>
         </div>
         <div class="artist-tags">
           <span class="artist-tag" data-translate="tag-fotografie">Fotografie</span>
+        </div>
+      </li>
+      <li class="artist-row">
+        <div class="artist-left">
+          <a class="artist-name" href="kuenstler/sybille-hutter.html">Sybille Hutter</a>
+          <span class="artist-line"></span>
+        </div>
+        <div class="artist-tags">
+          <span class="artist-tag" data-translate="tag-skulpturen">Skulpturen</span>
         </div>
       </li>
     </ul>
@@ -1128,25 +1127,41 @@
   <footer class="footer-dark">
     <img class="footer-bg" src="assets/platzhalter_werke.jpg" alt="Showroom Eins">
     <div class="footer-nav-bar">
-      <img class="footer-logo" src="svg/logo_weiss.svg" alt="Showroom Eins">
-      <div class="footer-col">
-        <a href="index.html" class="footer-col-link">Home</a>
+
+      <!-- Marke -->
+      <div class="footer-col footer-col-brand">
+        <img class="footer-logo" src="svg/logo_weiss.svg" alt="Showroom Eins">
+        <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener" class="footer-col-link">Instagram</a>
+      </div>
+
+      <!-- Künstler:innen -->
+      <div class="footer-col footer-col-artists">
+        <span class="footer-col-label">Künstler:innen</span>
+        <a href="kuenstler/cedric-pintarelli.html" class="footer-col-link">Cedric Pintarelli</a>
         <a href="kuenstler/chaz-bargainer.html" class="footer-col-link">Chaz Bargainer</a>
+        <a href="kuenstler/cholud-kassem.html" class="footer-col-link">Cholud Kassem</a>
+        <a href="kuenstler/johanna-mangold.html" class="footer-col-link">Johanna Mangold</a>
         <a href="kuenstler/philipp-diefenbacher.html" class="footer-col-link">Philipp Diefenbacher</a>
         <a href="kuenstler/ralf-diefenbacher.html" class="footer-col-link">Ralf Diefenbacher</a>
         <a href="kuenstler/sarah-haefner.html" class="footer-col-link">Sarah Häfner</a>
-        <a href="kuenstler/sybille-hutter.html" class="footer-col-link">Sybille Hutter</a>
-        <a href="kuenstler/cholud-kassem.html" class="footer-col-link">Cholud Kassem</a>
-        <a href="kuenstler/johanna-mangold.html" class="footer-col-link">Johanna Mangold</a>
-        <a href="kuenstler/cedric-pintarelli.html" class="footer-col-link">Cedric Pintarelli</a>
         <a href="kuenstler/siegmund-schlag.html" class="footer-col-link">Siegmund Schlag</a>
+        <a href="kuenstler/sybille-hutter.html" class="footer-col-link">Sybille Hutter</a>
       </div>
-      <div class="footer-col">
+
+      <!-- Navigation + Rechtliches -->
+      <div class="footer-col footer-col-nav">
+        <span class="footer-col-label">Navigation</span>
+        <a href="index.html" class="footer-col-link">Home</a>
+        <a href="#werke" class="footer-col-link">Werke</a>
+        <a href="#kuenstlerinnen" class="footer-col-link">Künstler:innen</a>
+        <a href="#ueber-uns" class="footer-col-link">Über uns</a>
+        <a href="#kontakt" class="footer-col-link">Kontakt</a>
+        <div class="footer-col-sep"></div>
         <a href="impressum.html" class="footer-col-link">Impressum</a>
         <a href="datenschutz.html" class="footer-col-link">Datenschutz</a>
         <a href="agb.html" class="footer-col-link">AGB</a>
-        <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener" class="footer-col-link">Instagram</a>
       </div>
+
     </div>
   </footer>
 
@@ -1600,15 +1615,15 @@
       <li><a href="#kontakt">Kontakt</a></li>
     </ul>
     <ul class="nav-overlay-artists">
+      <li><a href="kuenstler/cedric-pintarelli.html">Cedric Pintarelli</a></li>
       <li><a href="kuenstler/chaz-bargainer.html">Chaz Bargainer</a></li>
+      <li><a href="kuenstler/cholud-kassem.html">Cholud Kassem</a></li>
+      <li><a href="kuenstler/johanna-mangold.html">Johanna Mangold</a></li>
       <li><a href="kuenstler/philipp-diefenbacher.html">Philipp Diefenbacher</a></li>
       <li><a href="kuenstler/ralf-diefenbacher.html">Ralf Diefenbacher</a></li>
       <li><a href="kuenstler/sarah-haefner.html">Sarah Häfner</a></li>
-      <li><a href="kuenstler/sybille-hutter.html">Sybille Hutter</a></li>
-      <li><a href="kuenstler/cholud-kassem.html">Cholud Kassem</a></li>
-      <li><a href="kuenstler/johanna-mangold.html">Johanna Mangold</a></li>
-      <li><a href="kuenstler/cedric-pintarelli.html">Cedric Pintarelli</a></li>
       <li><a href="kuenstler/siegmund-schlag.html">Siegmund Schlag</a></li>
+      <li><a href="kuenstler/sybille-hutter.html">Sybille Hutter</a></li>
     </ul>
     <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener" class="nav-overlay-extra">Instagram</a>
   </div>
