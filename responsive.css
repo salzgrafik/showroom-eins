@@ -206,6 +206,20 @@ body.nav-open { overflow: hidden; }
   padding: 56px 48px 48px !important;
 }
 
+/* Desktop: Link-Block nimmt restlichen Platz, zentriert Inhalt */
+.footer-link-block {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 80px;
+}
+
+/* Desktop: Wrapper ist unsichtbar — Kinder werden direkte Flex-Items von footer-link-block */
+.footer-artists-legal {
+  display: contents;
+}
+
 .footer-col {
   display: flex;
   flex-direction: column;
@@ -225,9 +239,6 @@ body.nav-open { overflow: hidden; }
   gap: 6px;
   flex-shrink: 0;
 }
-
-/* Mobile-only Instagram (im Künstler-Grid) — auf Desktop versteckt */
-.footer-instagram-mobile { display: none; }
 
 .footer-col-legal {
   flex-shrink: 0;
@@ -496,6 +507,18 @@ body.nav-open { overflow: hidden; }
     gap: 0 !important;
     width: 100% !important;
   }
+  /* Link-Block auf Mobile: transparent → Kinder direkt in footer-nav-bar */
+  .footer-link-block {
+    display: contents !important;
+  }
+  /* Künstler+Legal-Wrapper auf Mobile: eigener Spalten-Anker */
+  .footer-artists-legal {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+  /* Künstler: 2-Spalten-Grid */
   .footer-col-artists {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
@@ -504,13 +527,12 @@ body.nav-open { overflow: hidden; }
   .footer-col-artists .footer-col-label {
     grid-column: 1 / -1;
   }
-  /* Instagram in den Künstler-Grid verschieben (Spalte 2, letzte Zeile) */
-  .footer-instagram-mobile { display: block !important; }
-  .footer-social-group { display: none !important; }
-  /* Legal-Spalte braucht auf Mobile keine Side-by-Side-Aufteilung mehr */
+  /* Legal: gleiches 2-Spalten-Grid → Spalten fluchten mit Künstler-Spalten */
   .footer-legal-inner {
-    flex-direction: column !important;
-    gap: 4px !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 4px 24px !important;
+    align-items: start !important;
   }
 
   /* ── Unterseiten ────────────────────────────────────────── */
