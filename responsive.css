@@ -215,9 +215,12 @@ body.nav-open { overflow: hidden; }
   gap: 80px;
 }
 
-/* Desktop: Wrapper ist unsichtbar — Kinder werden direkte Flex-Items von footer-link-block */
+/* Desktop: Künstler + Legal nebeneinander innerhalb des Link-Blocks */
 .footer-artists-legal {
-  display: contents;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 80px;
 }
 
 .footer-col {
@@ -515,7 +518,7 @@ body.nav-open { overflow: hidden; }
   .footer-artists-legal {
     display: flex !important;
     flex-direction: column !important;
-    gap: 8px !important;
+    gap: 32px !important;
     width: 100% !important;
   }
   /* Künstler: 2-Spalten-Grid */
