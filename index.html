@@ -588,9 +588,9 @@
     z-index: 1;
     padding: 56px var(--edge) 48px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-start;
-    gap: 48px;
+    gap: 64px;
   }
 
   .footer-logo {
@@ -1066,7 +1066,7 @@
       </div>
       <div class="about-right about-text">
         <p data-translate="about-p4" data-html>In unregelmäßigen Abständen finden sogenannte <em>Salons</em> statt – persönliche Zusammenkünfte mit wechselnden Inhalten wie <em>Gesprächen, Ausstellungen, Lesungen, Konzerte oder andere kleinen Veranstaltungen rund um Kunst</em> in jeglicher Form. Diese Formate funktionieren über persönliche Einladungen und schaffen einen konzentrierten Rahmen für Begegnung, Austausch und Resonanz.</p>
-        <p data-translate="about-p5" data-html>Solltest du Interesse haben unsere Salons zu besuchen, <em>melde dich gerne bei uns über unser <a href="#kontakt">Kontaktformular</a> oder folge uns auf <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener">Instagram</a></em>. Auch dort informieren wir regelmäßig über einen Teil unserer Salons.</p>
+        <p data-translate="about-p5" data-html>Solltest du Interesse haben unsere Salons zu besuchen, <em>melde dich gerne bei uns über unser <a href="#kontakt">Kontaktformular</a> oder folge uns auf <a href="https://www.instagram.com/showroom.eins/" data-instagram="showroom.eins" target="_blank" rel="noopener">Instagram</a></em>. Auch dort informieren wir regelmäßig über einen Teil unserer Salons.</p>
       </div>
     </div>
   </section>
@@ -1168,7 +1168,7 @@
             <a href="agb.html" class="footer-col-link">AGB</a>
           </div>
           <div class="footer-social-group">
-            <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener" class="footer-col-link">Instagram</a>
+            <a href="https://www.instagram.com/showroom.eins/" data-instagram="showroom.eins" target="_blank" rel="noopener" class="footer-col-link">Instagram</a>
           </div>
         </div>
       </div>
@@ -1208,7 +1208,7 @@
       'about-p2': 'Das Projekt versteht sich als offener Ort für künstlerische Positionen unterschiedlicher Herkunft, Medien und Perspektiven. Im Mittelpunkt steht die Frage, <em>was Kunst braucht, um gesehen und ernst genommen zu werden</em> – jenseits von Marktlogik, Trends oder Szenezugehörigkeit.',
       'about-p3': 'Ein besonderer Fokus liegt auf Künstler:innen aus unserem Stadtteil. Wir möchten die künstlerischen Positionen sichtbar machen, die in unserer direkten Umgebung entstehen, und <em>ihnen einen Kontext geben</em>, in dem sie wahrgenommen, diskutiert und wertgeschätzt werden.',
       'about-p4': 'In unregelmäßigen Abständen finden sogenannte <em>Salons</em> statt – persönliche Zusammenkünfte mit wechselnden Inhalten wie <em>Gesprächen, Ausstellungen, Lesungen, Konzerte oder andere kleinen Veranstaltungen rund um Kunst</em> in jeglicher Form. Diese Formate funktionieren über persönliche Einladungen und schaffen einen konzentrierten Rahmen für Begegnung, Austausch und Resonanz.',
-      'about-p5': 'Solltest du Interesse haben unsere Salons zu besuchen, <em>melde dich gerne bei uns über unser <a href="#kontakt">Kontaktformular</a> oder folge uns auf <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener">Instagram</a></em>. Auch dort informieren wir regelmäßig über einen Teil unserer Salons.',
+      'about-p5': 'Solltest du Interesse haben unsere Salons zu besuchen, <em>melde dich gerne bei uns über unser <a href="#kontakt">Kontaktformular</a> oder folge uns auf <a href="https://www.instagram.com/showroom.eins/" data-instagram="showroom.eins" target="_blank" rel="noopener">Instagram</a></em>. Auch dort informieren wir regelmäßig über einen Teil unserer Salons.',
       'contact-tag': 'Austausch', 'contact-title': 'Kontakt',
       'contact-send': 'Absenden',
       'placeholder-name': 'Name *', 'placeholder-email': 'E-Mail *', 'placeholder-message': 'Nachricht *',
@@ -1242,7 +1242,7 @@
       'about-p2': 'The project sees itself as an open space for artistic positions of different origins, media and perspectives. At its center is the question of <em>what art needs to be seen and taken seriously</em> – beyond market logic, trends or scene affiliation.',
       'about-p3': 'A particular focus is on artists from our neighbourhood. We want to make visible the artistic positions that emerge in our immediate surroundings, and <em>give them a context</em> in which they are perceived, discussed and appreciated.',
       'about-p4': 'At irregular intervals, so-called <em>Salons</em> take place – personal gatherings with varying content such as <em>conversations, exhibitions, readings, concerts or other small events around art</em> in any form. These formats work through personal invitations and create a focused framework for encounter, exchange and resonance.',
-      'about-p5': 'If you are interested in attending our Salons, <em>feel free to contact us through our <a href="#kontakt">contact form</a> or follow us on <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener">Instagram</a></em>. We also regularly share updates about some of our Salons there.',
+      'about-p5': 'If you are interested in attending our Salons, <em>feel free to contact us through our <a href="#kontakt">contact form</a> or follow us on <a href="https://www.instagram.com/showroom.eins/" data-instagram="showroom.eins" target="_blank" rel="noopener">Instagram</a></em>. We also regularly share updates about some of our Salons there.',
       'contact-tag': 'Exchange', 'contact-title': 'Contact',
       'contact-send': 'Send',
       'placeholder-name': 'Name *', 'placeholder-email': 'E-Mail *', 'placeholder-message': 'Message *',
@@ -1563,11 +1563,9 @@
   });
 
   lbInquiryBtn.addEventListener('click', () => {
-    closeLightbox();
-    setTimeout(() => {
-      const kontakt = document.getElementById('kontakt');
-      if (kontakt) kontakt.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+    if (currentItem && currentItem.dataset.url) {
+      window.location.href = currentItem.dataset.url + '#vermittlung';
+    }
   });
 
   document.getElementById('lbClose').addEventListener('click', closeLightbox);
@@ -1615,6 +1613,21 @@
   }
   if (document.readyState !== 'loading') { _initMobileNav(); }
   else { document.addEventListener('DOMContentLoaded', _initMobileNav); }
+
+  /* ── Instagram: App auf Mobile öffnen ──────────────────────── */
+  document.querySelectorAll('a[data-instagram]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (isMobile) {
+        e.preventDefault();
+        var username = link.dataset.instagram;
+        var appUrl = 'instagram://user?username=' + username;
+        var webUrl = link.href;
+        window.location = appUrl;
+        setTimeout(function() { window.location = webUrl; }, 1200);
+      }
+    });
+  });
 </script>
 
 <!-- ─── MOBILE NAV OVERLAY ───────────────────────────────────── -->
@@ -1646,7 +1659,7 @@
       <li><a href="kuenstler/siegmund-schlag.html">Siegmund Schlag</a></li>
       <li><a href="kuenstler/sybille-hutter.html">Sybille Hutter</a></li>
     </ul>
-    <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener" class="nav-overlay-extra">Instagram</a>
+    <a href="https://www.instagram.com/showroom.eins/" data-instagram="showroom.eins" target="_blank" rel="noopener" class="nav-overlay-extra">Instagram</a>
   </div>
 </div>
 </body>

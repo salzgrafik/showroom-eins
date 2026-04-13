@@ -201,8 +201,8 @@ body.nav-open { overflow: hidden; }
   display: flex !important;
   flex-direction: row !important;
   align-items: flex-start !important;
-  justify-content: space-between !important;
-  gap: 48px !important;
+  justify-content: flex-start !important;
+  gap: 64px !important;
   padding: 56px 48px 48px !important;
 }
 
@@ -502,9 +502,14 @@ body.nav-open { overflow: hidden; }
     grid-column: 1 / -1;
   }
   .footer-legal-inner {
-    flex-direction: row !important;
-    gap: 32px !important;
-    align-items: flex-start !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 4px 24px !important;
+    align-items: start !important;
+  }
+  .footer-legal-group,
+  .footer-social-group {
+    gap: 4px !important;
   }
 
   /* ── Unterseiten ────────────────────────────────────────── */
