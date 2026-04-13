@@ -226,6 +226,9 @@ body.nav-open { overflow: hidden; }
   flex-shrink: 0;
 }
 
+/* Mobile-only Instagram (im Künstler-Grid) — auf Desktop versteckt */
+.footer-instagram-mobile { display: none; }
+
 .footer-col-legal {
   flex-shrink: 0;
 }
@@ -501,14 +504,12 @@ body.nav-open { overflow: hidden; }
   .footer-col-artists .footer-col-label {
     grid-column: 1 / -1;
   }
+  /* Instagram in den Künstler-Grid verschieben (Spalte 2, letzte Zeile) */
+  .footer-instagram-mobile { display: block !important; }
+  .footer-social-group { display: none !important; }
+  /* Legal-Spalte braucht auf Mobile keine Side-by-Side-Aufteilung mehr */
   .footer-legal-inner {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 4px 24px !important;
-    align-items: start !important;
-  }
-  .footer-legal-group,
-  .footer-social-group {
+    flex-direction: column !important;
     gap: 4px !important;
   }
 
