@@ -53,7 +53,7 @@
   .nav-logo {
     font-family: 'DM Mono', monospace;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 24px;
     letter-spacing: 0;
     color: #0a0a0a;
     text-decoration: none;
@@ -141,7 +141,7 @@
     align-self: flex-start;
     width: fit-content;
     border: 1px solid var(--black);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     padding: 4px 8px;
@@ -182,8 +182,8 @@
   .hero-title {
     font-family: 'DM Mono', monospace;
     font-weight: 500;
-    font-size: 56px;
-    line-height: 64px;
+    font-size: 64px;
+    line-height: 1.1;
     text-transform: uppercase;
   }
 
@@ -220,8 +220,8 @@
   .section-title {
     font-family: 'DM Mono', monospace;
     font-weight: 500;
-    font-size: 40px;
-    line-height: 44px;
+    font-size: 48px;
+    line-height: 1.15;
     text-transform: uppercase;
   }
 
@@ -241,7 +241,7 @@
     flex: 0 0 auto;
     padding: 8px 16px;
     border-radius: 999px;
-    border: 1px solid rgba(10, 10, 10, 0.25);
+    border: 1px solid #999;
     background: transparent;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 12px;
@@ -249,8 +249,9 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     cursor: pointer;
-    color: rgba(10, 10, 10, 0.25);
-    transition: border-color 0.2s, color 0.2s;
+    color: #999;
+    text-decoration: line-through;
+    transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
     white-space: nowrap;
   }
 
@@ -259,9 +260,14 @@
     color: rgba(10, 10, 10, 0.5);
   }
 
+  .filter-btn:active {
+    opacity: 0.4;
+  }
+
   .filter-btn.active {
     border: 1px solid #0a0a0a;
     color: #0a0a0a;
+    text-decoration: none;
   }
 
   .filter-btn.active:hover {
@@ -747,7 +753,7 @@
     display: inline-block;
     align-self: flex-start;
     border: 1px solid var(--black);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     padding: 4px 8px;
@@ -756,8 +762,8 @@
   .lb-title {
     font-family: 'DM Mono', monospace;
     font-weight: 500;
-    font-size: 30px;
-    line-height: 36px;
+    font-size: 48px;
+    line-height: 1.15;
     text-transform: uppercase;
     margin-bottom: 12px;
   }

@@ -43,7 +43,7 @@
   .nav-logo {
     font-family: 'DM Mono', monospace;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 24px;
     text-decoration: none;
     color: var(--black);
   }
@@ -77,8 +77,8 @@
   .artist-h1 {
     font-family: 'DM Mono', monospace;
     font-weight: 500;
-    font-size: 40px;
-    line-height: 48px;
+    font-size: 64px;
+    line-height: 1.1;
     text-transform: uppercase;
     margin-bottom: 24px;
   }
@@ -88,7 +88,7 @@
     display: inline-block;
     width: fit-content;
     border: 1px solid var(--black);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     padding: 4px 8px;
@@ -113,8 +113,8 @@
   .section-gallery-artist h2 {
     font-family: 'DM Mono', monospace;
     font-weight: 500;
-    font-size: 40px;
-    line-height: 44px;
+    font-size: 32px;
+    line-height: 1.2;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     margin-bottom: 32px;
@@ -136,7 +136,7 @@
     flex: 0 0 auto;
     padding: 8px 16px;
     border-radius: 999px;
-    border: 1px solid rgba(10, 10, 10, 0.25);
+    border: 1px solid #999;
     background: transparent;
     font-family: var(--font);
     font-size: 12px;
@@ -144,8 +144,9 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     cursor: pointer;
-    color: rgba(10, 10, 10, 0.25);
-    transition: border-color 0.2s, color 0.2s;
+    color: #999;
+    text-decoration: line-through;
+    transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
     white-space: nowrap;
   }
 
@@ -154,9 +155,14 @@
     color: rgba(10, 10, 10, 0.5);
   }
 
+  .filter-btn:active {
+    opacity: 0.4;
+  }
+
   .filter-btn.active {
     border: 1px solid #0a0a0a;
     color: #0a0a0a;
+    text-decoration: none;
   }
 
   .filter-btn.active:hover {
@@ -251,7 +257,7 @@
     display: inline-block;
     width: fit-content;
     border: 1px solid var(--black);
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     padding: 4px 8px;
@@ -261,8 +267,8 @@
   .vermittlung-title {
     font-family: 'DM Mono', monospace;
     font-weight: 500;
-    font-size: 30px;
-    line-height: 32px;
+    font-size: 48px;
+    line-height: 1.15;
     text-transform: uppercase;
     color: var(--black);
     margin-bottom: 24px;
@@ -270,7 +276,7 @@
 
   .vermittlung-text {
     font-family: var(--font);
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.7;
     color: rgba(10, 10, 10, 0.6);
     margin-bottom: 48px;
@@ -527,8 +533,8 @@
   .lb-info { background: rgba(247,245,242,0.82); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-left: 1px solid var(--gray-light); padding: 48px 40px; display: flex; flex-direction: column; overflow-y: auto; position: relative; }
   .lb-close { position: absolute; top: 28px; right: 32px; background: transparent; border: none; cursor: pointer; font-size: 22px; color: var(--black); line-height: 1; padding: 0; font-family: var(--font); opacity: 0.5; transition: opacity 0.2s; }
   .lb-close:hover { opacity: 1; }
-  .lb-price { display: inline-block; align-self: flex-start; border: 1px solid var(--black); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 8px; margin-bottom: 28px; }
-  .lb-title { font-family: 'DM Mono', monospace; font-weight: 500; font-size: 30px; line-height: 36px; text-transform: uppercase; margin-bottom: 12px; }
+  .lb-price { display: inline-block; align-self: flex-start; border: 1px solid var(--black); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 8px; margin-bottom: 28px; }
+  .lb-title { font-family: 'DM Mono', monospace; font-weight: 500; font-size: 48px; line-height: 1.15; text-transform: uppercase; margin-bottom: 12px; }
   .lb-artist-name { font-size: 12px; letter-spacing: 0.1em; color: rgba(10,10,10,0.5); margin-bottom: 20px; }
   .lb-meta { font-size: 12px; letter-spacing: 0.06em; color: rgba(10,10,10,0.5); line-height: 2; }
   .lb-actions { margin-top: auto; padding-top: 48px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
