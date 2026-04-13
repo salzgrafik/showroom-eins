@@ -39,11 +39,8 @@ body.nav-open { overflow: hidden; }
 }
 
 .nav-hamburger span:nth-child(1) { width: 20px; }
-.nav-hamburger span:nth-child(2) { width: 13px; }
+.nav-hamburger span:nth-child(2) { width: 20px; }
 .nav-hamburger span:nth-child(3) { width: 20px; }
-
-/* Hover: mittlere Linie verlängert sich */
-.nav-hamburger:not(.open):hover span:nth-child(2) { width: 20px; }
 
 /* Open → X */
 .nav-hamburger.open span:nth-child(1) {
@@ -92,7 +89,7 @@ body.nav-open { overflow: hidden; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: 48px;
   padding: 80px 48px;
   width: 100%;
   max-width: 360px;
@@ -127,7 +124,7 @@ body.nav-open { overflow: hidden; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 16px;
 }
 
 .nav-overlay-artists a {
@@ -229,6 +226,24 @@ body.nav-open { overflow: hidden; }
   flex-shrink: 0;
 }
 
+.footer-col-legal {
+  flex-shrink: 0;
+}
+
+.footer-legal-inner {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.footer-legal-group,
+.footer-social-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .footer-col-label {
   display: block;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -283,7 +298,7 @@ body.nav-open { overflow: hidden; }
   pointer-events: none;
 }
 
-.gallery-item-caption-title {
+.gallery-item-caption-text {
   display: block;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 11px;
@@ -291,19 +306,6 @@ body.nav-open { overflow: hidden; }
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #f7f5f2;
-  line-height: 1.5;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.gallery-item-caption-artist {
-  display: block;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  color: rgba(247,245,242,0.6);
   line-height: 1.5;
   white-space: nowrap;
   overflow: hidden;
@@ -442,11 +444,14 @@ body.nav-open { overflow: hidden; }
   .section-gallery,
   .section-artists,
   .section-about,
-  .section-contact,
   .section-gallery-artist,
   .section-vermittlung {
     padding-top: 64px !important;
     padding-bottom: 64px !important;
+  }
+  .section-contact {
+    padding-top: 64px !important;
+    padding-bottom: 0 !important;
   }
 
   /* ── Künstler:innen-Liste ───────────────────────────────── */
@@ -484,7 +489,7 @@ body.nav-open { overflow: hidden; }
   .footer-col-brand {
     flex-direction: row !important;
     align-items: center !important;
-    justify-content: space-between !important;
+    justify-content: flex-start !important;
     gap: 0 !important;
     width: 100% !important;
   }
@@ -495,6 +500,11 @@ body.nav-open { overflow: hidden; }
   }
   .footer-col-artists .footer-col-label {
     grid-column: 1 / -1;
+  }
+  .footer-legal-inner {
+    flex-direction: row !important;
+    gap: 32px !important;
+    align-items: flex-start !important;
   }
 
   /* ── Unterseiten ────────────────────────────────────────── */
@@ -611,11 +621,13 @@ button {
   min-height: 44px;
 }
 
-/* Load-More Button: Mindest-Touch-Target 44px */
-.load-more-btn {
-  min-height: 44px;
-  display: inline-flex !important;
-  align-items: center;
+/* Load-More Button: Mindest-Touch-Target 44px (nur Touch) */
+@media (hover: none) {
+  .load-more-btn {
+    min-height: 44px;
+    display: inline-flex !important;
+    align-items: center;
+  }
 }
 
 /* Lightbox-Close Button: Mindest-Touch-Target 44px */
@@ -651,9 +663,9 @@ button {
     transform: none !important;
   }
 
-  /* Hamburger: kein Hover-Effekt auf mittlerer Linie */
+  /* Hamburger: kein Hover-Effekt auf Touch */
   .nav-hamburger:not(.open):hover span:nth-child(2) {
-    width: 13px !important;
+    width: 20px !important;
   }
 
   /* Nav-Links: kein Hover-Underline auf Touch */
@@ -674,5 +686,10 @@ button {
   .load-more-btn:hover {
     border-bottom-color: transparent !important;
     opacity: 1 !important;
+  }
+
+  /* Künstlername: kein Hover-Underline auf Touch */
+  a.artist-name:hover {
+    border-bottom-color: transparent !important;
   }
 }

@@ -298,7 +298,7 @@
 
   /* ─── LOAD MORE ──────────────────────────────────────────────── */
   .load-more-wrap {
-    margin-top: 48px;
+    margin-top: 24px;
     text-align: center;
   }
 
@@ -387,10 +387,12 @@
     letter-spacing: 0.01em;
     color: var(--black);
     text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.25s ease;
   }
 
   a.artist-name:hover {
-    border-bottom: 1px solid var(--black);
+    border-bottom-color: var(--black);
   }
 
   .artist-line {
@@ -1131,7 +1133,16 @@
       <!-- Marke -->
       <div class="footer-col footer-col-brand">
         <img class="footer-logo" src="svg/logo_weiss.svg" alt="Showroom Eins">
-        <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener" class="footer-col-link">Instagram</a>
+      </div>
+
+      <!-- Navigation -->
+      <div class="footer-col footer-col-nav">
+        <span class="footer-col-label">Navigation</span>
+        <a href="index.html" class="footer-col-link">Home</a>
+        <a href="#werke" class="footer-col-link">Werke</a>
+        <a href="#kuenstlerinnen" class="footer-col-link">Künstler:innen</a>
+        <a href="#ueber-uns" class="footer-col-link">Über uns</a>
+        <a href="#kontakt" class="footer-col-link">Kontakt</a>
       </div>
 
       <!-- Künstler:innen -->
@@ -1148,18 +1159,18 @@
         <a href="kuenstler/sybille-hutter.html" class="footer-col-link">Sybille Hutter</a>
       </div>
 
-      <!-- Navigation + Rechtliches -->
-      <div class="footer-col footer-col-nav">
-        <span class="footer-col-label">Navigation</span>
-        <a href="index.html" class="footer-col-link">Home</a>
-        <a href="#werke" class="footer-col-link">Werke</a>
-        <a href="#kuenstlerinnen" class="footer-col-link">Künstler:innen</a>
-        <a href="#ueber-uns" class="footer-col-link">Über uns</a>
-        <a href="#kontakt" class="footer-col-link">Kontakt</a>
-        <div class="footer-col-sep"></div>
-        <a href="impressum.html" class="footer-col-link">Impressum</a>
-        <a href="datenschutz.html" class="footer-col-link">Datenschutz</a>
-        <a href="agb.html" class="footer-col-link">AGB</a>
+      <!-- Rechtliches + Socials -->
+      <div class="footer-col footer-col-legal">
+        <div class="footer-legal-inner">
+          <div class="footer-legal-group">
+            <a href="impressum.html" class="footer-col-link">Impressum</a>
+            <a href="datenschutz.html" class="footer-col-link">Datenschutz</a>
+            <a href="agb.html" class="footer-col-link">AGB</a>
+          </div>
+          <div class="footer-social-group">
+            <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener" class="footer-col-link">Instagram</a>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -1534,11 +1545,13 @@
   }
 
   document.querySelectorAll('.gallery-item').forEach(item => {
-    // Mobile caption direkt auf dem Bild
+    // Mobile caption direkt auf dem Bild (einzeilig: TITEL - KÜNSTLER)
     const cap = document.createElement('div');
     cap.className = 'gallery-item-caption';
-    cap.innerHTML = '<span class="gallery-item-caption-title">' + (item.dataset.title || '') + '</span>' +
-                    '<span class="gallery-item-caption-artist">' + (item.dataset.artist || '') + '</span>';
+    const capTitle = item.dataset.title || '';
+    const capArtist = item.dataset.artist || '';
+    const capText = capTitle && capArtist ? capTitle + ' – ' + capArtist : capTitle || capArtist;
+    cap.innerHTML = '<span class="gallery-item-caption-text">' + capText + '</span>';
     item.appendChild(cap);
     item.addEventListener('click', () => openLightbox(item));
   });
@@ -1547,6 +1560,14 @@
     if (currentItem && currentItem.dataset.url) {
       window.location.href = currentItem.dataset.url;
     }
+  });
+
+  lbInquiryBtn.addEventListener('click', () => {
+    closeLightbox();
+    setTimeout(() => {
+      const kontakt = document.getElementById('kontakt');
+      if (kontakt) kontakt.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   });
 
   document.getElementById('lbClose').addEventListener('click', closeLightbox);
