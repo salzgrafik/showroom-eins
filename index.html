@@ -265,16 +265,8 @@
     text-decoration: none;
   }
 
-  @media (hover: hover) and (pointer: fine) {
-    .filter-btn:hover {
-      border-color: rgba(10, 10, 10, 0.5);
-      color: rgba(10, 10, 10, 0.5);
-    }
-    .filter-btn.active:hover {
-      border-color: rgba(10, 10, 10, 0.5);
-      color: rgba(10, 10, 10, 0.5);
-    }
-  }
+    html:not(.touch) .filter-btn:hover { border-color: rgba(10,10,10,0.5); color: rgba(10,10,10,0.5); }
+  html:not(.touch) .filter-btn.active:hover { border-color: rgba(10,10,10,0.5); color: rgba(10,10,10,0.5); }
 
   /* Responsive: mehrzeilig → linksbündig */
   @media (max-width: 900px) {
@@ -863,6 +855,7 @@
   }
   .contact-success.show { opacity: 1; }
 </style>
+<script>window.addEventListener("touchstart",function(){document.documentElement.classList.add("touch")},{once:true,passive:true})</script>
 </head>
 <body>
 
