@@ -51,10 +51,12 @@
 
   .page { margin-top: var(--nav-h); }
 
-  .section-artist-header { padding: 104px var(--edge) 80px; border-bottom: 1px solid var(--gray-light); max-width: 960px; }
+  .section-artist-header { padding: 104px var(--edge) 80px; max-width: 960px; }
   .section-tag { display: inline-block; width: fit-content; border: 1px solid var(--black); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 8px; margin-bottom: 16px; }
   .artist-h1 { font-family: 'DM Mono', monospace; font-weight: 500; font-size: 64px; line-height: 1.1; text-transform: uppercase; margin-bottom: 24px; }
   .artist-bio { font-family: var(--font); font-size: 24px; font-weight: 400; line-height: 1.45; color: var(--black); max-width: 640px; margin-top: 24px; }
+  .artist-bio p { margin: 0 0 1.2em; }
+  .artist-bio p:last-child { margin-bottom: 0; }
 
   .section-gallery-artist { padding: 80px var(--edge); }
   .section-gallery-artist h2 { font-family: 'DM Mono', monospace; font-weight: 500; font-size: 32px; line-height: 1.2; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 32px; }
@@ -81,7 +83,7 @@
   .cursor-tooltip-title { font-family: var(--font); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #0a0a0a; line-height: 1.4; }
   .cursor-tooltip-artist { font-family: var(--font); font-size: 12px; letter-spacing: 0.08em; color: rgba(10,10,10,0.5); line-height: 1.4; }
 
-  .section-vermittlung { background: var(--white); color: var(--black); padding: 104px var(--edge); border-top: 1px solid var(--gray-light); }
+  .section-vermittlung { background: var(--white); color: var(--black); padding: 104px var(--edge); }
   .vermittlung-inner { max-width: 640px; }
   .vermittlung-label { display: inline-block; width: fit-content; border: 1px solid var(--black); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 8px; margin-bottom: 16px; }
   .vermittlung-title { font-family: 'DM Mono', monospace; font-weight: 500; font-size: 48px; line-height: 1.15; text-transform: uppercase; color: var(--black); margin-bottom: 24px; }
@@ -177,8 +179,7 @@
   <section class="section-artist-header">
     <div class="section-tag" data-translate="artist-tag-f">Künstlerin</div>
     <h1 class="artist-h1">Johanna Mangold</h1>
-    <p class="artist-bio" data-translate="artist-bio">
-    </p>
+    <div class="artist-bio" data-translate="artist-bio"></div>
   </section>
 
   <section class="section-gallery-artist">
@@ -344,7 +345,7 @@
       'form-check2': 'Ich bin damit einverstanden, dass meine Daten verarbeitet werden.',
       'form-submit': 'Absenden', 'form-success': 'Nachricht gesendet',
       'form-email-error': 'Bitte eine gültige E-Mail-Adresse eingeben.', 'form-email-ok': 'OK',
-      'load-more': 'Weitere Werke', 'load-less': 'Weniger anzeigen',
+      'load-more': 'Weitere Werke', 'load-less': 'Weniger anzeigen', 'bio-read-more': 'Weiterlesen',
       'lb-inquiry': 'Werk anfragen',
       'footer-home': 'Home', 'footer-impressum': 'Impressum', 'footer-datenschutz': 'Datenschutz',
       'footer-agb': 'AGBs', 'footer-instagram': 'Instagram',
@@ -364,7 +365,7 @@
       'form-check2': 'I agree to my data being processed.',
       'form-submit': 'Send', 'form-success': 'Message sent',
       'form-email-error': 'Please enter a valid email address.', 'form-email-ok': 'OK',
-      'load-more': 'More Works', 'load-less': 'Show Less',
+      'load-more': 'More Works', 'load-less': 'Show Less', 'bio-read-more': 'Read more',
       'lb-inquiry': 'Request Work',
       'footer-home': 'Home', 'footer-impressum': 'Imprint', 'footer-datenschutz': 'Privacy',
       'footer-agb': 'Terms', 'footer-instagram': 'Instagram',
@@ -522,12 +523,34 @@
   document.getElementById('lbClose').addEventListener('click', closeLightbox);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
+  function setBio(el, text, lang) {
+    var oldBtn = document.getElementById('bioReadMoreBtn');
+    if (oldBtn) oldBtn.remove();
+    var raw = (text || '').trim();
+    if (!raw) { el.innerHTML = ''; return; }
+    var parts = raw.split(/\n\n+/).map(function(s){ return s.trim(); }).filter(Boolean);
+    if (parts.length <= 1) { el.innerHTML = '<p>' + raw + '</p>'; return; }
+    el.innerHTML = parts.map(function(p, i){
+      return i === 0 ? '<p>' + p + '</p>' : '<p class="bio-rest" style="display:none">' + p + '</p>';
+    }).join('');
+    var btn = document.createElement('button');
+    btn.id = 'bioReadMoreBtn';
+    btn.className = 'load-more-btn';
+    btn.style.marginTop = '16px';
+    btn.textContent = T[lang]['bio-read-more'] || 'Weiterlesen';
+    el.parentNode.insertBefore(btn, el.nextSibling);
+    btn.addEventListener('click', function() {
+      el.querySelectorAll('.bio-rest').forEach(function(p){ p.style.display = ''; });
+      btn.remove();
+    });
+  }
+
   function applyLang(lang) {
     currentLang.v = lang;
     const t = T[lang];
     document.querySelectorAll('[data-translate]').forEach(el => {
       const key = el.dataset.translate;
-      if (t[key] !== undefined) el.textContent = t[key];
+      if (t[key] !== undefined) { if (key === 'artist-bio') { setBio(el, t[key], lang); } else { el.textContent = t[key]; } }
     });
     document.querySelectorAll('[data-translate-placeholder]').forEach(el => {
       const key = el.dataset.translatePlaceholder;

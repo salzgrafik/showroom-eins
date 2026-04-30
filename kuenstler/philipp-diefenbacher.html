@@ -70,7 +70,6 @@
   /* ─── KÜNSTLER:IN HEADER ─────────────────────────────────── */
   .section-artist-header {
     padding: 104px var(--edge) 80px;
-    border-bottom: 1px solid var(--gray-light);
     max-width: 960px;
   }
 
@@ -104,6 +103,8 @@
     max-width: 640px;
     margin-top: 24px;
   }
+  .artist-bio p { margin: 0 0 1.2em; }
+  .artist-bio p:last-child { margin-bottom: 0; }
 
   /* ─── WERKGALERIE ────────────────────────────────────────── */
   .section-gallery-artist {
@@ -241,7 +242,6 @@
     background: var(--white);
     color: var(--black);
     padding: 104px var(--edge);
-    border-top: 1px solid var(--gray-light);
   }
 
   .vermittlung-inner {
@@ -579,9 +579,7 @@
   <section class="section-artist-header">
     <div class="section-tag" data-translate="artist-tag-m">Künstler</div>
     <h1 class="artist-h1">Philipp Diefenbacher</h1>
-    <p class="artist-bio" data-translate="artist-bio">
-      Philipp Diefenbacher bewegt sich zwischen Malerei, Druckgrafik und Zeichnung. Seine Arbeiten auf Papier und Leinwand erkunden Komposition und Materialität – präzise und zugleich offen für das Zufällige. Er lebt und arbeitet in Heidelberg.
-    </p>
+    <div class="artist-bio" data-translate="artist-bio"></div>
   </section>
 
   <!-- ─── WERKGALERIE ──────────────────────────────────────── -->
@@ -754,7 +752,7 @@
       'form-check2': 'Ich bin damit einverstanden, dass meine Daten verarbeitet werden.',
       'form-submit': 'Absenden', 'form-success': 'Nachricht gesendet',
       'form-email-error': 'Bitte eine gültige E-Mail-Adresse eingeben.', 'form-email-ok': 'OK',
-      'load-more': 'Weitere Werke', 'load-less': 'Weniger anzeigen',
+      'load-more': 'Weitere Werke', 'load-less': 'Weniger anzeigen', 'bio-read-more': 'Weiterlesen',
       'lb-inquiry': 'Werk anfragen',
       'footer-home': 'Home', 'footer-impressum': 'Impressum', 'footer-datenschutz': 'Datenschutz',
       'footer-agb': 'AGBs', 'footer-instagram': 'Instagram',
@@ -774,7 +772,7 @@
       'form-check2': 'I agree to my data being processed.',
       'form-submit': 'Send', 'form-success': 'Message sent',
       'form-email-error': 'Please enter a valid email address.', 'form-email-ok': 'OK',
-      'load-more': 'More Works', 'load-less': 'Show Less',
+      'load-more': 'More Works', 'load-less': 'Show Less', 'bio-read-more': 'Read more',
       'lb-inquiry': 'Request Work',
       'footer-home': 'Home', 'footer-impressum': 'Imprint', 'footer-datenschutz': 'Privacy',
       'footer-agb': 'Terms', 'footer-instagram': 'Instagram',
@@ -1004,12 +1002,34 @@
   document.getElementById('lbClose').addEventListener('click', closeLightbox);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
+  function setBio(el, text, lang) {
+    var oldBtn = document.getElementById('bioReadMoreBtn');
+    if (oldBtn) oldBtn.remove();
+    var raw = (text || '').trim();
+    if (!raw) { el.innerHTML = ''; return; }
+    var parts = raw.split(/\n\n+/).map(function(s){ return s.trim(); }).filter(Boolean);
+    if (parts.length <= 1) { el.innerHTML = '<p>' + raw + '</p>'; return; }
+    el.innerHTML = parts.map(function(p, i){
+      return i === 0 ? '<p>' + p + '</p>' : '<p class="bio-rest" style="display:none">' + p + '</p>';
+    }).join('');
+    var btn = document.createElement('button');
+    btn.id = 'bioReadMoreBtn';
+    btn.className = 'load-more-btn';
+    btn.style.marginTop = '16px';
+    btn.textContent = T[lang]['bio-read-more'] || 'Weiterlesen';
+    el.parentNode.insertBefore(btn, el.nextSibling);
+    btn.addEventListener('click', function() {
+      el.querySelectorAll('.bio-rest').forEach(function(p){ p.style.display = ''; });
+      btn.remove();
+    });
+  }
+
   function applyLang(lang) {
     currentLang.v = lang;
     const t = T[lang];
     document.querySelectorAll('[data-translate]').forEach(el => {
       const key = el.dataset.translate;
-      if (t[key] !== undefined) el.textContent = t[key];
+      if (t[key] !== undefined) { if (key === 'artist-bio') { setBio(el, t[key], lang); } else { el.textContent = t[key]; } }
     });
     document.querySelectorAll('[data-translate-placeholder]').forEach(el => {
       const key = el.dataset.translatePlaceholder;
