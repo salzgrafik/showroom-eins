@@ -206,9 +206,11 @@ body.nav-open { overflow: hidden; }
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 48px;
   padding: 72px 48px 56px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .footer-col {
@@ -505,7 +507,7 @@ body.nav-open { overflow: hidden; }
     gap: 16px !important;
   }
   .footer-brand-text {
-    max-width: 100% !important;
+    max-width: 260px !important;
   }
   .footer-bottom {
     padding: 16px 24px !important;
