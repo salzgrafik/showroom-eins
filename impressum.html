@@ -267,26 +267,26 @@
 
     <div class="impressum-block">
       <p class="impressum-label" data-translate="label-2">Hinweis zum Charakter dieses Projekts</p>
-      <p class="impressum-text">Showroom Eins ist ein privater, nicht-kommerzieller Kunstraum. Alle Veranstaltungen finden ausschließlich auf persönliche Einladung statt und sind nicht öffentlich zugänglich. Es handelt sich um keine gewerbliche Galerie und keinen Kunsthandel.</p>
-      <p class="impressum-text">Genannte Preise sind Preisangaben der jeweiligen Künstler:innen und dienen ausschließlich der Information. Showroom Eins vermittelt auf Anfrage den Kontakt zur jeweiligen Künstlerin oder zum jeweiligen Künstler. Eine Verkaufsabwicklung durch Showroom Eins findet nicht statt. Showroom Eins erzielt keinerlei Vergütung oder Provision.</p>
+      <p class="impressum-text" data-translate="text-2a">Showroom Eins ist ein privater, nicht-kommerzieller Kunstraum. Alle Veranstaltungen finden ausschließlich auf persönliche Einladung statt und sind nicht öffentlich zugänglich. Es handelt sich um keine gewerbliche Galerie und keinen Kunsthandel.</p>
+      <p class="impressum-text" data-translate="text-2b">Genannte Preise sind Preisangaben der jeweiligen Künstler:innen und dienen ausschließlich der Information. Showroom Eins vermittelt auf Anfrage den Kontakt zur jeweiligen Künstlerin oder zum jeweiligen Künstler. Eine Verkaufsabwicklung durch Showroom Eins findet nicht statt. Showroom Eins erzielt keinerlei Vergütung oder Provision.</p>
     </div>
 
     <div class="impressum-block">
       <p class="impressum-label" data-translate="label-3">Urheberrecht</p>
-      <p class="impressum-text">Alle auf dieser Website abgebildeten Werke sind urheberrechtlich geschützt. Die Rechte liegen bei den jeweiligen Künstler:innen. Reproduktion, Verbreitung oder öffentliche Wiedergabe nur mit ausdrücklicher Genehmigung der Rechteinhaber:innen.</p>
+      <p class="impressum-text" data-translate="text-3">Alle auf dieser Website abgebildeten Werke sind urheberrechtlich geschützt. Die Rechte liegen bei den jeweiligen Künstler:innen. Reproduktion, Verbreitung oder öffentliche Wiedergabe nur mit ausdrücklicher Genehmigung der Rechteinhaber:innen.</p>
     </div>
 
     <div class="impressum-block">
       <p class="impressum-label" data-translate="label-4">Haftung für Inhalte</p>
-      <p class="impressum-text">Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte wird keine Gewähr übernommen.</p>
+      <p class="impressum-text" data-translate="text-4">Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte wird keine Gewähr übernommen.</p>
     </div>
 
     <div class="impressum-block">
       <p class="impressum-label" data-translate="label-5">Haftung für Links</p>
-      <p class="impressum-text">Diese Website enthält Links zu externen Websites. Für die Inhalte der verlinkten Seiten sind ausschließlich deren Betreiber:innen verantwortlich.</p>
+      <p class="impressum-text" data-translate="text-5">Diese Website enthält Links zu externen Websites. Für die Inhalte der verlinkten Seiten sind ausschließlich deren Betreiber:innen verantwortlich.</p>
     </div>
 
-    <div class="impressum-notice">
+    <div class="impressum-notice" data-translate="text-notice">
       Fotografien der Werke – <a href="http://www.sarahhaefner.de" target="_blank" rel="noopener">Sarah Häfner</a><br>
       Webdesign – Salzgrafik
     </div>
@@ -306,10 +306,10 @@
       <div class="footer-col footer-col-nav">
         <span class="footer-col-label">Navigation</span>
         <a href="index.html" class="footer-col-link">Home</a>
-        <a href="index.htmlindex.html#werke" class="footer-col-link">Werke</a>
-        <a href="index.htmlindex.html#kuenstlerinnen" class="footer-col-link">Künstler:innen</a>
-        <a href="index.htmlindex.html#ueber-uns" class="footer-col-link">Über uns</a>
-        <a href="index.htmlindex.html#kontakt" class="footer-col-link">Kontakt</a>
+        <a href="index.html#werke" class="footer-col-link">Werke</a>
+        <a href="index.html#kuenstlerinnen" class="footer-col-link">Künstler:innen</a>
+        <a href="index.html#ueber-uns" class="footer-col-link">Über uns</a>
+        <a href="index.html#kontakt" class="footer-col-link">Kontakt</a>
       </div>
 
       <div class="footer-col footer-col-artists">
@@ -382,8 +382,28 @@
 <script>
   const currentLang = { v: 'de' };
   const T = {
-    de: { 'nav-works': 'Werke', 'nav-artists': 'Künstler:innen', 'nav-about': 'Über uns', 'nav-contact': 'Kontakt', 'footer-home': 'Home', 'footer-impressum': 'Impressum', 'footer-datenschutz': 'Datenschutz', 'footer-agb': 'AGBs', 'footer-instagram': 'Instagram', 'page-tag': 'Rechtliches', 'page-title': 'Impressum', 'label-1': 'Angaben gemäß § 5 TMG', 'label-2': 'Hinweis zum Charakter dieses Projekts', 'label-3': 'Urheberrecht', 'label-4': 'Haftung für Inhalte', 'label-5': 'Haftung für Links' },
-    en: { 'nav-works': 'Works', 'nav-artists': 'Artists', 'nav-about': 'About', 'nav-contact': 'Contact', 'footer-home': 'Home', 'footer-impressum': 'Imprint', 'footer-datenschutz': 'Privacy', 'footer-agb': 'Terms', 'footer-instagram': 'Instagram', 'page-tag': 'Legal', 'page-title': 'Imprint', 'label-1': 'Information according to § 5 TMG', 'label-2': 'Note on the Character of this Project', 'label-3': 'Copyright', 'label-4': 'Liability for Content', 'label-5': 'Liability for Links' }
+    de: {
+      'nav-works': 'Werke', 'nav-artists': 'Künstler:innen', 'nav-about': 'Über uns', 'nav-contact': 'Kontakt',
+      'page-tag': 'Rechtliches', 'page-title': 'Impressum',
+      'label-1': 'Angaben gemäß § 5 TMG', 'label-2': 'Hinweis zum Charakter dieses Projekts', 'label-3': 'Urheberrecht', 'label-4': 'Haftung für Inhalte', 'label-5': 'Haftung für Links',
+      'text-2a': 'Showroom Eins ist ein privater, nicht-kommerzieller Kunstraum. Alle Veranstaltungen finden ausschließlich auf persönliche Einladung statt und sind nicht öffentlich zugänglich. Es handelt sich um keine gewerbliche Galerie und keinen Kunsthandel.',
+      'text-2b': 'Genannte Preise sind Preisangaben der jeweiligen Künstler:innen und dienen ausschließlich der Information. Showroom Eins vermittelt auf Anfrage den Kontakt zur jeweiligen Künstlerin oder zum jeweiligen Künstler. Eine Verkaufsabwicklung durch Showroom Eins findet nicht statt. Showroom Eins erzielt keinerlei Vergütung oder Provision.',
+      'text-3': 'Alle auf dieser Website abgebildeten Werke sind urheberrechtlich geschützt. Die Rechte liegen bei den jeweiligen Künstler:innen. Reproduktion, Verbreitung oder öffentliche Wiedergabe nur mit ausdrücklicher Genehmigung der Rechteinhaber:innen.',
+      'text-4': 'Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte wird keine Gewähr übernommen.',
+      'text-5': 'Diese Website enthält Links zu externen Websites. Für die Inhalte der verlinkten Seiten sind ausschließlich deren Betreiber:innen verantwortlich.',
+      'text-notice': 'Fotografien der Werke – <a href="http://www.sarahhaefner.de" target="_blank" rel="noopener">Sarah Häfner</a><br>Webdesign – Salzgrafik'
+    },
+    en: {
+      'nav-works': 'Works', 'nav-artists': 'Artists', 'nav-about': 'About', 'nav-contact': 'Contact',
+      'page-tag': 'Legal', 'page-title': 'Imprint',
+      'label-1': 'Information according to § 5 TMG', 'label-2': 'Note on the Character of this Project', 'label-3': 'Copyright', 'label-4': 'Liability for Content', 'label-5': 'Liability for Links',
+      'text-2a': 'Showroom Eins is a private, non-commercial art space. All events take place exclusively by personal invitation and are not open to the public. This is not a commercial gallery or art dealership.',
+      'text-2b': 'Prices listed are provided by the respective artists and serve informational purposes only. Showroom Eins can facilitate contact with the respective artist upon request. Showroom Eins does not handle any sales transactions and receives no compensation or commission.',
+      'text-3': 'All works depicted on this website are protected by copyright. Rights belong to the respective artists. Reproduction, distribution, or public display requires the express consent of the rights holders.',
+      'text-4': 'The content of this website has been compiled with the greatest possible care. No guarantee is given for the accuracy, completeness, or currency of the content.',
+      'text-5': 'This website contains links to external websites. The operators of those linked pages are solely responsible for their content.',
+      'text-notice': 'Photographs of the works – <a href="http://www.sarahhaefner.de" target="_blank" rel="noopener">Sarah Häfner</a><br>Web design – Salzgrafik'
+    }
   };
 
   function applyLang(lang) {
@@ -391,14 +411,18 @@
     const t = T[lang];
     document.querySelectorAll('[data-translate]').forEach(el => {
       const key = el.dataset.translate;
-      if (t[key] !== undefined) el.textContent = t[key];
+      if (t[key] !== undefined) el.innerHTML = t[key];
     });
     document.querySelectorAll('.toggle-track').forEach(t => t.classList.toggle('en-active', lang === 'en'));
   }
 
   function toggleLang() {
-    applyLang(currentLang.v === 'de' ? 'en' : 'de');
+    const newLang = currentLang.v === 'de' ? 'en' : 'de';
+    localStorage.setItem('sre-lang', newLang);
+    applyLang(newLang);
   }
+
+  { const _s = localStorage.getItem('sre-lang'); if (_s === 'en') { document.querySelectorAll('.toggle-track').forEach(t => t.classList.add('en-active')); applyLang('en'); } }
 
   /* Mobile Navigation */
   document.addEventListener('DOMContentLoaded', function() {
