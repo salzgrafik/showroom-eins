@@ -200,69 +200,52 @@ body.nav-open { overflow: hidden; }
 
 
 /* ─── FOOTER LAYOUT ─────────────────────────────────────────── */
-.footer-nav-bar {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: flex-start !important;
-  justify-content: flex-start !important;
-  gap: 64px !important;
-  padding: 56px 48px 48px !important;
-}
-
-/* Desktop: Link-Block nimmt restlichen Platz, zentriert Inhalt */
-.footer-link-block {
-  flex: 1;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 80px;
-}
-
-/* Desktop: Künstler + Legal nebeneinander innerhalb des Link-Blocks */
-.footer-artists-legal {
+.footer-main {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: 80px;
+  justify-content: flex-start;
+  gap: 72px;
+  padding: 72px 48px 56px;
 }
 
 .footer-col {
   display: flex;
   flex-direction: column;
-  gap: 8px;
 }
 
 .footer-col-brand {
-  gap: 32px;
-  flex-shrink: 0;
+  flex: 0 0 220px;
+  gap: 20px;
 }
 
-.footer-col-artists {
-  gap: 6px;
-}
-
-.footer-col-nav {
-  gap: 6px;
-  flex-shrink: 0;
-}
-
+.footer-col-nav,
+.footer-col-artists,
 .footer-col-legal {
+  gap: 4px;
   flex-shrink: 0;
 }
 
-.footer-legal-inner {
-  display: flex;
-  flex-direction: row;
-  gap: 32px;
-  align-items: flex-start;
+.footer-brand-text {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.4);
+  max-width: 200px;
+  margin: 0;
 }
 
-.footer-legal-group,
-.footer-social-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+.footer-brand-email {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  transition: color 0.2s;
 }
+.footer-brand-email:hover { color: #ffffff; }
 
 .footer-col-label {
   display: block;
@@ -270,27 +253,21 @@ body.nav-open { overflow: hidden; }
   font-size: 9px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
-  margin-bottom: 6px;
-}
-
-.footer-col-sep {
-  height: 1px;
-  background: rgba(255,255,255,0.15);
-  margin: 8px 0;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 10px;
 }
 
 .footer-col-link {
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255,255,255,0.6);
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 11px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  transition: color 0.25s;
+  transition: color 0.2s;
   line-height: 1.2;
+  padding: 3px 0;
 }
-
 .footer-col-link:hover { color: #ffffff; }
 
 .footer-logo {
@@ -298,6 +275,22 @@ body.nav-open { overflow: hidden; }
   width: auto !important;
   display: block !important;
   flex-shrink: 0 !important;
+}
+
+.footer-bottom {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 20px 48px;
+  display: flex;
+  align-items: center;
+}
+
+.footer-copyright {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.28);
 }
 
 
@@ -498,45 +491,30 @@ body.nav-open { overflow: hidden; }
   .contact-form { max-width: none !important; }
 
   /* ── Footer: vertikal stapeln ───────────────────────────── */
-  .footer-dark { padding-top: 72px !important; }
-  .footer-nav-bar {
+  .footer-main {
     flex-direction: column !important;
-    padding: 48px 24px !important;
-    gap: 32px !important;
+    padding: 48px 24px 40px !important;
+    gap: 40px !important;
   }
   .footer-col-brand {
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    gap: 0 !important;
+    flex: none !important;
     width: 100% !important;
+    gap: 16px !important;
   }
-  /* Link-Block auf Mobile: transparent → Kinder direkt in footer-nav-bar */
-  .footer-link-block {
-    display: contents !important;
+  .footer-brand-text {
+    max-width: 100% !important;
   }
-  /* Künstler+Legal-Wrapper auf Mobile: eigener Spalten-Anker */
-  .footer-artists-legal {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 32px !important;
-    width: 100% !important;
-  }
-  /* Künstler: 2-Spalten-Grid */
   .footer-col-artists {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
     gap: 4px 24px !important;
   }
   .footer-col-artists .footer-col-label {
-    grid-column: 1 / -1;
+    grid-column: 1 / -1 !important;
   }
-  /* Legal: gleiches 2-Spalten-Grid → Spalten fluchten mit Künstler-Spalten */
-  .footer-legal-inner {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 4px 24px !important;
-    align-items: start !important;
+  .footer-bottom {
+    padding: 16px 24px !important;
+    justify-content: center !important;
   }
 
   /* ── Unterseiten ────────────────────────────────────────── */
