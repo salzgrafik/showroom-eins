@@ -510,8 +510,10 @@
   allItems().forEach(item => {
     const cap = document.createElement('div');
     cap.className = 'gallery-item-caption';
-    cap.innerHTML = '<span class="gallery-item-caption-title">' + (item.dataset.title || '') + '</span>' +
-                    '<span class="gallery-item-caption-artist">' + (item.dataset.artist || '') + '</span>';
+    const capTitle = item.dataset.title || '';
+    const capArtist = item.dataset.artist || '';
+    const capText = capTitle && capArtist ? capTitle + ' \u2013 ' + capArtist : capTitle || capArtist;
+    cap.innerHTML = '<span class="gallery-item-caption-text">' + capText + '</span>';
     item.appendChild(cap);
     item.addEventListener('click', () => openLightbox(item));
   });
