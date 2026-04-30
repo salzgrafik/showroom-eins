@@ -206,8 +206,8 @@ body.nav-open { overflow: hidden; }
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: flex-start;
-  gap: 72px;
+  justify-content: space-between;
+  gap: 48px;
   padding: 72px 48px 56px;
 }
 
@@ -217,13 +217,15 @@ body.nav-open { overflow: hidden; }
 }
 
 .footer-col-brand {
-  flex: 0 0 220px;
+  flex: 0 0 200px;
+  align-items: flex-start;
   gap: 20px;
 }
 
 .footer-col-nav,
 .footer-col-artists,
-.footer-col-legal {
+.footer-col-legal,
+.footer-col-socials {
   gap: 4px;
   flex-shrink: 0;
 }
@@ -499,18 +501,11 @@ body.nav-open { overflow: hidden; }
   .footer-col-brand {
     flex: none !important;
     width: 100% !important;
+    align-items: flex-start !important;
     gap: 16px !important;
   }
   .footer-brand-text {
     max-width: 100% !important;
-  }
-  .footer-col-artists {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 4px 24px !important;
-  }
-  .footer-col-artists .footer-col-label {
-    grid-column: 1 / -1 !important;
   }
   .footer-bottom {
     padding: 16px 24px !important;
