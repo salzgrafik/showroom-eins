@@ -679,16 +679,6 @@ button {
   /* Cursor-Tooltip: nur auf Hover-Geräten sinnvoll             */
   .cursor-tooltip { display: none !important; }
 
-  /* Filter-Buttons: aktiver Zustand bleibt schwarz, kein Hover  */
-  .filter-btn:hover {
-    border-color: #999 !important;
-    color: #999 !important;
-  }
-  .filter-btn.active:hover {
-    border-color: #0a0a0a !important;
-    color: #0a0a0a !important;
-  }
-
   /* Galerie-Bild: kein Zoom beim Tippen */
   .gallery-item:hover img {
     transform: none !important;

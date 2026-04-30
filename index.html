@@ -255,11 +255,6 @@
     white-space: nowrap;
   }
 
-  .filter-btn:hover {
-    border-color: rgba(10, 10, 10, 0.5);
-    color: rgba(10, 10, 10, 0.5);
-  }
-
   .filter-btn:active {
     opacity: 0.4;
   }
@@ -270,9 +265,15 @@
     text-decoration: none;
   }
 
-  .filter-btn.active:hover {
-    border-color: rgba(10, 10, 10, 0.5);
-    color: rgba(10, 10, 10, 0.5);
+  @media (hover: hover) {
+    .filter-btn:hover {
+      border-color: rgba(10, 10, 10, 0.5);
+      color: rgba(10, 10, 10, 0.5);
+    }
+    .filter-btn.active:hover {
+      border-color: rgba(10, 10, 10, 0.5);
+      color: rgba(10, 10, 10, 0.5);
+    }
   }
 
   /* Responsive: mehrzeilig → linksbündig */
