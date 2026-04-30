@@ -65,6 +65,8 @@
   .filter-btn.active { border: 1px solid #0a0a0a; color: #0a0a0a; text-decoration: none; }
     html:not(.touch) .filter-btn:hover { border-color: rgba(10,10,10,0.5); color: rgba(10,10,10,0.5); }
   html:not(.touch) .filter-btn.active:hover { border-color: rgba(10,10,10,0.5); color: rgba(10,10,10,0.5); }
+  html.touch .filter-btn { transition: none; }
+  html.touch .filter-btn:active { opacity: 1; }
 
   .gallery-scatter { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .gallery-item { overflow: hidden; cursor: pointer; }
