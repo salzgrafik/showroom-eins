@@ -415,21 +415,12 @@
     lbMeta.innerHTML = [d.year, d.material, d.size].filter(Boolean).join('<br>');
     artworkLightbox.classList.add('open');
     tooltip.style.display = 'none';
-    var scrollY = window.scrollY;
     document.body.style.overflow = 'hidden';
-    document.body.style.position = 'fixed';
-    document.body.style.top = '-' + scrollY + 'px';
-    document.body.style.width = '100%';
   }
 
   function closeLightbox() {
-    var scrollTop = parseInt(document.body.style.top || '0') * -1;
     artworkLightbox.classList.remove('open');
     document.body.style.overflow = '';
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
-    window.scrollTo(0, scrollTop);
     lbCurrent = null;
   }
 
@@ -526,19 +517,10 @@
 
   /* Mobile Navigation */
   function _lockScroll() {
-    var scrollY = window.scrollY;
     document.body.style.overflow = 'hidden';
-    document.body.style.position = 'fixed';
-    document.body.style.top = '-' + scrollY + 'px';
-    document.body.style.width = '100%';
   }
   function _unlockScroll() {
-    var scrollTop = parseInt(document.body.style.top || '0') * -1;
     document.body.style.overflow = '';
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
-    window.scrollTo(0, scrollTop);
   }
   function _initMobileNav() {
     var h = document.getElementById('navHamburger');
