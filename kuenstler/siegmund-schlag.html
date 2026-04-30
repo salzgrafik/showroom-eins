@@ -63,7 +63,7 @@
   .filter-btn { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; padding: 8px 16px; border-radius: 999px; border: 1px solid #999; background: transparent; font-family: var(--font); font-size: 12px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; color: #999; transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease; text-decoration: line-through; white-space: nowrap; }
   .filter-btn:active { opacity: 0.4; }
   .filter-btn.active { border: 1px solid #0a0a0a; color: #0a0a0a; text-decoration: none; }
-  @media (hover: hover) { .filter-btn:hover { border-color: rgba(10,10,10,0.5); color: rgba(10,10,10,0.5); } .filter-btn.active:hover { border-color: rgba(10,10,10,0.5); color: rgba(10,10,10,0.5); } }
+  @media (hover: hover) and (pointer: fine) { .filter-btn:hover { border-color: rgba(10,10,10,0.5); color: rgba(10,10,10,0.5); } .filter-btn.active:hover { border-color: rgba(10,10,10,0.5); color: rgba(10,10,10,0.5); } }
 
   .gallery-scatter { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .gallery-item { overflow: hidden; cursor: pointer; }
