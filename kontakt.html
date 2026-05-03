@@ -239,6 +239,8 @@
 
       <input type="hidden" name="_subject" value="Neue Anfrage – Showroom Eins">
       <input type="hidden" name="_next" value="danke.html">
+      <input type="text" name="_gotcha" id="_gotcha"
+             style="display:none" tabindex="-1" autocomplete="off">
 
       <div class="form-field">
         <label for="name">Name</label>
@@ -349,6 +351,16 @@
 </div>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    var form = document.querySelector('.contact-form');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        if (document.getElementById('_gotcha').value !== '') {
+          e.preventDefault();
+          return;
+        }
+      });
+    }
+
     var h = document.getElementById('navHamburger');
     var o = document.getElementById('navOverlay');
     if (!h || !o) return;
