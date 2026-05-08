@@ -872,6 +872,7 @@
     }
 
     updateFilterUI();
+    layoutMasonry();
   }
 
   function updateFilterUI() {
@@ -918,6 +919,7 @@
   });
 
   updateGallery();
+  document.querySelectorAll('#galleryGrid img').forEach(img => { if (!img.complete) img.addEventListener('load', layoutMasonry); });
 
   /* ── Anfrage-Formular ───────────────────────────────────── */
   const anfrageForm       = document.getElementById('anfrageForm');
