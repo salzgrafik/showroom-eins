@@ -75,8 +75,8 @@
   html.touch .filter-btn { transition: none; }
   html.touch .filter-btn:active { opacity: 1; }
 
-  .gallery-scatter { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .gallery-item { overflow: hidden; cursor: pointer; }
+  .gallery-scatter { position: relative; }
+  .gallery-item { position: absolute; overflow: hidden; cursor: pointer; }
   .gallery-item img { width: 100%; display: block; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
   .gallery-item:hover img { transform: scale(1.06); }
 
@@ -419,6 +419,24 @@
     filtersEl.appendChild(btn);
   });
 
+  const _GAP = 24, _COLS = 3;
+  function layoutMasonry() {
+    const grid = document.getElementById('galleryGrid');
+    const items = [...grid.querySelectorAll('.gallery-item')].filter(el => el.style.display !== 'none');
+    if (!items.length) { grid.style.height = '0'; return; }
+    const w = grid.offsetWidth;
+    const colW = (w - _GAP * (_COLS - 1)) / _COLS;
+    const heights = new Array(_COLS).fill(0);
+    items.forEach(item => {
+      item.style.width = colW + 'px';
+      const col = heights.indexOf(Math.min(...heights));
+      item.style.left  = col * (colW + _GAP) + 'px';
+      item.style.top   = heights[col] + 'px';
+      heights[col] += item.offsetHeight + _GAP;
+    });
+    grid.style.height = Math.max(...heights) - _GAP + 'px';
+  }
+  let _rT; window.addEventListener('resize', () => { clearTimeout(_rT); _rT = setTimeout(layoutMasonry, 100); });
   function filteredItems() { return allItems().filter(i => activeFilters.has(i.dataset.category)); }
 
   function updateGallery() {
@@ -434,6 +452,7 @@
       const f = btn.dataset.filter;
       btn.classList.toggle('active', f === 'alle' ? allActive : activeFilters.has(f));
     });
+    layoutMasonry();
   }
 
   filtersEl.addEventListener('click', e => {
@@ -453,6 +472,7 @@
   });
 
   updateGallery();
+    document.querySelectorAll('#galleryGrid img').forEach(img => { if (!img.complete) img.addEventListener('load', layoutMasonry); });
 
   const anfrageForm = document.getElementById('anfrageForm');
   const anfrageCheckboxes = document.querySelectorAll('.anfrage-checkbox-label input[type="checkbox"]');

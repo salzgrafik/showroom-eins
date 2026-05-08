@@ -162,16 +162,8 @@
   }
 
   /* ─── GALLERY GRID (identisch Frontpage) ────────────────── */
-  .gallery-scatter {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-
-  .gallery-item {
-    overflow: hidden;
-    cursor: pointer;
-  }
+  .gallery-scatter { position: relative; }
+  .gallery-item { position: absolute; overflow: hidden; cursor: pointer; }
 
   .gallery-item img {
     width: 100%;
