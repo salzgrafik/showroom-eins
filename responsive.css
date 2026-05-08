@@ -304,6 +304,10 @@ body.nav-open { overflow: hidden; }
   position: relative;
 }
 
+.gallery-item img {
+  height: auto;
+}
+
 .gallery-item-caption {
   display: none;
   position: absolute;
