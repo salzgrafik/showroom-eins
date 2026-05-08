@@ -57,6 +57,8 @@
   .artist-bio { font-family: var(--font); font-size: 24px; font-weight: 400; line-height: 1.45; color: var(--black); max-width: 640px; margin-top: 24px; }
   .artist-bio p { margin: 0 0 1.2em; }
   .artist-bio p:last-child { margin-bottom: 0; }
+  .bio-inline-btn { background: transparent; border: none; font-family: var(--font); font-size: inherit; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; color: var(--black); border-bottom: 1px solid rgba(10,10,10,0.35); padding: 0 0 1px; display: inline; line-height: inherit; vertical-align: baseline; }
+  html:not(.touch) .bio-inline-btn:hover { border-bottom-color: var(--black); }
   .artist-links { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 32px; }
   .artist-links a { font-family: var(--font); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: border-color 0.25s; }
   html:not(.touch) .artist-links a:hover { border-bottom-color: var(--black); }
@@ -544,22 +546,29 @@
   function setBio(el, text, lang) {
     var oldBtn = document.getElementById('bioReadMoreBtn');
     if (oldBtn) oldBtn.remove();
+    var oldLessBtn = document.getElementById('bioReadLessBtn');
+    if (oldLessBtn) oldLessBtn.remove();
     var raw = (text || '').trim();
     if (!raw) { el.innerHTML = ''; return; }
     var parts = raw.split(/\n\n+/).map(function(s){ return s.trim(); }).filter(Boolean);
     if (parts.length <= 1) { el.innerHTML = '<p>' + raw + '</p>'; return; }
+    var readMoreLabel = (T[lang] && T[lang]['bio-read-more']) || 'Weiterlesen';
+    var readLessLabel = (T[lang] && T[lang]['bio-read-less']) || 'Weniger anzeigen';
     el.innerHTML = parts.map(function(p, i){
-      return i === 0 ? '<p>' + p + '</p>' : '<p class="bio-rest" style="display:none">' + p + '</p>';
+      if (i === 0) return '<p>' + p + ' <button id="bioReadMoreBtn" class="bio-inline-btn">' + readMoreLabel + ' →</button></p>';
+      return '<p class="bio-rest" style="display:none">' + p + '</p>';
     }).join('');
-    var btn = document.createElement('button');
-    btn.id = 'bioReadMoreBtn';
-    btn.className = 'load-more-btn';
-    btn.style.marginTop = '16px';
-    btn.textContent = T[lang]['bio-read-more'] || 'Weiterlesen';
-    el.parentNode.insertBefore(btn, el.nextSibling);
-    btn.addEventListener('click', function() {
+    document.getElementById('bioReadMoreBtn').addEventListener('click', function() {
       el.querySelectorAll('.bio-rest').forEach(function(p){ p.style.display = ''; });
-      btn.remove();
+      this.remove();
+      var lastP = el.querySelector('p:last-child');
+      var lessBtn = document.createElement('button');
+      lessBtn.id = 'bioReadLessBtn';
+      lessBtn.className = 'bio-inline-btn';
+      lessBtn.textContent = readLessLabel;
+      lastP.appendChild(document.createTextNode(' '));
+      lastP.appendChild(lessBtn);
+      lessBtn.addEventListener('click', function() { setBio(el, text, lang); });
     });
   }
 
