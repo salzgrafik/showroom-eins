@@ -105,7 +105,7 @@
   }
   .artist-bio p { margin: 0 0 1.2em; }
   .artist-bio p:last-child { margin-bottom: 0; }
-  .bio-inline-btn { background: transparent; border: none; font-family: var(--font); font-size: inherit; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; color: var(--black); border-bottom: 1px solid rgba(10,10,10,0.35); padding: 0 0 1px; display: inline; line-height: inherit; vertical-align: baseline; }
+  .bio-inline-btn { background: transparent; border: none; font-family: var(--font); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; color: var(--black); border-bottom: 1px solid transparent; padding: 0 0 2px; display: inline; vertical-align: middle; transition: border-color 0.25s ease; }
   html:not(.touch) .bio-inline-btn:hover { border-bottom-color: var(--black); }
   .artist-links { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 32px; }
   .artist-links a { font-family: var(--font); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: border-color 0.25s; }
@@ -1020,23 +1020,26 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
   function setBio(el, text, lang) {
-    var oldBtn = document.getElementById('bioReadMoreBtn');
-    if (oldBtn) oldBtn.remove();
-    var oldLessBtn = document.getElementById('bioReadLessBtn');
-    if (oldLessBtn) oldLessBtn.remove();
     var raw = (text || '').trim();
     if (!raw) { el.innerHTML = ''; return; }
-    var parts = raw.split(/\n\n+/).map(function(s){ return s.trim(); }).filter(Boolean);
-    if (parts.length <= 1) { el.innerHTML = '<p>' + raw + '</p>'; return; }
     var readMoreLabel = (T[lang] && T[lang]['bio-read-more']) || 'Weiterlesen';
     var readLessLabel = (T[lang] && T[lang]['bio-read-less']) || 'Weniger anzeigen';
-    el.innerHTML = parts.map(function(p, i){
-      if (i === 0) return '<p>' + p + ' <button id="bioReadMoreBtn" class="bio-inline-btn">' + readMoreLabel + ' →</button></p>';
-      return '<p class="bio-rest" style="display:none">' + p + '</p>';
-    }).join('');
-    document.getElementById('bioReadMoreBtn').addEventListener('click', function() {
-      el.querySelectorAll('.bio-rest').forEach(function(p){ p.style.display = ''; });
-      this.remove();
+    var flat = raw.replace(/\n\n+/g, ' ').replace(/\n/g, ' ');
+    function showTruncated() {
+      if (flat.length <= 250) {
+        var pts = raw.split(/\n\n+/).map(function(s){ return s.trim(); }).filter(Boolean);
+        el.innerHTML = pts.map(function(p){ return '<p>' + p + '</p>'; }).join('');
+        return;
+      }
+      var cut = flat.substring(0, 250);
+      var sp = cut.lastIndexOf(' ');
+      if (sp > 0) cut = cut.substring(0, sp);
+      el.innerHTML = '<p>' + cut + ' <button id="bioReadMoreBtn" class="bio-inline-btn">' + readMoreLabel + ' →</button></p>';
+      document.getElementById('bioReadMoreBtn').addEventListener('click', showFull);
+    }
+    function showFull() {
+      var pts = raw.split(/\n\n+/).map(function(s){ return s.trim(); }).filter(Boolean);
+      el.innerHTML = pts.map(function(p){ return '<p>' + p + '</p>'; }).join('');
       var lastP = el.querySelector('p:last-child');
       var lessBtn = document.createElement('button');
       lessBtn.id = 'bioReadLessBtn';
@@ -1044,8 +1047,9 @@
       lessBtn.textContent = readLessLabel;
       lastP.appendChild(document.createTextNode(' '));
       lastP.appendChild(lessBtn);
-      lessBtn.addEventListener('click', function() { setBio(el, text, lang); });
-    });
+      lessBtn.addEventListener('click', showTruncated);
+    }
+    showTruncated();
   }
 
   function applyLang(lang) {
