@@ -57,6 +57,9 @@
   .artist-bio { font-family: var(--font); font-size: 24px; font-weight: 400; line-height: 1.45; color: var(--black); max-width: 640px; margin-top: 24px; }
   .artist-bio p { margin: 0 0 1.2em; }
   .artist-bio p:last-child { margin-bottom: 0; }
+  .artist-links { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 32px; }
+  .artist-links a { font-family: var(--font); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: border-color 0.25s; }
+  html:not(.touch) .artist-links a:hover { border-bottom-color: var(--black); }
 
   .section-gallery-artist { padding: 80px var(--edge); }
   .section-gallery-artist h2 { font-family: 'DM Mono', monospace; font-weight: 500; font-size: 32px; line-height: 1.2; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 32px; }
@@ -252,17 +255,16 @@
 
       <div class="footer-col footer-col-artists">
         <span class="footer-col-label">Künstler:innen</span>
-        <a href="../kuenstler/cedric-pintarelli.html" class="footer-col-link">Cedric Pintarelli</a>
         <a href="../kuenstler/chaz-bargainer.html" class="footer-col-link">Chaz Bargainer</a>
-        <a href="../kuenstler/cholud-kassem.html" class="footer-col-link">Cholud Kassem</a>
-        <a href="../kuenstler/johanna-mangold.html" class="footer-col-link">Johanna Mangold</a>
         <a href="../kuenstler/philipp-diefenbacher.html" class="footer-col-link">Philipp Diefenbacher</a>
         <a href="../kuenstler/ralf-diefenbacher.html" class="footer-col-link">Ralf Diefenbacher</a>
-        <a href="../kuenstler/sarah-haefner.html" class="footer-col-link">Sarah Häfner</a>
-        <a href="../kuenstler/siegmund-schlag.html" class="footer-col-link">Siegmund Schlag</a>
-        <a href="../kuenstler/sybille-hutter.html" class="footer-col-link">Sybille Hutter</a>
-        <a href="../kuenstler/alexandra-kunz.html" class="footer-col-link">Alexandra Kunz</a>
         <a href="../kuenstler/thilda-golly.html" class="footer-col-link">Thilda Golly</a>
+        <a href="../kuenstler/sarah-haefner.html" class="footer-col-link">Sarah Häfner</a>
+        <a href="../kuenstler/sybille-hutter.html" class="footer-col-link">Sybille Hutter</a>
+        <a href="../kuenstler/cholud-kassem.html" class="footer-col-link">Cholud Kassem</a>
+        <a href="../kuenstler/alexandra-kunz.html" class="footer-col-link">Alexandra Kunz</a>
+        <a href="../kuenstler/johanna-mangold.html" class="footer-col-link">Johanna Mangold</a>
+        <a href="../kuenstler/cedric-pintarelli.html" class="footer-col-link">Cedric Pintarelli</a>
       </div>
 
       <div class="footer-col footer-col-legal">
@@ -326,17 +328,17 @@
       <li><a href="../kontakt.html">Kontakt</a></li>
     </ul>
     <ul class="nav-overlay-artists">
-      <li><a href="cedric-pintarelli.html">Cedric Pintarelli</a></li>
       <li><a href="chaz-bargainer.html">Chaz Bargainer</a></li>
-      <li><a href="cholud-kassem.html">Cholud Kassem</a></li>
-      <li><a href="johanna-mangold.html">Johanna Mangold</a></li>
       <li><a href="philipp-diefenbacher.html">Philipp Diefenbacher</a></li>
       <li><a href="ralf-diefenbacher.html">Ralf Diefenbacher</a></li>
-      <li><a href="sarah-haefner.html">Sarah Häfner</a></li>
-      <li><a href="siegmund-schlag.html">Siegmund Schlag</a></li>
-      <li><a href="sybille-hutter.html">Sybille Hutter</a></li>
-      <li><a href="alexandra-kunz.html">Alexandra Kunz</a></li>
       <li><a href="thilda-golly.html">Thilda Golly</a></li>
+      <li><a href="sarah-haefner.html">Sarah Häfner</a></li>
+      <li><a href="sybille-hutter.html">Sybille Hutter</a></li>
+      <li><a href="cholud-kassem.html">Cholud Kassem</a></li>
+      <li><a href="alexandra-kunz.html">Alexandra Kunz</a></li>
+      <li><a href="johanna-mangold.html">Johanna Mangold</a></li>
+      <li><a href="cedric-pintarelli.html">Cedric Pintarelli</a></li>
+      <li><a href="siegmund-schlag.html">Siegmund Schlag</a></li>
     </ul>
     <a href="https://www.instagram.com/showroom.eins/" target="_blank" rel="noopener" class="nav-overlay-extra">Instagram</a>
   </div>
@@ -588,7 +590,7 @@
   }
 
   // Gespeicherte Sprache beim Laden wiederherstellen
-  { const _s = localStorage.getItem('sre-lang'); if (_s === 'en') applyLang('en'); }
+  applyLang(localStorage.getItem('sre-lang') || 'de');
 
   /* Mobile Navigation */
   function _lockScroll() {
