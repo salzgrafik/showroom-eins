@@ -575,7 +575,12 @@
       lessBtn.textContent = readLessLabel;
       lastP.appendChild(document.createTextNode(' '));
       lastP.appendChild(lessBtn);
-      lessBtn.addEventListener('click', showTruncated);
+      lessBtn.addEventListener('click', function() {
+        var h0 = el.offsetHeight;
+        showTruncated();
+        var diff = h0 - el.offsetHeight;
+        if (diff > 0) window.scrollBy({ top: -diff, behavior: 'smooth' });
+      });
     }
     showTruncated();
   }
