@@ -198,8 +198,8 @@
     <div class="gallery-filters" id="galleryFilters"></div>
 
     <div class="gallery-scatter" id="galleryGrid">
-      <div class="gallery-item" data-category="Malerei" data-title="Kruste 1" data-artist="Cedric Pintarelli" data-gender="m" data-year="2025" data-material="Acryl, Verputz, Spray auf Leine"               data-size="24 × 18 cm"   data-price="180 €"><img src="../assets/images/kuenstler/cedric-pintarelli/sre-16-26.webp" alt="Kruste 1" width="3014" height="3732"></div>
-      <div class="gallery-item" data-category="Malerei" data-title="Kruste 2" data-artist="Cedric Pintarelli" data-gender="m" data-year="2025" data-material="Acryl, Verputz, Spray auf Leine"               data-size="24 × 18 cm"   data-price="180 €"><img src="../assets/images/kuenstler/cedric-pintarelli/sre-17-26.webp" alt="Kruste 2" width="1454" height="1800"></div>
+      <div class="gallery-item" data-category="Mixed Media" data-title="Kruste 1" data-artist="Cedric Pintarelli" data-gender="m" data-year="2025" data-material="Acryl, Verputz, Spray auf Leine"               data-size="24 × 18 cm"   data-price="180 €"><img src="../assets/images/kuenstler/cedric-pintarelli/sre-16-26.webp" alt="Kruste 1" width="3014" height="3732"></div>
+      <div class="gallery-item" data-category="Mixed Media" data-title="Kruste 2" data-artist="Cedric Pintarelli" data-gender="m" data-year="2025" data-material="Acryl, Verputz, Spray auf Leine"               data-size="24 × 18 cm"   data-price="180 €"><img src="../assets/images/kuenstler/cedric-pintarelli/sre-17-26.webp" alt="Kruste 2" width="1454" height="1800"></div>
       <div class="gallery-item" data-category="Malerei" data-title="Untitled"  data-artist="Cedric Pintarelli" data-gender="m" data-year="2019" data-material="Dispersion, Acryl, Spray auf Leine und Holz" data-size="121 × 100 cm" data-price="850 €"><img src="../assets/images/kuenstler/cedric-pintarelli/sre-18-26.webp" alt="Untitled" width="1569" height="1800"></div>
     </div>
 
@@ -590,15 +590,9 @@
     }
     function showFull() {
       var pts = raw.split(/\n\n+/).map(function(s){ return s.trim(); }).filter(Boolean);
-      el.innerHTML = pts.map(function(p){ return '<p>' + p + '</p>'; }).join('');
-      var lastP = el.querySelector('p:last-child');
-      var lessBtn = document.createElement('button');
-      lessBtn.id = 'bioReadLessBtn';
-      lessBtn.className = 'bio-inline-btn';
-      lessBtn.textContent = readLessLabel;
-      lastP.appendChild(document.createTextNode(' '));
-      lastP.appendChild(lessBtn);
-      lessBtn.addEventListener('click', function() {
+      el.innerHTML = pts.map(function(p){ return '<p>' + p + '</p>'; }).join('') +
+        '<p><button id="bioReadLessBtn" class="bio-inline-btn" style="margin-left:0">' + readLessLabel + '</button></p>';
+      el.querySelector('#bioReadLessBtn').addEventListener('click', function() {
         var h0 = el.offsetHeight;
         showTruncated();
         var diff = h0 - el.offsetHeight;

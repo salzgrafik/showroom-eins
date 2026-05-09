@@ -196,7 +196,7 @@
     <div class="gallery-filters" id="galleryFilters"></div>
 
     <div class="gallery-scatter" id="galleryGrid">
-      <div class="gallery-item" data-category="Fotografie" data-title="Sofortbild 2 (+ Basis SB5.1)"  data-artist="Siegmund Schlag" data-gender="m" data-year="2025" data-material="Mixed Materials" data-size="40 × 30 cm" data-price="280 €"><img src="../assets/images/kuenstler/siegmund-schlag/sre-07-26.webp" alt="Sofortbild 2" width="1800" height="1701"></div>
+      <div class="gallery-item" data-category="Malerei" data-title="Sofortbild 2 (+ Basis SB5.1)"  data-artist="Siegmund Schlag" data-gender="m" data-year="2025" data-material="Mixed Materials" data-size="40 × 30 cm" data-price="280 €"><img src="../assets/images/kuenstler/siegmund-schlag/sre-07-26.webp" alt="Sofortbild 2" width="1800" height="1701"></div>
       <div class="gallery-item" data-category="Fotografie" data-title="Sofortbild 4 (+ Basis SB3.20)" data-artist="Siegmund Schlag" data-gender="m" data-year="2025" data-material="Mixed Materials" data-size="40 × 30 cm" data-price="280 €"><img src="../assets/images/kuenstler/siegmund-schlag/sre-08-26.webp" alt="Sofortbild 4" width="1800" height="1701"></div>
       <div class="gallery-item" data-category="Fotografie" data-title="Sofortbild 5 (+ Basis SB5.2)"  data-artist="Siegmund Schlag" data-gender="m" data-year="2025" data-material="Mixed Materials" data-size="40 × 30 cm" data-price="280 €"><img src="../assets/images/kuenstler/siegmund-schlag/sre-09-26.webp" alt="Sofortbild 5" width="1800" height="1701"></div>
       <div class="gallery-item" data-category="Fotografie" data-title="Sofortbild 9 (+ Basis SB3.19)" data-artist="Siegmund Schlag" data-gender="m" data-year="2025" data-material="Mixed Materials" data-size="40 × 30 cm" data-price="280 €"><img src="../assets/images/kuenstler/siegmund-schlag/sre-10-26.webp" alt="Sofortbild 9" width="1800" height="1701"></div>
@@ -589,15 +589,9 @@
     }
     function showFull() {
       var pts = raw.split(/\n\n+/).map(function(s){ return s.trim(); }).filter(Boolean);
-      el.innerHTML = pts.map(function(p){ return '<p>' + p + '</p>'; }).join('');
-      var lastP = el.querySelector('p:last-child');
-      var lessBtn = document.createElement('button');
-      lessBtn.id = 'bioReadLessBtn';
-      lessBtn.className = 'bio-inline-btn';
-      lessBtn.textContent = readLessLabel;
-      lastP.appendChild(document.createTextNode(' '));
-      lastP.appendChild(lessBtn);
-      lessBtn.addEventListener('click', function() {
+      el.innerHTML = pts.map(function(p){ return '<p>' + p + '</p>'; }).join('') +
+        '<p><button id="bioReadLessBtn" class="bio-inline-btn" style="margin-left:0">' + readLessLabel + '</button></p>';
+      el.querySelector('#bioReadLessBtn').addEventListener('click', function() {
         var h0 = el.offsetHeight;
         showTruncated();
         var diff = h0 - el.offsetHeight;

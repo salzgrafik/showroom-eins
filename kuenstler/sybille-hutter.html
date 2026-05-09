@@ -1058,15 +1058,9 @@
     }
     function showFull() {
       var pts = raw.split(/\n\n+/).map(function(s){ return s.trim(); }).filter(Boolean);
-      el.innerHTML = pts.map(function(p){ return '<p>' + p + '</p>'; }).join('');
-      var lastP = el.querySelector('p:last-child');
-      var lessBtn = document.createElement('button');
-      lessBtn.id = 'bioReadLessBtn';
-      lessBtn.className = 'bio-inline-btn';
-      lessBtn.textContent = readLessLabel;
-      lastP.appendChild(document.createTextNode(' '));
-      lastP.appendChild(lessBtn);
-      lessBtn.addEventListener('click', function() {
+      el.innerHTML = pts.map(function(p){ return '<p>' + p + '</p>'; }).join('') +
+        '<p><button id="bioReadLessBtn" class="bio-inline-btn" style="margin-left:0">' + readLessLabel + '</button></p>';
+      el.querySelector('#bioReadLessBtn').addEventListener('click', function() {
         var h0 = el.offsetHeight;
         showTruncated();
         var diff = h0 - el.offsetHeight;
