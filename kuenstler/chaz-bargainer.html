@@ -495,12 +495,12 @@
     lbMeta.innerHTML = [d.year, d.material, d.size].filter(Boolean).join('<br>');
     artworkLightbox.classList.add('open');
     tooltip.style.display = 'none';
-    document.body.style.overflow = 'hidden';
+    const _sy = window.scrollY; document.body.style.top = '-' + _sy + 'px'; document.body.style.position = 'fixed'; document.body.style.width = '100%'; document.body.style.overflow = 'hidden';
   }
 
   function closeLightbox() {
     artworkLightbox.classList.remove('open');
-    document.body.style.overflow = '';
+    const _sy = Math.abs(parseInt(document.body.style.top || '0')); document.body.style.position = ''; document.body.style.top = ''; document.body.style.width = ''; document.body.style.overflow = ''; window.scrollTo(0, _sy);
     lbCurrent = null;
   }
 
