@@ -153,24 +153,26 @@
 
   /* ─── HERO ──────────────────────────────────────────────────── */
   .hero {
-    display: grid;
-    grid-template-columns: 63fr 37fr;
+    display: flex;
     height: calc(100vh - var(--nav-h));
   }
 
   .hero-image {
+    flex: 0 0 auto;
     overflow: hidden;
     background: #dedad4;
   }
 
   .hero-image img {
-    width: 100%;
     height: 100%;
-    object-fit: contain;
+    width: auto;
+    max-width: 72vw;
     display: block;
   }
 
   .hero-meta {
+    flex: 1;
+    min-width: 280px;
     padding: 40px 32px;
     border-left: 1px solid var(--gray-light);
     display: flex;
@@ -688,8 +690,7 @@
     position: fixed;
     inset: 0;
     z-index: 800;
-    display: grid;
-    grid-template-columns: 60fr 40fr;
+    display: flex;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.35s ease;
@@ -699,16 +700,19 @@
     pointer-events: all;
   }
   .lb-image {
+    flex: 0 0 auto;
     overflow: hidden;
     background: #dedad4;
   }
   .lb-image img {
-    width: 100%;
     height: 100%;
-    object-fit: contain;
+    width: auto;
+    max-width: 72vw;
     display: block;
   }
   .lb-info {
+    flex: 1;
+    min-width: 280px;
     background: rgba(247, 245, 242, 0.82);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
