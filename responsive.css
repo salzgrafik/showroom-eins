@@ -450,6 +450,13 @@ body.nav-open { overflow: hidden; }
     height: auto !important;
     max-height: none !important;
     min-height: 0 !important;
+    overflow: hidden !important;
+  }
+  .hero-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    max-width: none !important;
   }
   .hero-meta { flex-shrink: 0 !important; }
   .hero-title { font-size: 40px !important; line-height: 1.1 !important; }
@@ -539,6 +546,13 @@ body.nav-open { overflow: hidden; }
     flex: 1 1 auto !important;
     height: auto !important;
     min-height: 0 !important;
+    overflow: hidden !important;
+  }
+  .lb-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    max-width: none !important;
   }
   .lb-info {
     flex-shrink: 0 !important;
