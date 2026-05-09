@@ -776,7 +776,7 @@
     en: {
       'nav-works': 'Works', 'nav-artists': 'Artists', 'nav-about': 'About', 'nav-contact': 'Contact',
       'artist-tag-f': 'Artist', 'artist-tag-m': 'Artist',
-      'artist-bio': "In her work, Sarah Häfner moves between still life photography, commercial photography, and textile art.\n\nAfter training as a visual merchandising designer – with an early focus on product staging – she found her way to photography more or less by chance. As a self-taught artist, she developed her own visual language over the years and now works as a full-time product photographer.\n\nIn her personal still life projects, the focus is primarily on transient motifs such as flowers or fruit. She is particularly fascinated by fragility, materiality, and the tension between natural objects and their deliberate staging.\n\nOver the years, embroidery has developed into another cornerstone of her creative practice. Working by hand with fabric and thread serves as a conscious counterpoint to digital photo production.\n\nShe understands creativity as a fundamental part of her life – as a form of expression and as a way of processing internal and external impressions.",
+      'artist-bio': "In her work, Sarah Häfner moves between still life photography, commercial photography, and textile art.\n\nAfter training as a visual merchandicing – with an early focus on product staging – she found her way to photography more or less by chance. As a self-taught artist, she developed her own visual language over the years and now works as a full-time product photographer.\n\nIn her personal still life projects, the focus is primarily on transient motifs such as flowers or fruit. She is particularly fascinated by fragility, materiality, and the tension between natural objects and their deliberate staging.\n\nOver the years, embroidery has developed into another cornerstone of her creative practice. Working by hand with fabric and thread serves as a conscious counterpoint to digital photo production.\n\nShe understands creativity as a fundamental part of her life – as a form of expression and as a way of processing internal and external impressions.",
       'gallery-h2': 'Works',
       'filter-all': 'All', 'filter-skulpturen': 'Sculptures', 'filter-fotografie': 'Photography',
       'filter-malerei': 'Painting', 'filter-textilkunst': 'Textile Art', 'filter-druckgrafik': 'Printmaking',
@@ -1007,6 +1007,7 @@
     lbImg.src = item.querySelector('img').src;
     lbImg.alt = d.title || '';
     lbPrice.textContent = d.price || '';
+    document.getElementById('lbInquiryBtn').style.display = d.price === 'unverkäuflich' ? 'none' : '';
     lbTitle.textContent = d.title || '';
     lbArtistName.textContent = d.artist || '';
     lbMeta.innerHTML = [d.year, d.material, d.size].filter(Boolean).join('<br>');

@@ -1351,8 +1351,8 @@
     applyLang(lang);
   }
 
-  // Gespeicherte Sprache beim Laden wiederherstellen
-  { const _s = localStorage.getItem('sre-lang'); if (_s === 'en') { document.querySelectorAll('.toggle-track').forEach(t => t.classList.add('en-active')); applyLang('en'); } }
+  // Toggle-Zustand sofort setzen (visuell), Sprache nach Gallery-Init anwenden
+  { const _s = localStorage.getItem('sre-lang'); if (_s === 'en') document.querySelectorAll('.toggle-track').forEach(t => t.classList.add('en-active')); }
 
   /* ── Gallery ─────────────────────────────────────────── */
   const CATEGORIES = ['Skulpturen','Fotografie','Malerei','Textilkunst','Druckgrafik','Zeichnungen','Mixed Media'];
@@ -1530,6 +1530,8 @@
   // Init
   updateGallery();
   document.querySelectorAll('#galleryGrid img').forEach(img => { if (!img.complete) img.addEventListener('load', layoutMasonry); });
+  // Sprache aus localStorage anwenden (muss nach Gallery-Init stehen, da applyLang → updateGallery aufruft)
+  if (localStorage.getItem('sre-lang') === 'en') applyLang('en');
 
   /* ── Kontaktformular ────────────────────────────────────────── */
   const contactForm       = document.querySelector('.contact-form');
@@ -1603,11 +1605,12 @@
     lbImg.src        = item.querySelector('img').src;
     lbImg.alt        = d.title || '';
     lbPrice.textContent  = d.price || '';
+    lbInquiryBtn.style.display = d.price === 'unverkäuflich' ? 'none' : '';
     lbTitle.textContent  = d.title || '';
     lbArtist.textContent = d.artist || '';
     lbMeta.innerHTML = [d.year, d.material, d.size].filter(Boolean).join('<br>');
     lbArtistBtn.textContent  = T[currentLang][d.gender === 'f' ? 'lb-artist-f' : 'lb-artist-m'];
-    lbInquiryBtn.textContent = T[currentLang]['lb-inquiry'];
+    lbInquiryBtn.textContent = d.price === 'unverkäuflich' ? '' : T[currentLang]['lb-inquiry'];
     tooltip.style.display = 'none';
     artworkLightbox.classList.add('open');
     document.body.style.overflow = 'hidden';

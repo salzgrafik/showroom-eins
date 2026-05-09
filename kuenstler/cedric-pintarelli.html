@@ -491,6 +491,7 @@
     lbImg.src = item.querySelector('img').src;
     lbImg.alt = d.title || '';
     lbPrice.textContent = d.price || '';
+    document.getElementById('lbInquiryBtn').style.display = d.price === 'unverkäuflich' ? 'none' : '';
     lbTitle.textContent = d.title || '';
     lbArtistName.textContent = d.artist || '';
     lbMeta.innerHTML = [d.year, d.material, d.size].filter(Boolean).join('<br>');
@@ -530,7 +531,7 @@
     de: {
       'nav-works': 'Werke', 'nav-artists': 'Künstler:innen', 'nav-about': 'Über uns', 'nav-contact': 'Kontakt',
       'artist-tag-f': 'Künstlerin', 'artist-tag-m': 'Künstler',
-      'artist-bio': "Cédric Pintarelli alias SWEETUNO verschreibt sich seit 1989 dem klassischen Graffiti Writing. Er konzentriert sich in erster Linie auf Individualität im Schriftbild und dessen ständiger Weiterentwicklung.\n\nNach einer Ausbildung zum Schriftsetzer und Grafiker entdeckte der Schweizer 1998 das Theater und zog für eine vierjährige Schauspielausbildung nach Freiburg. Neben der Schauspielerei verbrachte er weiterhin viel Zeit in der \u201eWritingkultur\u201c. Seitdem gilt SWEETUNO als experimentierfreudig und innovativ. Es folgen Portraits in diversen internationalen Graffitimagazinen und Fernsehsendungen.\n\nSeit 2002 lebt und arbeitet er in Heidelberg und Mannheim. 2004 verfasst er \u201eSky's the limit\u201c, das bisher einzige Theaterstück über die Graffitibewegung. Seit 2008 widmet sich SWEETUNO vermehrt der Kombination aus Graffiti und Malerei; seine Atelierarbeiten erhalten Einzug in Ausstellungen im In- und Ausland.",
+      'artist-bio': "Cédric Pintarelli alias SWEETUNO verschreibt sich seit 1989 dem klassischen Graffiti Writing. Er konzentriert sich in erster Linie auf Individualität im Schriftbild und dessen ständiger Weiterentwicklung.\n\nNach einer Ausbildung zum Schriftsetzer und Grafiker entdeckte der Schweizer 1998 das Theater und zog für eine vierjährige Schauspielausbildung nach Freiburg. Neben der Schauspielerei verbrachte er weiterhin viel Zeit in der „Writingkultur“. Seitdem gilt SWEETUNO als experimentierfreudig und innovativ. Es folgen Portraits in diversen internationalen Graffitimagazinen und Fernsehsendungen.\n\nSeit 2002 lebt und arbeitet er in Heidelberg und Mannheim. 2004 verfasst er „Sky´s the limit“, das bisher einzige Theaterstück über die Graffitibewegung. Seit 2008 widmet sich SWEETUNO vermehrt der Kombination aus Graffiti und Malerei; seine Atelierarbeiten erhalten Einzug in Ausstellungen im In- und Ausland.",
       'gallery-h2': 'Werke',
       'filter-all': 'Alle', 'filter-skulpturen': 'Skulpturen', 'filter-fotografie': 'Fotografie',
       'filter-malerei': 'Malerei', 'filter-textilkunst': 'Textilkunst', 'filter-druckgrafik': 'Druckgrafik',
@@ -550,7 +551,7 @@
     en: {
       'nav-works': 'Works', 'nav-artists': 'Artists', 'nav-about': 'About', 'nav-contact': 'Contact',
       'artist-tag-f': 'Artist', 'artist-tag-m': 'Artist',
-      'artist-bio': "Cédric Pintarelli, alias SWEETUNO, has been dedicated to classic graffiti writing since 1989. He focuses primarily on individuality in lettering and its constant evolution.\n\nAfter training as a typesetter and graphic designer, the Swiss artist discovered theater in 1998 and moved to Freiburg for a four-year acting program. Alongside acting, he continued to spend a great deal of time in the \"writing culture.\" Since then, SWEETUNO has been regarded as experimental and innovative. Portraits of him have appeared in various international graffiti magazines and television programs.\n\nSince 2002, he has lived and worked in Heidelberg and Mannheim. In 2004, he wrote \"Sky's the Limit,\" the only play to date about the graffiti movement. Since 2008, SWEETUNO has focused increasingly on the combination of graffiti and painting; his studio works are featured in exhibitions both at home and abroad.",
+      'artist-bio': "Cédric Pintarelli, alias SWEETUNO, has been dedicated to classic graffiti writing since 1989. He focuses primarily on individuality in lettering and its constant evolution.\n\nAfter training as a typesetter and graphic designer, the Swiss artist discovered theater in 1998 and moved to Freiburg for a four-year acting program. Alongside acting, he continued to spend a great deal of time in the \"writing culture.\" Since then, SWEETUNO has been regarded as experimental and innovative. Portraits of him have appeared in various international graffiti magazines and television programs.\n\nSince 2002, he has lived and worked in Heidelberg and Mannheim. In 2004, he wrote \"Sky’s the Limit,\" the only play to date about the graffiti movement. Since 2008, SWEETUNO has focused increasingly on the combination of graffiti and painting; his studio works are featured in exhibitions both at home and abroad.",
       'gallery-h2': 'Works',
       'filter-all': 'All', 'filter-skulpturen': 'Sculptures', 'filter-fotografie': 'Photography',
       'filter-malerei': 'Painting', 'filter-textilkunst': 'Textile Art', 'filter-druckgrafik': 'Printmaking',

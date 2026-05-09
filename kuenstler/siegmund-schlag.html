@@ -490,6 +490,7 @@
     lbImg.src = item.querySelector('img').src;
     lbImg.alt = d.title || '';
     lbPrice.textContent = d.price || '';
+    document.getElementById('lbInquiryBtn').style.display = d.price === 'unverkäuflich' ? 'none' : '';
     lbTitle.textContent = d.title || '';
     lbArtistName.textContent = d.artist || '';
     lbMeta.innerHTML = [d.year, d.material, d.size].filter(Boolean).join('<br>');
@@ -529,7 +530,7 @@
     de: {
       'nav-works': 'Werke', 'nav-artists': 'Künstler:innen', 'nav-about': 'Über uns', 'nav-contact': 'Kontakt',
       'artist-tag-f': 'Künstlerin', 'artist-tag-m': 'Künstler',
-      'artist-bio': "Siegmund Schlag arbeitet mit Sofortbild-Fotografie und gemischten Materialien. Seine Arbeiten befragen das Verh\u00e4ltnis von Moment und Eingriff \u2013 das fotografische Bild wird zur Ausgangsfl\u00e4che f\u00fcr handwerkliche und konzeptuelle Transformation. Er lebt und arbeitet in Heidelberg.",
+      'artist-bio': "Der Grafiker und Künstler Siegmund Schlag arbeitet aktuell an einem Projekt mit dem Titel „Sofortbilder“. Dabei erschafft er innerhalb von nur 4 bis 5 Minuten Werke im klassischen Polaroid-Format (8,8 x 10,7 cm).\n\nStilistisch ordnet er diese Arbeiten zwischen Abstraktion und Streetart ein. Interessierte sind herzlich dazu eingeladen, den Entstehungsprozess der Bilder in Echtzeit mitzuverfolgen.",
       'gallery-h2': 'Werke',
       'filter-all': 'Alle', 'filter-skulpturen': 'Skulpturen', 'filter-fotografie': 'Fotografie',
       'filter-malerei': 'Malerei', 'filter-textilkunst': 'Textilkunst', 'filter-druckgrafik': 'Druckgrafik',
@@ -549,7 +550,7 @@
     en: {
       'nav-works': 'Works', 'nav-artists': 'Artists', 'nav-about': 'About', 'nav-contact': 'Contact',
       'artist-tag-f': 'Artist', 'artist-tag-m': 'Artist',
-      'artist-bio': "Siegmund Schlag works with instant photography and mixed materials. His works question the relationship between moment and intervention \u2013 the photographic image becomes a ground for material and conceptual transformation. He lives and works in Heidelberg.",
+      'artist-bio': "Graphic designer and artist Siegmund Schlag is currently working on a project titled \"Sofortbilder\" (Instant Pictures). Within just 4 to 5 minutes, he creates works in the classic Polaroid format (8.8 x 10.7 cm).\n\nStylistically, he positions these pieces between abstraction and street art. Interested viewers are cordially invited to witness the creative process in real time.",
       'gallery-h2': 'Works',
       'filter-all': 'All', 'filter-skulpturen': 'Sculptures', 'filter-fotografie': 'Photography',
       'filter-malerei': 'Painting', 'filter-textilkunst': 'Textile Art', 'filter-druckgrafik': 'Printmaking',

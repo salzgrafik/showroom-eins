@@ -489,6 +489,7 @@
     lbImg.src = item.querySelector('img').src;
     lbImg.alt = d.title || '';
     lbPrice.textContent = d.price || '';
+    document.getElementById('lbInquiryBtn').style.display = d.price === 'unverkäuflich' ? 'none' : '';
     lbTitle.textContent = d.title || '';
     lbArtistName.textContent = d.artist || '';
     lbMeta.innerHTML = [d.year, d.material, d.size].filter(Boolean).join('<br>');
@@ -528,7 +529,7 @@
     de: {
       'nav-works': 'Werke', 'nav-artists': 'Künstler:innen', 'nav-about': 'Über uns', 'nav-contact': 'Kontakt',
       'artist-tag-f': 'Künstlerin', 'artist-tag-m': 'Künstler',
-      'artist-bio': "Chaz Bargainer ist in den USA geboren, lebt und arbeitet aber seit vielen Jahren in Heidelberg-Kirchheim. Während der Corona-Epidemie fand Chaz Bargainer Zeit und Ruhe, um sich endlich wieder der abstrakten Malerei zu widmen. Seitdem malt und experimentiert er mit Farben, Materialien und Formen, wobei er die Malerei oft mit Collagetechniken verbindet.\n\nDa die Kunst im Auge des Betrachters liegt, ist es Chaz Bargainer am liebsten, wenn sich jeder Betrachtende für ein Bild seinen eigenen passenden Titel aussucht. Seine Devise beim Malen – und im Leben – lautet dabei: \u201eWhat happens happens. But you have to know when to stop.\u201c",
+      'artist-bio': "Chaz Bargainer ist in den USA geboren, lebt und arbeitet aber seit vielen Jahren in Heidelberg-Kirchheim. Während der Corona-Epidemie fand Chaz Bargainer Zeit und Ruhe, um sich endlich wieder der abstrakten Malerei zu widmen. Seitdem malt und experimentiert er mit Farben, Materialien und Formen, wobei er die Malerei oft mit Collagetechniken verbindet.\n\nDa die Kunst im Auge des Betrachters liegt, ist es Chaz Bargainer am liebsten, wenn sich jeder Betrachtende für ein Bild seinen eigenen passenden Titel aussucht. Seine Devise beim Malen – und im Leben – lautet dabei: „What happens happens. But you have to know when to stop.“",
       'gallery-h2': 'Werke',
       'filter-all': 'Alle', 'filter-skulpturen': 'Skulpturen', 'filter-fotografie': 'Fotografie',
       'filter-malerei': 'Malerei', 'filter-textilkunst': 'Textilkunst', 'filter-druckgrafik': 'Druckgrafik',
