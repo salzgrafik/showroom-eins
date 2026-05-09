@@ -534,30 +534,29 @@ body.nav-open { overflow: hidden; }
   .artist-h1 { font-size: 40px !important; line-height: 1.1 !important; }
   .section-artist-header { padding: 64px 24px 48px !important; }
 
-  /* ── Lightbox: wie Hero (Bild füllt, Info unten) ────────── */
+  /* ── Lightbox: gesamtes Overlay scrollt (Bild + Info zusammen) */
   .artwork-lightbox {
     display: flex !important;
     flex-direction: column !important;
     height: 100vh !important;
     height: 100dvh !important;
-    overflow: hidden !important;
+    overflow-y: auto !important;
   }
   .lb-image {
-    flex: 1 1 auto !important;
+    flex: none !important;
+    width: 100% !important;
     height: auto !important;
-    min-height: 0 !important;
-    overflow: hidden !important;
+    overflow: visible !important;
   }
   .lb-image img {
     width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
+    height: auto !important;
     max-width: none !important;
   }
   .lb-info {
     flex-shrink: 0 !important;
-    max-height: 55vh !important;
-    overflow-y: auto !important;
+    max-height: none !important;
+    overflow-y: visible !important;
     padding: 32px 24px !important;
   }
   .lb-actions {
