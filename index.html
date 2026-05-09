@@ -1259,7 +1259,7 @@
       'filter-fotografie': 'Fotografie', 'filter-textilkunst': 'Textilkunst',
       'filter-malerei': 'Malerei', 'filter-druckgrafik': 'Druckgrafik',
       'filter-zeichnungen': 'Zeichnungen', 'filter-keramik': 'Keramik',
-      'filter-mixed': 'Mixed Media',
+      'filter-aquarell': 'Aquarell', 'filter-mixed': 'Mixed Media',
       'btn-more': 'Weitere Werke', 'btn-less': 'Weniger anzeigen',
       'artists-tag': 'Ensemble', 'artists-title': 'Vertretene Künstler:innen',
       'tag-skulpturen': 'Skulpturen', 'tag-fotografie': 'Fotografie',
@@ -1293,7 +1293,7 @@
       'filter-fotografie': 'Photography', 'filter-textilkunst': 'Textile Art',
       'filter-malerei': 'Painting', 'filter-druckgrafik': 'Printmaking',
       'filter-zeichnungen': 'Drawings', 'filter-keramik': 'Ceramics',
-      'filter-mixed': 'Mixed Media',
+      'filter-aquarell': 'Watercolour', 'filter-mixed': 'Mixed Media',
       'btn-more': 'More Works', 'btn-less': 'Show Less',
       'artists-tag': 'Ensemble', 'artists-title': 'Represented Artists',
       'tag-skulpturen': 'Sculptures', 'tag-fotografie': 'Photography',
@@ -1355,7 +1355,7 @@
   { const _s = localStorage.getItem('sre-lang'); if (_s === 'en') document.querySelectorAll('.toggle-track').forEach(t => t.classList.add('en-active')); }
 
   /* ── Gallery ─────────────────────────────────────────── */
-  const CATEGORIES = ['Skulpturen','Fotografie','Malerei','Textilkunst','Druckgrafik','Zeichnungen','Mixed Media'];
+  const CATEGORIES = [...new Set([...document.querySelectorAll('#galleryGrid .gallery-item')].map(i => i.dataset.category))];
   const PAGE_SIZE = 6;
 
   // Grid-Positionen exakt nach Vorlage (20-Spalten-Grid)
