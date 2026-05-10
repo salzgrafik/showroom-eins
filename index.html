@@ -1259,7 +1259,7 @@
       'filter-fotografie': 'Fotografie', 'filter-textilkunst': 'Textilkunst',
       'filter-malerei': 'Malerei', 'filter-druckgrafik': 'Druckgrafik',
       'filter-zeichnungen': 'Zeichnungen', 'filter-keramik': 'Keramik',
-      'filter-aquarell': 'Aquarell', 'filter-mixed': 'Mixed Media',
+      'filter-aquarell': 'Aquarell', 'filter-mixed-media': 'Mixed Media',
       'btn-more': 'Weitere Werke', 'btn-less': 'Weniger anzeigen',
       'artists-tag': 'Ensemble', 'artists-title': 'Vertretene Künstler:innen',
       'tag-skulpturen': 'Skulpturen', 'tag-fotografie': 'Fotografie',
@@ -1293,7 +1293,7 @@
       'filter-fotografie': 'Photography', 'filter-textilkunst': 'Textile Art',
       'filter-malerei': 'Painting', 'filter-druckgrafik': 'Printmaking',
       'filter-zeichnungen': 'Drawings', 'filter-keramik': 'Ceramics',
-      'filter-aquarell': 'Watercolour', 'filter-mixed': 'Mixed Media',
+      'filter-aquarell': 'Watercolour', 'filter-mixed-media': 'Mixed Media',
       'btn-more': 'More Works', 'btn-less': 'Show Less',
       'artists-tag': 'Ensemble', 'artists-title': 'Represented Artists',
       'tag-skulpturen': 'Sculptures', 'tag-fotografie': 'Photography',
@@ -1358,30 +1358,13 @@
   const CATEGORIES = [...new Set([...document.querySelectorAll('#galleryGrid .gallery-item')].map(i => i.dataset.category))];
   const PAGE_SIZE = 6;
 
-  // Grid-Positionen exakt nach Vorlage (20-Spalten-Grid)
-  // Muster aus Bild: links-breit | rechts-versetzt → mitte-links | rechts → links | rechts-tief → …
-  const GRID_POS = [
-    { col: '1 / 9',   pt: 0   },  // links breit
-    { col: '13 / 19', pt: 100 },  // rechts, deutlich versetzt
-    { col: '4 / 12',  pt: 0   },  // mitte-links
-    { col: '13 / 19', pt: 0   },  // rechts
-    { col: '1 / 8',   pt: 100 },  // links, versetzt
-    { col: '13 / 19', pt: 0   },  // rechts
-    { col: '4 / 12',  pt: 0   },  // mitte-links
-    { col: '13 / 19', pt: 80  },  // rechts versetzt
-    { col: '1 / 9',   pt: 0   },  // links breit
-    { col: '12 / 18', pt: 0   },  // rechts
-    { col: '3 / 11',  pt: 80  },  // mitte versetzt
-    { col: '13 / 19', pt: 0   },  // rechts
-    { col: '1 / 9',   pt: 0   },  // links breit
-  ];
 
   let activeFilters = new Set(CATEGORIES);
   let visibleCount = PAGE_SIZE;
 
   /* ── Filter-Buttons dynamisch erzeugen (wie Künstlerseiten) ── */
   const filtersEl = document.getElementById('galleryFilters');
-  const _catKeyMap = { 'Mixed Media': 'filter-mixed' };
+  const _catKeyMap = { 'Mixed Media': 'filter-mixed-media' };
 
   const _allBtn = document.createElement('button');
   _allBtn.className = 'filter-btn active';
@@ -1410,7 +1393,7 @@
     const items = [...grid.querySelectorAll('.gallery-item')].filter(el => el.style.display !== 'none');
     if (!items.length) { grid.style.height = '0'; return; }
     const w = grid.offsetWidth;
-    const cols = window.innerWidth <= 767 ? 1 : 3;
+    const cols = window.innerWidth <= 767 ? 1 : (window.innerWidth <= 1024 ? 2 : 3);
 
     const colW = (w - _GAP * (cols - 1)) / cols;
     const heights = new Array(cols).fill(0);

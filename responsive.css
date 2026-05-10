@@ -6,9 +6,6 @@
 /* Kein horizontales Scrollen auf keinem Breakpoint */
 html, body { max-width: 100%; overflow-x: hidden; }
 
-/* Scroll lock wenn Overlay oder Lightbox offen */
-body.nav-open { overflow: hidden; }
-
 
 /* ─── HAMBURGER BUTTON ──────────────────────────────────────── */
 .nav-hamburger {
@@ -378,10 +375,6 @@ body.nav-open { overflow: hidden; }
     line-height: 1.1 !important;
   }
 
-  /* ── Galerie: 2 Spalten ─────────────────────────────────── */
-  .gallery-scatter {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
 
   /* ── Sections: Seitenabstand ────────────────────────────── */
   .section-gallery,
@@ -461,8 +454,6 @@ body.nav-open { overflow: hidden; }
   .hero-meta { flex-shrink: 0 !important; }
   .hero-title { font-size: 40px !important; line-height: 1.1 !important; }
 
-  /* ── Galerie: 1 Spalte ──────────────────────────────────── */
-  .gallery-scatter { grid-template-columns: 1fr !important; }
 
   /* ── Titel-Größen ───────────────────────────────────────── */
   .section-title { font-size: 32px !important; line-height: 1.15 !important; }

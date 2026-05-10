@@ -329,7 +329,7 @@
       <li><a href="../index.html#werke">Werke</a></li>
       <li><a href="../index.html#kuenstlerinnen">Künstler:innen</a></li>
       <li><a href="../index.html#ueber-uns">Über uns</a></li>
-      <li><a href="../kontakt.html">Kontakt</a></li>
+      <li><a href="../index.html#kontakt">Kontakt</a></li>
     </ul>
     <ul class="nav-overlay-artists">
       <li><a href="chaz-bargainer.html">Chaz Bargainer</a></li>
@@ -366,15 +366,17 @@
     allBtn.dataset.filter = 'alle';
     allBtn.textContent = 'Alle';
     filtersEl.appendChild(allBtn);
-  }
 
-  CATEGORIES.forEach(cat => {
-    const btn = document.createElement('button');
-    btn.className = 'filter-btn active';
-    btn.dataset.filter = cat;
-    btn.textContent = cat;
-    filtersEl.appendChild(btn);
-  });
+    CATEGORIES.forEach(cat => {
+      const btn = document.createElement('button');
+      btn.className = 'filter-btn active';
+      btn.dataset.filter = cat;
+      btn.textContent = cat;
+      filtersEl.appendChild(btn);
+    });
+  } else {
+    filtersEl.style.display = 'none';
+  }
 
   const _GAP = 24;
   function layoutMasonry() {
@@ -382,7 +384,7 @@
     const items = [...grid.querySelectorAll('.gallery-item')].filter(el => el.style.display !== 'none');
     if (!items.length) { grid.style.height = '0'; return; }
     const w = grid.offsetWidth;
-    const cols = window.innerWidth <= 767 ? 1 : 3;
+    const cols = window.innerWidth <= 767 ? 1 : (window.innerWidth <= 1024 ? 2 : 3);
 
     const colW = (w - _GAP * (cols - 1)) / cols;
     const heights = new Array(cols).fill(0);
@@ -533,7 +535,7 @@
       'gallery-h2': 'Werke',
       'filter-all': 'Alle', 'filter-skulpturen': 'Skulpturen', 'filter-fotografie': 'Fotografie',
       'filter-malerei': 'Malerei', 'filter-textilkunst': 'Textilkunst', 'filter-druckgrafik': 'Druckgrafik',
-      'filter-zeichnungen': 'Zeichnungen', 'filter-mixed': 'Mixed Media',
+      'filter-zeichnungen': 'Zeichnungen', 'filter-mixed-media': 'Mixed Media',
       'vermittlung-tag': 'Werk anfragen', 'vermittlung-title': 'Interesse an einem Werk?',
       'vermittlung-text': "Showroom Eins vermittelt auf Anfrage den direkten Kontakt zum K\u00fcnstler. Wir sind kein Kunsthandel \u2013 alle Verk\u00e4ufe laufen direkt zwischen Ihnen und dem K\u00fcnstler ab.",
       'form-name-ph': 'Name *', 'form-email-ph': 'E-Mail *', 'form-message-ph': 'Nachricht *',
@@ -541,7 +543,7 @@
       'form-check2': 'Ich bin damit einverstanden, dass meine Daten verarbeitet werden.',
       'form-submit': 'Absenden', 'form-success': 'Nachricht gesendet',
       'form-email-error': 'Bitte eine gültige E-Mail-Adresse eingeben.', 'form-email-ok': 'OK',
-      'load-more': 'Weitere Werke', 'load-less': 'Weniger anzeigen', 'bio-read-more': 'Weiterlesen',
+      'load-more': 'Weitere Werke', 'load-less': 'Weniger anzeigen', 'bio-read-more': 'Weiterlesen', 'bio-read-less': 'Weniger anzeigen',
       'lb-inquiry': 'Werk anfragen',
       'footer-home': 'Home', 'footer-impressum': 'Impressum', 'footer-datenschutz': 'Datenschutz',
       'footer-agb': 'AGBs', 'footer-instagram': 'Instagram',
@@ -553,7 +555,7 @@
       'gallery-h2': 'Works',
       'filter-all': 'All', 'filter-skulpturen': 'Sculptures', 'filter-fotografie': 'Photography',
       'filter-malerei': 'Painting', 'filter-textilkunst': 'Textile Art', 'filter-druckgrafik': 'Printmaking',
-      'filter-zeichnungen': 'Drawings', 'filter-mixed': 'Mixed Media',
+      'filter-zeichnungen': 'Drawings', 'filter-mixed-media': 'Mixed Media',
       'vermittlung-tag': 'Request a Work', 'vermittlung-title': 'Interested in a Work?',
       'vermittlung-text': 'Showroom Eins facilitates direct contact with the artist upon request. We are not an art dealer – all sales take place directly between you and the artist.',
       'form-name-ph': 'Name *', 'form-email-ph': 'E-Mail *', 'form-message-ph': 'Message *',
@@ -561,7 +563,7 @@
       'form-check2': 'I agree to my data being processed.',
       'form-submit': 'Send', 'form-success': 'Message sent',
       'form-email-error': 'Please enter a valid email address.', 'form-email-ok': 'OK',
-      'load-more': 'More Works', 'load-less': 'Show Less', 'bio-read-more': 'Read more',
+      'load-more': 'More Works', 'load-less': 'Show Less', 'bio-read-more': 'Read more', 'bio-read-less': 'Show less',
       'lb-inquiry': 'Request Work',
       'footer-home': 'Home', 'footer-impressum': 'Imprint', 'footer-datenschutz': 'Privacy',
       'footer-agb': 'Terms', 'footer-instagram': 'Instagram',
