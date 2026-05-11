@@ -856,6 +856,33 @@
   .contact-success.show { opacity: 1; }
 </style>
 <script>window.addEventListener("touchstart",function(){document.documentElement.classList.add("touch")},{once:true,passive:true})</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "Showroom Eins",
+      "url": "https://showroom-eins.de",
+      "description": "Online-Plattform für Gegenwartskunst aus Heidelberg"
+    },
+    {
+      "@type": "Organization",
+      "name": "Showroom Eins",
+      "url": "https://showroom-eins.de",
+      "description": "Online-Plattform für Gegenwartskunst aus Heidelberg",
+      "location": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Heidelberg",
+          "addressCountry": "DE"
+        }
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
