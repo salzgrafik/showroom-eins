@@ -1617,12 +1617,12 @@
     lbImg.src        = item.querySelector('img').src;
     lbImg.alt        = d.title || '';
     lbPrice.textContent  = d.price || '';
-    lbInquiryBtn.style.display = d.price === 'unverkäuflich' ? 'none' : '';
+    lbInquiryBtn.style.display = (d.price === 'unverkäuflich' || d.price === 'Verkauft') ? 'none' : '';
     lbTitle.textContent  = d.title || '';
     lbArtist.textContent = d.artist || '';
     lbMeta.innerHTML = [d.year, d.material, d.size].filter(Boolean).join('<br>');
     lbArtistBtn.textContent  = T[currentLang][d.gender === 'f' ? 'lb-artist-f' : 'lb-artist-m'];
-    lbInquiryBtn.textContent = d.price === 'unverkäuflich' ? '' : T[currentLang]['lb-inquiry'];
+    lbInquiryBtn.textContent = (d.price === 'unverkäuflich' || d.price === 'Verkauft') ? '' : T[currentLang]['lb-inquiry'];
     tooltip.style.display = 'none';
     artworkLightbox.classList.add('open');
     const _sy = window.scrollY; document.body.style.top = '-' + _sy + 'px'; document.body.style.position = 'fixed'; document.body.style.width = '100%'; document.body.style.overflow = 'hidden';

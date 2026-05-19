@@ -513,7 +513,7 @@
     lbImg.src = item.querySelector('img').src;
     lbImg.alt = d.title || '';
     lbPrice.textContent = d.price || '';
-    document.getElementById('lbInquiryBtn').style.display = d.price === 'unverkäuflich' ? 'none' : '';
+    document.getElementById('lbInquiryBtn').style.display = (d.price === 'unverkäuflich' || d.price === 'Verkauft') ? 'none' : '';
     lbTitle.textContent = d.title || '';
     lbArtistName.textContent = d.artist || '';
     lbMeta.innerHTML = [d.year, d.material, d.size].filter(Boolean).join('<br>');
