@@ -1,0 +1,23 @@
+# Showroom Eins
+
+> Online-Plattform für Gegenwartskunst aus Heidelberg.
+> Zeigt zeitgenössische Positionen regionaler Künstler:innen.
+
+## Seiten
+- [Startseite](https://showroom-eins.de/)
+- [Künstler:innen](https://showroom-eins.de/#kuenstlerinnen)
+- [Über uns](https://showroom-eins.de/#about)
+- [Kontakt](https://showroom-eins.de/kontakt.html)
+
+## Künstler:innen
+- [Alexandra Kunz](https://showroom-eins.de/kuenstler/alexandra-kunz.html)
+- [Cedric Pintarelli](https://showroom-eins.de/kuenstler/cedric-pintarelli.html)
+- [Chaz Bargainer](https://showroom-eins.de/kuenstler/chaz-bargainer.html)
+- [Cholud Kassem](https://showroom-eins.de/kuenstler/cholud-kassem.html)
+- [Johanna Mangold](https://showroom-eins.de/kuenstler/johanna-mangold.html)
+- [Philipp Diefenbacher](https://showroom-eins.de/kuenstler/philipp-diefenbacher.html)
+- [Ralf Diefenbacher](https://showroom-eins.de/kuenstler/ralf-diefenbacher.html)
+- [Sarah Häfner](https://showroom-eins.de/kuenstler/sarah-haefner.html)
+- [Siegmund Schlag](https://showroom-eins.de/kuenstler/siegmund-schlag.html)
+- [Sybille Hutter](https://showroom-eins.de/kuenstler/sybille-hutter.html)
+- [Thilda Golly](https://showroom-eins.de/kuenstler/thilda-golly.html)
